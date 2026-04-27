@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
+import CalcomButton from '../components/CalcomButton.astro';
 import { site } from '../data/site';
 
 const success = Astro.url.searchParams.get('success') === 'true';
@@ -54,6 +55,17 @@ const success = Astro.url.searchParams.get('success') === 'true';
           <button type="submit" class="btn btn-dark form-submit">Send Message</button>
         </form>
       )}
+
+      <div class="book-card mt-8">
+        <div>
+          <p class="eyebrow">Prefer to talk it through?</p>
+          <h2 class="serif-h book-title">Book a free consultation</h2>
+          <p class="book-body">
+            A relaxed 30-minute call to share your vision, ask questions, and see if we're the right fit. No pressure, no commitment.
+          </p>
+        </div>
+        <CalcomButton label="Book Free Consultation" />
+      </div>
 
       <div class="alt-contact mt-8">
         <p class="eyebrow text-center">Other Ways to Reach Me</p>
@@ -129,8 +141,34 @@ const success = Astro.url.searchParams.get('success') === 'true';
     font-size: 0.95rem;
   }
 
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-5);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-7);
+    box-shadow: var(--shadow-soft);
+  }
+  .book-card > div { max-width: 540px; }
+  .book-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.7rem;
+    color: var(--color-brown);
+    margin: var(--sp-2) 0 var(--sp-3);
+  }
+  .book-body {
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
   @media (max-width: 700px) {
     .contact-form { padding: var(--sp-5); }
     .alt-grid { grid-template-columns: 1fr; }
+    .book-card { padding: var(--sp-5); }
   }
 </style>

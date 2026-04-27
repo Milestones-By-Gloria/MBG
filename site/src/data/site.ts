@@ -15,13 +15,9 @@ export const site = {
   socials: {
     instagram: 'https://instagram.com/milestonesbygloria',
     facebook: 'https://facebook.com/milestonesbygloria',
-    linkedin: 'https://linkedin.com/in/gloria-niyomahoro',
-    twitter: '',
   },
 
-  // TODO: replace with Gloria's real Cal.com URL once she signs up
-  // e.g. 'milestonesbygloria/free-consultation'
-  calcomLink: 'milestonesbygloria/free-consultation',
+  calcomLink: 'gloria-niyomahoro/free-consultation',
 
   founder: {
     name: 'Gloria Niyomahoro',

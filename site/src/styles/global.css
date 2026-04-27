@@ -9,6 +9,8 @@
 
   --color-brown: #623e2a;          /* primary heading + accent (PDF brand) */
   --color-brown-deep: #4a2e1f;
+  --color-navy: #1a2c4b;           /* CTA button bg */
+  --color-navy-deep: #25406b;      /* CTA hover */
   --color-ink: #2e2e2e;            /* primary body text */
   --color-ink-soft: #343434;
   --color-black: #000000;

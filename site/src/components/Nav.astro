@@ -96,6 +96,14 @@ const { transparent = false, current = '' } = Astro.props;
     background: currentColor;
   }
   .nav-cta { padding: 0.65rem 1.25rem; font-size: 0.72rem; }
+  /* Home-only: nav Inquire Now button uses navy (matches hero CTAs) */
+  .site-nav.is-transparent .nav-cta {
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+  .site-nav.is-transparent .nav-cta:hover {
+    background: var(--color-navy-deep);
+  }
 
   .nav-toggle {
     display: none;
