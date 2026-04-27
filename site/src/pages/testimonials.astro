@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import TestimonialComp from '../components/Testimonial.astro';
+import { testimonials } from '../data/testimonials';
+---
+
+<Base title="Testimonials" current="/testimonials">
+  <Section bg="cream">
+    <div class="container text-center">
+      <p class="eyebrow">Kind Words</p>
+      <h1 class="h1 mt-3">Testimonial</h1>
+      <p class="lead mt-5" style="max-width:640px;margin:var(--sp-5) auto 0;font-style:italic;font-family:var(--font-serif);">
+        Real moments from real clients — the kind of feedback that means everything.
+      </p>
+    </div>
+
+    <div class="container mt-8">
+      <div class="testimonial-stack">
+        {testimonials.map((t) => <TestimonialComp item={t} />)}
+      </div>
+    </div>
+
+    <div class="container text-center mt-8">
+      <p class="serif-h" style="font-style:italic;font-size:1.2rem;">
+        I would love to be part of your milestone, too.
+      </p>
+      <div class="cta-pair mt-5">
+        <a href="/contact" class="btn btn-dark">Inquire Now</a>
+        <a href="/services" class="btn btn-ghost">View Services</a>
+      </div>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .testimonial-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-7);
+  }
+</style>

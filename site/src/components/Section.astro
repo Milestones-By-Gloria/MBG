@@ -1,0 +1,17 @@
+---
+interface Props {
+  bg?: 'cream' | 'periwinkle' | 'pink-soft' | 'lavender-soft';
+  tight?: boolean;
+  id?: string;
+  class?: string;
+}
+
+const { bg = 'cream', tight = false, id, class: className = '' } = Astro.props;
+const cls = ['section', tight ? 'section-tight' : '', `bg-${bg}`, className]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<section id={id} class={cls}>
+  <slot />
+</section>

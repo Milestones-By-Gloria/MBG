@@ -1,0 +1,80 @@
+---
+import type { Testimonial } from '../data/testimonials';
+
+interface Props { item: Testimonial }
+const { item } = Astro.props;
+---
+
+<article class="testimonial">
+  {item.image && (
+    <div class="testimonial-photo img-rounded">
+      <img src={item.image} alt={item.alt ?? ''} loading="lazy" decoding="async" />
+    </div>
+  )}
+  <div class="testimonial-body">
+    <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+    {item.quote.map((p) => <p>{p}</p>)}
+    <footer>
+      <p class="author">{item.author}</p>
+      {item.context && <p class="context">{item.context}</p>}
+    </footer>
+  </div>
+</article>
+
+<style>
+  .testimonial {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: var(--sp-7);
+    align-items: center;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-7);
+    box-shadow: var(--shadow-soft);
+  }
+  .testimonial-photo {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+  }
+  .testimonial-body { position: relative; }
+  .quote-mark {
+    font-family: var(--font-display);
+    color: var(--color-brown);
+    opacity: 0.18;
+    font-size: 6rem;
+    line-height: 0.6;
+    position: absolute;
+    top: -1.5rem;
+    left: -1rem;
+  }
+  .testimonial-body p {
+    color: var(--color-ink);
+    font-size: 1rem;
+    margin-bottom: var(--sp-4);
+  }
+  .testimonial-body footer {
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--color-border);
+  }
+  .author {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-brown);
+    font-size: 1.1rem;
+    margin-bottom: var(--sp-1) !important;
+  }
+  .context {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-brown);
+    opacity: 0.7;
+    margin-bottom: 0 !important;
+  }
+  @media (max-width: 800px) {
+    .testimonial { grid-template-columns: 1fr; padding: var(--sp-5); }
+    .testimonial-photo { max-width: 320px; margin: 0 auto; }
+    .quote-mark { position: static; display: block; margin-bottom: var(--sp-3); }
+  }
+</style>

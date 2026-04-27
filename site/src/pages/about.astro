@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import { site } from '../data/site';
+---
+
+<Base title="About" current="/about">
+  <Section bg="cream">
+    <div class="container">
+      <p class="eyebrow text-center">The Founder</p>
+      <h1 class="h1 text-center mt-3">About Milestones by Gloria</h1>
+
+      <div class="about-grid mt-8">
+        <aside class="founder-card">
+          <div class="founder-photo img-rounded">
+            <img src="/images/gloria-portrait.jpg" alt="Gloria Niyomahoro, Founder of Milestones by Gloria" loading="eager" decoding="async" />
+          </div>
+          <p class="founder-name">{site.founder.name}</p>
+          <p class="founder-role">{site.founder.role}</p>
+          <a href={site.emailHref} class="btn btn-dark email-btn">Email Me</a>
+          <ul class="founder-socials">
+            {site.socials.instagram && <li><a href={site.socials.instagram} target="_blank" rel="noopener">Instagram</a></li>}
+            {site.socials.facebook && <li><a href={site.socials.facebook} target="_blank" rel="noopener">Facebook</a></li>}
+            {site.socials.linkedin && <li><a href={site.socials.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>}
+          </ul>
+        </aside>
+
+        <div class="bio">
+          <p class="lead">Hi, I'm Gloria — the heart behind MBG.</p>
+
+          <p>
+            I created this business because I believe life's most important moments deserve to be
+            experienced, not stressed over. Whether it's a wedding, a birthday celebration, a baby
+            shower, or a memorial service, my goal is to take the pressure off your shoulders so you
+            can focus on what truly matters — your people, your memories, and your moment.
+          </p>
+
+          <p>
+            With a background in caregiving and working with families, I understand how important it
+            is to approach every event with patience, organization, and heart. No two milestones are
+            the same, which is why every event I plan &amp; coordinate is thoughtfully tailored to reflect
+            your story and your vision.
+          </p>
+
+          <p>
+            From joyful celebrations to more delicate gatherings, I'm here to support you with calm
+            guidance, clear communication, and careful attention to detail every step of the way.
+          </p>
+
+          <p>
+            At the end of the day, this isn't just about planning events — it's about creating space for
+            memories that last a lifetime.
+          </p>
+
+          <p class="closing">I would be honoured to be part of your milestone.</p>
+
+          <div class="cta-pair mt-6">
+            <a href="/contact" class="btn btn-dark">Inquire Now</a>
+            <a href="/services" class="btn btn-ghost">Services &amp; Packages</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: var(--sp-8);
+    align-items: start;
+  }
+  .founder-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+    position: sticky;
+    top: calc(var(--nav-height) + var(--sp-5));
+  }
+  .founder-photo {
+    aspect-ratio: 4 / 5;
+    margin-bottom: var(--sp-5);
+  }
+  .founder-name {
+    font-family: var(--font-display);
+    color: var(--color-brown);
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .founder-role {
+    font-family: var(--font-label);
+    font-style: italic;
+    color: var(--color-ink);
+    margin-top: var(--sp-1);
+    margin-bottom: var(--sp-5);
+  }
+  .email-btn { width: 100%; }
+  .founder-socials {
+    display: flex;
+    gap: var(--sp-4);
+    justify-content: center;
+    margin-top: var(--sp-5);
+  }
+  .founder-socials a {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-brown);
+    transition: opacity var(--transition);
+  }
+  .founder-socials a:hover { opacity: 0.7; }
+
+  .bio p {
+    color: var(--color-ink-soft);
+    margin-bottom: var(--sp-4);
+    font-size: 1.0625rem;
+  }
+  .bio .lead {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--color-brown);
+    margin-bottom: var(--sp-5);
+  }
+  .bio .closing {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-brown);
+    font-size: 1.15rem;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .founder-card { position: static; max-width: 360px; margin: 0 auto; }
+  }
+</style>

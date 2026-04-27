@@ -1,0 +1,231 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import CalcomButton from '../components/CalcomButton.astro';
+import { weddingPackages } from '../data/packages';
+import { milestoneEvents, corporateEvents } from '../data/eventTypes';
+---
+
+<Base title="Services & Packages" current="/services">
+
+  {/* Intro + 3 cards */}
+  <Section bg="cream">
+    <div class="container text-center">
+      <p class="eyebrow">What I offer</p>
+      <h1 class="h1 mt-3">Services Offered</h1>
+      <p class="lead mt-5" style="max-width:640px;margin-left:auto;margin-right:auto;">
+        Three core ways I help you bring your milestone to life — each thoughtfully tailored to reflect your story.
+      </p>
+
+      <div class="services-grid mt-8">
+        <a href="#wedding" class="service-card">
+          <div class="img-rounded">
+            <img src="/images/service-card-wedding.jpg" alt="" loading="lazy" />
+          </div>
+          <h3 class="serif-h">Wedding Packages</h3>
+          <p>Seamless coordination so your special day unfolds exactly as you imagined.</p>
+        </a>
+
+        <a href="#milestone" class="service-card">
+          <div class="img-rounded">
+            <img src="/images/service-card-milestone.jpg" alt="" loading="lazy" />
+          </div>
+          <h3 class="serif-h">Milestone Celebrations</h3>
+          <p>Birthdays, baptisms, anniversaries, and life celebrations — designed with intention and joy.</p>
+        </a>
+
+        <a href="#corporate" class="service-card">
+          <div class="img-rounded">
+            <img src="/images/service-card-corporate.jpg" alt="" loading="lazy" />
+          </div>
+          <h3 class="serif-h">Corporate Events</h3>
+          <p>Professional and polished events that reflect your brand and purpose.</p>
+        </a>
+      </div>
+    </div>
+  </Section>
+
+  {/* Wedding packages */}
+  <Section bg="periwinkle" id="wedding">
+    <div class="container">
+      <h2 class="h1 text-center">Wedding Packages</h2>
+
+      {weddingPackages.map((pkg, idx) => (
+        <div class:list={['row-2col', { reverse: idx % 2 === 1 }]} style={idx === 0 ? 'margin-top:var(--sp-7);' : ''}>
+          <div class="img-rounded pkg-img">
+            <img src={pkg.image} alt={pkg.alt} loading="lazy" decoding="async" />
+          </div>
+          <div>
+            <h3 class="serif-h pkg-title">{pkg.title}</h3>
+            <p class="pkg-tagline">{pkg.tagline}</p>
+            <p class="pkg-includes-label">Includes:</p>
+            <ul class="pkg-list">
+              {pkg.includes.map((line) => <li>{line}</li>)}
+            </ul>
+          </div>
+        </div>
+      ))}
+
+      <div class="text-center mt-7">
+        <CalcomButton label="Book Free Consultation" />
+      </div>
+    </div>
+  </Section>
+
+  {/* Milestone events */}
+  <Section bg="cream" id="milestone">
+    <div class="container">
+      <p class="eyebrow text-center">Milestone Moments</p>
+      <h2 class="h1 text-center mt-3">Celebrate Life's Meaningful Moments</h2>
+      <p class="text-center mt-5" style="max-width:720px;margin:var(--sp-5) auto 0;color:var(--color-ink-soft);">
+        Every milestone tells a story — a moment of growth, love, remembrance, or celebration.
+        Each event is thoughtfully curated to reflect your vision, your people, and the significance of the occasion.
+      </p>
+
+      <p class="eyebrow text-center mt-8">Type of Events</p>
+
+      <div class="event-list mt-7">
+        {milestoneEvents.map((event, idx) => (
+          <div class:list={['row-2col', { reverse: idx % 2 === 1 }]}>
+            <div class="img-rounded ev-img">
+              <img src={event.image} alt={event.alt} loading="lazy" decoding="async" />
+            </div>
+            <div>
+              <h3 class="serif-h ev-title">{event.title}</h3>
+              {event.body.map((p) => <p class="ev-body">{p}</p>)}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <p class="eyebrow">Let's create something beautiful</p>
+        <p class="lead mt-3" style="font-family:var(--font-serif);font-style:italic;">
+          Your story deserves to be celebrated with care and intention.<br />
+          I would love to be part of your next milestone.
+        </p>
+        <div class="cta-pair mt-6">
+          <a href="/contact" class="btn btn-dark">Inquire Now</a>
+          <a href={"mailto:" + 'hello@milestonesbygloria.ca'} class="btn btn-ghost">Contact Me</a>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  {/* Corporate events */}
+  <Section bg="periwinkle" id="corporate">
+    <div class="container">
+      <p class="eyebrow text-center">Corporate &amp; Community Events</p>
+      <h2 class="h1 text-center mt-3">Professional, Polished &amp; Purposeful</h2>
+      <p class="text-center mt-5" style="max-width:720px;margin:var(--sp-5) auto 0;color:var(--color-ink-soft);">
+        From school celebrations to large-scale promotional events, every gathering deserves thoughtful planning and seamless execution.
+        I bring organization, creativity, and calm coordination to events of all sizes — ensuring your event runs smoothly while leaving a lasting impression.
+      </p>
+
+      <p class="eyebrow text-center mt-8">Types of Events</p>
+
+      <div class="event-list mt-7">
+        {corporateEvents.map((event, idx) => (
+          <div class:list={['row-2col', { reverse: idx % 2 === 1 }]}>
+            <div class="img-rounded ev-img">
+              <img src={event.image} alt={event.alt} loading="lazy" decoding="async" />
+            </div>
+            <div>
+              <h3 class="serif-h ev-title">{event.title}</h3>
+              {event.body.map((p) => <p class="ev-body">{p}</p>)}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <p class="eyebrow">Let's bring your event to life</p>
+        <p class="lead mt-3" style="font-family:var(--font-serif);font-style:italic;">
+          Whether you're planning a school celebration, a formal event, or a large community gathering,<br />
+          I would love to support you in creating something meaningful and memorable.
+        </p>
+        <div class="cta-pair mt-6">
+          <a href="/contact" class="btn btn-dark">Inquire Now</a>
+          <CalcomButton label="Book Free Consultation" variant="ghost" />
+        </div>
+      </div>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-6);
+  }
+  .service-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition), box-shadow var(--transition);
+    text-align: left;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+  .service-card .img-rounded {
+    aspect-ratio: 4 / 3;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .service-card h3 {
+    font-size: 1.25rem;
+    padding: var(--sp-5) var(--sp-5) var(--sp-2);
+  }
+  .service-card p {
+    padding: 0 var(--sp-5) var(--sp-5);
+    color: var(--color-ink-soft);
+    font-size: 0.95rem;
+  }
+
+  .pkg-img, .ev-img { aspect-ratio: 4 / 3; }
+  .pkg-title { font-size: 1.75rem; margin-bottom: var(--sp-3); }
+  .pkg-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: var(--sp-5);
+  }
+  .pkg-includes-label {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--color-brown);
+    margin-bottom: var(--sp-3);
+    font-size: 1rem;
+  }
+  .pkg-list { display: flex; flex-direction: column; gap: var(--sp-2); }
+  .pkg-list li {
+    color: var(--color-ink-soft);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .pkg-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-brown);
+  }
+
+  .ev-title {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: var(--sp-3);
+  }
+  .ev-body {
+    color: var(--color-ink-soft);
+    margin-bottom: var(--sp-3);
+  }
+
+  @media (max-width: 800px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>

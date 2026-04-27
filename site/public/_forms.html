@@ -1,0 +1,13 @@
+<!--
+  Static fallback so Netlify can detect the contact form during the build.
+  Astro pages render via JS islands but the build output of contact.astro
+  produces real HTML; this file is belt-and-suspenders.
+-->
+<!doctype html>
+<html><body>
+<form name="contact" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <textarea name="message"></textarea>
+</form>
+</body></html>

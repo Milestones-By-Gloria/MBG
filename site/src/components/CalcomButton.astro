@@ -1,0 +1,89 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  label?: string;
+  variant?: 'primary' | 'dark' | 'ghost';
+}
+const { label = 'Book Free Consultation', variant = 'dark' } = Astro.props;
+---
+
+<button
+  type="button"
+  class={`btn btn-${variant}`}
+  data-cal-link={site.calcomLink}
+  data-cal-namespace=""
+  data-cal-config='{"layout":"month_view"}'
+>
+  {label}
+</button>
+
+<script>
+  // Cal.com inline embed loader (popup mode).
+  // Lazy-loads on first hover/click of any button with [data-cal-link]
+  // so the page weight isn't impacted unless user actually wants to book.
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-cal-link]');
+
+  let loadPromise: Promise<unknown> | null = null;
+
+  function loadCal() {
+    if (loadPromise) return loadPromise;
+    loadPromise = new Promise((resolve) => {
+      // Cal.com embed snippet (official)
+      // @ts-ignore
+      (function (C, A, L) {
+        let p = function (a: any, ar: any) { a.q.push(ar); };
+        // @ts-ignore
+        let d = C.document;
+        // @ts-ignore
+        C.Cal = C.Cal || function () {
+          // @ts-ignore
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement('script')).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === 'string') {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ['initNamespace', namespace]);
+            } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+      // @ts-ignore
+      window.Cal('init', { origin: 'https://cal.com' });
+      // @ts-ignore
+      window.Cal('ui', {
+        styles: { branding: { brandColor: '#623e2a' } },
+        hideEventTypeDetails: false,
+        layout: 'month_view',
+      });
+      resolve(null);
+    });
+    return loadPromise;
+  }
+
+  buttons.forEach((btn) => {
+    const link = btn.getAttribute('data-cal-link');
+    if (!link) return;
+    const open = async () => {
+      await loadCal();
+      // @ts-ignore
+      window.Cal('modal', { calLink: link });
+    };
+    btn.addEventListener('mouseenter', loadCal, { once: true });
+    btn.addEventListener('focus', loadCal, { once: true });
+    btn.addEventListener('click', open);
+  });
+</script>

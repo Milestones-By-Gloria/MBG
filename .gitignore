@@ -1,0 +1,23 @@
+# Astro / Node
+site/node_modules/
+site/dist/
+site/.astro/
+site/.env
+site/.env.production
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Local Claude Code settings (not for shared repo)
+.claude/
+
+# Source design files (kept out of repo — they live with Gloria in Canva)
+*.pdf
+
+# Derived assets — regenerated from the source PDF, no need to commit
+_pdf_extract/
+_design.txt
