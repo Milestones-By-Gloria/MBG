@@ -48,12 +48,8 @@ const ogImage = '/images/hero-wedding-party.jpg';
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Italiana&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=DM+Sans:ital,wght@1,400&display=swap"
-      rel="stylesheet"
-    />
+    {/* Fonts are now self-hosted via @fontsource and bundled with the build —
+        no preconnect / no Google Fonts CDN. See src/styles/global.css. */}
   </head>
   <body class={bodyClass}>
     <a href="#main" class="skip-link">Skip to content</a>

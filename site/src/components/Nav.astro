@@ -96,13 +96,13 @@ const { transparent = false, current = '' } = Astro.props;
     background: currentColor;
   }
   .nav-cta { padding: 0.65rem 1.25rem; font-size: 0.72rem; }
-  /* Home-only: nav Inquire Now button uses navy (matches hero CTAs) */
+  /* Home-only: nav Inquire Now button matches the hero CTAs (soft periwinkle) */
   .site-nav.is-transparent .nav-cta {
-    background: var(--color-navy);
-    color: var(--color-white);
+    background: #f4f6fc;
+    color: var(--color-black);
   }
   .site-nav.is-transparent .nav-cta:hover {
-    background: var(--color-navy-deep);
+    background: #e6eaf5;
   }
 
   .nav-toggle {
@@ -150,6 +150,14 @@ const { transparent = false, current = '' } = Astro.props;
     }
     .nav-link, .nav-cta { width: 100%; }
     .nav-cta { justify-content: flex-start; padding: 0.85rem 1.25rem; }
+    /* The mobile dropdown always has a cream background. Force readable
+       link colours even when the parent nav is in transparent mode —
+       otherwise on the home page the links inherit white from the
+       `.is-transparent:not(.scrolled)` rule and the menu looks like an
+       empty white box until a scroll triggers a colour change. */
+    .site-nav.is-transparent:not(.scrolled) .nav-links .nav-link {
+      color: var(--color-brown);
+    }
   }
 </style>
 

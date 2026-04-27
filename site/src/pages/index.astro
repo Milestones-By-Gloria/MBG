@@ -6,7 +6,14 @@ import { site } from '../data/site';
 <Base title={undefined} transparentNav={true} current="/" hideFooter={true} bodyClass="home-body">
   <section class="hero">
     <div class="hero-bg">
-      <img src="/images/hero-wedding-party.jpg" alt="" fetchpriority="high" />
+      <img src="/images/hero-wedding-party.jpg" alt="" class="slide" fetchpriority="high" />
+      <img src="/images/wedding-full.jpg" alt="" class="slide" loading="lazy" decoding="async" />
+      <img src="/images/hero-grad-group.jpg" alt="" class="slide" loading="lazy" decoding="async" />
+      <img src="/images/hero-firerescue.jpg" alt="" class="slide" loading="lazy" decoding="async" />
+      <img src="/images/hero-family-portrait.jpg" alt="" class="slide" loading="lazy" decoding="async" />
+      <img src="/images/hero-bridal-party.jpg" alt="" class="slide" loading="lazy" decoding="async" />
+      <img src="/images/hero-blackwhite-group.jpg" alt="" class="slide" loading="lazy" decoding="async" />
+      <img src="/images/hero-party-bus.jpg" alt="" class="slide" loading="lazy" decoding="async" />
     </div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-content">
@@ -36,18 +43,52 @@ import { site } from '../data/site';
     inset: 0;
     z-index: -2;
   }
-  .hero-bg img {
+  .hero-bg .slide {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center 35%;
+    opacity: 0;
+    /* 8 slides × 6 s window each = 48 s cycle */
+    animation: hero-fade 48s infinite;
+    will-change: opacity;
+  }
+  /* Slide 1 starts already faded-in (negative delay places its animation
+     1 second past the 0% keyframe at page load — i.e. fully visible).
+     Each subsequent slide is staggered by 6 s. */
+  .hero-bg .slide:nth-child(1) { animation-delay: -1s; }
+  .hero-bg .slide:nth-child(2) { animation-delay: 5s; }
+  .hero-bg .slide:nth-child(3) { animation-delay: 11s; }
+  .hero-bg .slide:nth-child(4) { animation-delay: 17s; }
+  .hero-bg .slide:nth-child(5) { animation-delay: 23s; }
+  .hero-bg .slide:nth-child(6) { animation-delay: 29s; }
+  .hero-bg .slide:nth-child(7) { animation-delay: 35s; }
+  .hero-bg .slide:nth-child(8) { animation-delay: 41s; }
+
+  @keyframes hero-fade {
+    0%      { opacity: 0; }
+    2.08%   { opacity: 1; }    /* ~1 s fade-in */
+    12.5%   { opacity: 1; }    /* ~5 s hold visible */
+    14.58%  { opacity: 0; }    /* ~1 s fade-out */
+    100%    { opacity: 0; }    /* stay invisible until cycle restarts */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg .slide { animation: none; opacity: 0; }
+    .hero-bg .slide:nth-child(1) { opacity: 1; }
   }
   .hero-overlay {
     position: absolute;
     inset: 0;
     z-index: -1;
+    /* Gradient overlay + flat tint stacked. The flat layer is the "slight
+       black tint" that lifts the title off the photo regardless of which
+       slide is showing; the gradient adds extra depth at top/bottom. */
     background:
-      linear-gradient(180deg, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.55) 100%);
+      linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.30) 40%, rgba(0,0,0,0.60) 100%),
+      rgba(0, 0, 0, 0.18);
   }
   .hero-content {
     text-align: center;
@@ -78,14 +119,14 @@ import { site } from '../data/site';
     justify-content: center;
     flex-wrap: wrap;
   }
-  /* Home-only button override: dark navy for strong contrast on the hero photo */
+  /* Home-only: hero buttons use a soft periwinkle-tinted off-white */
   .hero-ctas .btn {
-    background: var(--color-navy);
-    color: var(--color-white);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+    background: #f4f6fc;
+    color: var(--color-black);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
   }
   .hero-ctas .btn:hover {
-    background: var(--color-navy-deep);
+    background: #e6eaf5;
     transform: translateY(-1px);
   }
   @media (max-width: 600px) {

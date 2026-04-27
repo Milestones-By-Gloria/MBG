@@ -2,19 +2,20 @@
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import CalcomButton from '../components/CalcomButton.astro';
+import SocialIcon from '../components/SocialIcon.astro';
 import { site } from '../data/site';
 
 const success = Astro.url.searchParams.get('success') === 'true';
 ---
 
-<Base title="Inquire Now" current="/contact" description="Reach out to Milestones by Gloria — let's plan your milestone together.">
+<Base title="Inquire Now" current="/contact" description="Reach out to Milestones by Gloria. Let's plan your milestone together.">
   <Section bg="cream">
     <div class="container-narrow">
       <div class="text-center">
         <p class="eyebrow">Get In Touch</p>
         <h1 class="h1 mt-3">Contact Me</h1>
         <p class="lead mt-5" style="font-family:var(--font-serif);font-style:italic;color:var(--color-brown);">
-          Whether it's a question, a kind word, or a collaboration idea — I'd love to hear from you.
+          Whether it's a question, a kind word, or a collaboration idea, I'd love to hear from you.
         </p>
       </div>
 
@@ -70,20 +71,26 @@ const success = Astro.url.searchParams.get('success') === 'true';
       <div class="alt-contact mt-8">
         <p class="eyebrow text-center">Other Ways to Reach Me</p>
         <div class="alt-grid mt-5">
-          <a href={site.emailHref} class="alt-tile">
-            <p class="alt-label">Email</p>
+          <a href={site.emailHref} class="alt-tile" aria-label="Email">
+            <span class="alt-icon"><SocialIcon name="email" size={28} /></span>
             <p class="alt-value">{site.email}</p>
           </a>
           {site.socials.instagram && (
-            <a href={site.socials.instagram} target="_blank" rel="noopener" class="alt-tile">
-              <p class="alt-label">Instagram</p>
+            <a href={site.socials.instagram} target="_blank" rel="noopener" class="alt-tile" aria-label="Instagram">
+              <span class="alt-icon"><SocialIcon name="instagram" size={28} /></span>
               <p class="alt-value">@milestonesbygloria</p>
             </a>
           )}
           {site.socials.facebook && (
-            <a href={site.socials.facebook} target="_blank" rel="noopener" class="alt-tile">
-              <p class="alt-label">Facebook</p>
-              <p class="alt-value">Milestones by Gloria</p>
+            <a href={site.socials.facebook} target="_blank" rel="noopener" class="alt-tile" aria-label="Facebook">
+              <span class="alt-icon"><SocialIcon name="facebook" size={28} /></span>
+              <p class="alt-value">/milestonesbygloria</p>
+            </a>
+          )}
+          {site.socials.pinterest && (
+            <a href={site.socials.pinterest} target="_blank" rel="noopener" class="alt-tile" aria-label="Pinterest">
+              <span class="alt-icon"><SocialIcon name="pinterest" size={28} /></span>
+              <p class="alt-value">/milestonesbygloria</p>
             </a>
           )}
         </div>
@@ -133,6 +140,13 @@ const success = Astro.url.searchParams.get('success') === 'true';
     text-transform: uppercase;
     color: var(--color-brown);
     margin-bottom: var(--sp-2);
+  }
+  .alt-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brown);
+    margin-bottom: var(--sp-3);
   }
   .alt-value {
     font-family: var(--font-serif);

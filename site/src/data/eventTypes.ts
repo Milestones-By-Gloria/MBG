@@ -18,7 +18,7 @@ export const milestoneEvents: EventType[] = [
   {
     title: 'Baby Showers & Gender Reveals',
     body: [
-      'Welcoming a new life is a beautiful milestone. These events are designed to feel warm, joyful, and meaningful — bringing together loved ones to celebrate this exciting new chapter.',
+      'Welcoming a new life is a beautiful milestone. These events are designed to feel warm, joyful, and meaningful, bringing together loved ones to celebrate this exciting new chapter.',
     ],
     image: '/images/milestone-baby.jpg',
     alt: 'Newborn baby feet held gently',
@@ -88,7 +88,7 @@ export const corporateEvents: EventType[] = [
   {
     title: 'Prom & Formal Events',
     body: [
-      'Elegant, exciting, and unforgettable — proms and formal events require careful coordination to ensure everything runs seamlessly.',
+      'Elegant, exciting, and unforgettable. Proms and formal events require careful coordination to ensure everything runs seamlessly.',
       'From timelines to vendor coordination and on-site management, I help create a polished and memorable experience for students.',
     ],
     image: '/images/corp-prom.jpg',

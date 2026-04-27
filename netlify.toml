@@ -6,14 +6,67 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# ──────────────────────────────────────────────────────────────────────
+# Security headers — applied to every page
+# ──────────────────────────────────────────────────────────────────────
 [[headers]]
   for = "/*"
   [headers.values]
+    # Force HTTPS for 2 years; include subdomains; HSTS preload-list eligible
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+
+    # Click-jacking: legacy header (CSP frame-ancestors below is the modern
+    # equivalent — keeping both for defence in depth and old-browser support)
     X-Frame-Options = "SAMEORIGIN"
+
+    # Refuse MIME-type sniffing
     X-Content-Type-Options = "nosniff"
+
+    # Limit how much referrer info leaks to other origins
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+    # Disable browser APIs this site doesn't need (also opts out of FLoC)
+    Permissions-Policy = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()"
+
+    # Content-Security-Policy
+    #
+    # Strategy: default-deny, then explicitly allow only what the site needs.
+    #   • Scripts: same origin + Cal.com embed (loaded dynamically by their
+    #     bootstrap). NO 'unsafe-inline' — Astro hoists all <script> blocks
+    #     to bundled files in /_astro/, so inline scripts shouldn't exist
+    #     in the build output. If anything breaks after deploy, the most
+    #     likely culprit is a stray `is:inline` somewhere — find it and
+    #     refactor, don't add 'unsafe-inline' back.
+    #   • Styles: 'unsafe-inline' is required because Astro emits component
+    #     styles inline and we use a few inline `style="..."` attrs.
+    #   • Fonts: self-hosted via @fontsource, bundled into /_astro/ — no
+    #     third-party connections needed.
+    #   • frame-src + connect-src: Cal.com modal iframe and its API.
+    #   • frame-ancestors: same as X-Frame-Options but enforceable on modern
+    #     browsers via CSP (X-Frame-Options is largely deprecated).
+    #   • object-src 'none': blocks <object>/<embed> entirely.
+    #   • base-uri 'self': stops attackers from re-pointing relative URLs
+    #     via an injected <base> tag.
+    #   • form-action 'self': all form submits stay on the site (Netlify
+    #     forms post back to the same origin).
+    #   • upgrade-insecure-requests: any leftover http:// references get
+    #     auto-upgraded to https before being requested.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://app.cal.com https://cal.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://app.cal.com https://cal.com; frame-src 'self' https://app.cal.com https://cal.com; frame-ancestors 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+
+# ──────────────────────────────────────────────────────────────────────
+# Caching — long-lived for fingerprinted assets, short-lived for HTML
+# ──────────────────────────────────────────────────────────────────────
 [[headers]]
   for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

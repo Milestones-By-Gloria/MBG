@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
+import SocialIcon from '../components/SocialIcon.astro';
 import { site } from '../data/site';
 ---
 
@@ -19,19 +20,20 @@ import { site } from '../data/site';
           <p class="founder-role">{site.founder.role}</p>
           <a href={site.emailHref} class="btn btn-dark email-btn">Email Me</a>
           <ul class="founder-socials">
-            {site.socials.instagram && <li><a href={site.socials.instagram} target="_blank" rel="noopener">Instagram</a></li>}
-            {site.socials.facebook && <li><a href={site.socials.facebook} target="_blank" rel="noopener">Facebook</a></li>}
+            {site.socials.instagram && <li><a href={site.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram"><SocialIcon name="instagram" size={22} /></a></li>}
+            {site.socials.facebook && <li><a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook"><SocialIcon name="facebook" size={22} /></a></li>}
+            {site.socials.pinterest && <li><a href={site.socials.pinterest} target="_blank" rel="noopener" aria-label="Pinterest"><SocialIcon name="pinterest" size={22} /></a></li>}
           </ul>
         </aside>
 
         <div class="bio">
-          <p class="lead">Hi, I'm Gloria — the heart behind MBG.</p>
+          <p class="lead">Hi, I'm Gloria, the heart behind MBG.</p>
 
           <p>
             I created this business because I believe life's most important moments deserve to be
             experienced, not stressed over. Whether it's a wedding, a birthday celebration, a baby
             shower, or a memorial service, my goal is to take the pressure off your shoulders so you
-            can focus on what truly matters — your people, your memories, and your moment.
+            can focus on what truly matters: your people, your memories, and your moment.
           </p>
 
           <p>
@@ -47,7 +49,7 @@ import { site } from '../data/site';
           </p>
 
           <p>
-            At the end of the day, this isn't just about planning events — it's about creating space for
+            At the end of the day, this isn't just about planning events; it's about creating space for
             memories that last a lifetime.
           </p>
 
@@ -99,18 +101,18 @@ import { site } from '../data/site';
   .email-btn { width: 100%; }
   .founder-socials {
     display: flex;
-    gap: var(--sp-4);
+    gap: var(--sp-5);
     justify-content: center;
     margin-top: var(--sp-5);
   }
   .founder-socials a {
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     color: var(--color-brown);
-    transition: opacity var(--transition);
+    transition: opacity var(--transition), transform var(--transition);
   }
-  .founder-socials a:hover { opacity: 0.7; }
+  .founder-socials a:hover { opacity: 0.7; transform: translateY(-1px); }
 
   .bio p {
     color: var(--color-ink-soft);

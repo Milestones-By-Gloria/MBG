@@ -5,16 +5,15 @@ export const site = {
   name: 'Milestones by Gloria',
   tagline: "THOUGHTFULLY PLANNING LIFE'S MOST MEANINGFUL MOMENTS",
   shortDescription:
-    'Thoughtful, calm, detail-driven event planning and coordination — for weddings, milestones, and corporate gatherings.',
+    'Thoughtful, calm, detail-driven event planning and coordination for weddings, milestones, and corporate gatherings.',
 
-  // TODO: replace with Gloria's real email when ready
-  email: 'hello@milestonesbygloria.ca',
-  emailHref: 'mailto:hello@milestonesbygloria.ca',
+  email: 'milestonesbygloria@gmail.com',
+  emailHref: 'mailto:milestonesbygloria@gmail.com',
 
-  // TODO: replace with Gloria's real handles
   socials: {
     instagram: 'https://instagram.com/milestonesbygloria',
     facebook: 'https://facebook.com/milestonesbygloria',
+    pinterest: 'https://pinterest.com/milestonesbygloria',
   },
 
   calcomLink: 'gloria-niyomahoro/free-consultation',

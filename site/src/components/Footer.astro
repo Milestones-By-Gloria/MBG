@@ -1,5 +1,6 @@
 ---
 import { site, nav } from '../data/site';
+import SocialIcon from './SocialIcon.astro';
 const year = new Date().getFullYear();
 ---
 
@@ -10,23 +11,27 @@ const year = new Date().getFullYear();
       <p class="brand-line">{site.tagline}</p>
     </div>
 
-    <nav class="footer-links" aria-label="Footer">
-      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
-      <a href="/contact">Inquire</a>
-    </nav>
-
     <div class="footer-meta">
       <a href={site.emailHref} class="footer-email">{site.email}</a>
       <ul class="footer-socials">
         {site.socials.instagram && (
-          <li><a href={site.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram">Instagram</a></li>
+          <li><a href={site.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram"><SocialIcon name="instagram" size={20} /></a></li>
         )}
         {site.socials.facebook && (
-          <li><a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook">Facebook</a></li>
+          <li><a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook"><SocialIcon name="facebook" size={20} /></a></li>
+        )}
+        {site.socials.pinterest && (
+          <li><a href={site.socials.pinterest} target="_blank" rel="noopener" aria-label="Pinterest"><SocialIcon name="pinterest" size={20} /></a></li>
         )}
       </ul>
     </div>
   </div>
+
+  <nav class="container-wide footer-links" aria-label="Footer">
+    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    <a href="/contact">Inquire</a>
+  </nav>
+
   <div class="container-wide footer-bottom">
     <p>© {year} {site.name}. All rights reserved.</p>
   </div>
@@ -42,9 +47,10 @@ const year = new Date().getFullYear();
   }
   .footer-inner {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--sp-7);
-    align-items: start;
+    align-items: center;
+    text-align: center;
   }
   .footer-brand .brand-mark {
     font-family: var(--font-display);
@@ -60,9 +66,13 @@ const year = new Date().getFullYear();
     opacity: 0.8;
   }
   .footer-links {
+    margin-top: var(--sp-7);
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--color-border);
     display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sp-3) var(--sp-6);
   }
   .footer-links a {
     letter-spacing: 0.15em;
@@ -71,7 +81,7 @@ const year = new Date().getFullYear();
     transition: opacity var(--transition);
   }
   .footer-links a:hover { opacity: 0.7; }
-  .footer-meta { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .footer-meta { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); }
   .footer-email {
     font-family: var(--font-serif);
     font-style: italic;
@@ -83,16 +93,16 @@ const year = new Date().getFullYear();
     flex-wrap: wrap;
   }
   .footer-socials a {
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    transition: opacity var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brown);
+    transition: opacity var(--transition), transform var(--transition);
   }
-  .footer-socials a:hover { opacity: 0.7; }
+  .footer-socials a:hover { opacity: 0.7; transform: translateY(-1px); }
   .footer-bottom {
-    margin-top: var(--sp-7);
-    padding-top: var(--sp-5);
-    border-top: 1px solid var(--color-border);
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
     text-align: center;
     font-size: 0.75rem;
     opacity: 0.7;

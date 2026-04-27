@@ -18,6 +18,10 @@ Thumbs.db
 # Source design files (kept out of repo — they live with Gloria in Canva)
 *.pdf
 
-# Derived assets — regenerated from the source PDF, no need to commit
+# Source photos (originals from Gloria; web-sized copies live under
+# site/public/images/ which IS committed)
+Photos to use*/
+
+# Derived assets (regenerated from the source PDF, no need to commit)
 _pdf_extract/
 _design.txt

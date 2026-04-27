@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import CalcomButton from '../components/CalcomButton.astro';
+import { site } from '../data/site';
 import { weddingPackages } from '../data/packages';
 import { milestoneEvents, corporateEvents } from '../data/eventTypes';
 ---
@@ -14,7 +15,7 @@ import { milestoneEvents, corporateEvents } from '../data/eventTypes';
       <p class="eyebrow">What I offer</p>
       <h1 class="h1 mt-3">Services Offered</h1>
       <p class="lead mt-5" style="max-width:640px;margin-left:auto;margin-right:auto;">
-        Three core ways I help you bring your milestone to life — each thoughtfully tailored to reflect your story.
+        Three core ways I help you bring your milestone to life, each thoughtfully tailored to reflect your story.
       </p>
 
       <div class="services-grid mt-8">
@@ -31,7 +32,7 @@ import { milestoneEvents, corporateEvents } from '../data/eventTypes';
             <img src="/images/service-card-milestone.jpg" alt="" loading="lazy" />
           </div>
           <h3 class="serif-h">Milestone Celebrations</h3>
-          <p>Birthdays, baptisms, anniversaries, and life celebrations — designed with intention and joy.</p>
+          <p>Birthdays, baptisms, anniversaries, and life celebrations, designed with intention and joy.</p>
         </a>
 
         <a href="#corporate" class="service-card">
@@ -78,7 +79,7 @@ import { milestoneEvents, corporateEvents } from '../data/eventTypes';
       <p class="eyebrow text-center">Milestone Moments</p>
       <h2 class="h1 text-center mt-3">Celebrate Life's Meaningful Moments</h2>
       <p class="text-center mt-5" style="max-width:720px;margin:var(--sp-5) auto 0;color:var(--color-ink-soft);">
-        Every milestone tells a story — a moment of growth, love, remembrance, or celebration.
+        Every milestone tells a story: a moment of growth, love, remembrance, or celebration.
         Each event is thoughtfully curated to reflect your vision, your people, and the significance of the occasion.
       </p>
 
@@ -106,7 +107,7 @@ import { milestoneEvents, corporateEvents } from '../data/eventTypes';
         </p>
         <div class="cta-pair mt-6">
           <a href="/contact" class="btn btn-dark">Inquire Now</a>
-          <a href={"mailto:" + 'hello@milestonesbygloria.ca'} class="btn btn-ghost">Contact Me</a>
+          <a href={site.emailHref} class="btn btn-ghost">Contact Me</a>
         </div>
       </div>
     </div>
@@ -119,7 +120,7 @@ import { milestoneEvents, corporateEvents } from '../data/eventTypes';
       <h2 class="h1 text-center mt-3">Professional, Polished &amp; Purposeful</h2>
       <p class="text-center mt-5" style="max-width:720px;margin:var(--sp-5) auto 0;color:var(--color-ink-soft);">
         From school celebrations to large-scale promotional events, every gathering deserves thoughtful planning and seamless execution.
-        I bring organization, creativity, and calm coordination to events of all sizes — ensuring your event runs smoothly while leaving a lasting impression.
+        I bring organization, creativity, and calm coordination to events of all sizes, ensuring your event runs smoothly while leaving a lasting impression.
       </p>
 
       <p class="eyebrow text-center mt-8">Types of Events</p>
