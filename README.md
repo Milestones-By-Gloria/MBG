@@ -4,6 +4,8 @@ Marketing website for **Milestones by Gloria** (MBG) — a thoughtful, calm, det
 
 Built as a static site with Astro, hosted on Netlify, with Cal.com booking and Netlify Forms for inquiries.
 
+**Live:** [milestonesbygloria.ca](https://milestonesbygloria.ca) (also reachable at the Netlify subdomain `milestones-by-gloria.netlify.app`)
+
 ## Stack
 
 | Concern | Choice |
@@ -12,8 +14,9 @@ Built as a static site with Astro, hosted on Netlify, with Cal.com booking and N
 | Hosting | [Netlify](https://www.netlify.com) (free tier) |
 | Contact form | [Netlify Forms](https://docs.netlify.com/forms/setup/) (free up to 100/mo) |
 | Booking | [Cal.com](https://cal.com) — Google Calendar two-way sync |
-| Fonts | Google Fonts: Italiana, Libre Baskerville, Montserrat, DM Sans |
-| Domain (planned) | `milestonesbygloria.ca` via Porkbun |
+| Fonts | Self-hosted via `@fontsource` (Italiana, Libre Baskerville, Montserrat, DM Sans) |
+| Social icons | Inline SVG (simple-icons paths) |
+| Domain | `milestonesbygloria.ca` via Porkbun, ALIAS to Netlify |
 
 See [`PLAN.md`](./PLAN.md) for full design and decisions.
 
@@ -21,12 +24,12 @@ See [`PLAN.md`](./PLAN.md) for full design and decisions.
 
 | Route | Page |
 |---|---|
-| `/` | Home — full-viewport hero |
+| `/` | Home — full-viewport hero with 8-photo slideshow |
 | `/about` | About / Founder |
 | `/services` | Services & Packages (Wedding, Milestone, Corporate) |
 | `/benefits` | Why MBG (six numbered points) |
 | `/testimonials` | Client testimonials |
-| `/contact` | Inquiry form |
+| `/contact` | Inquiry form + Cal.com booking + alt-contact tiles |
 
 ## Local development
 
@@ -47,17 +50,17 @@ npm run preview      # preview the production build
 .
 ├── PLAN.md                      # full implementation plan
 ├── README.md
+├── netlify.toml                 # build settings + security headers
 └── site/
     ├── astro.config.mjs
-    ├── netlify.toml             # build settings + cache headers
     ├── package.json
     ├── public/
-    │   ├── images/              # 22 photos used across the site
+    │   ├── images/              # photos used across the site
     │   ├── favicon.svg
     │   ├── robots.txt
     │   └── sitemap.xml
     └── src/
-        ├── components/          # Nav, Footer, Button, Section, Testimonial, CalcomButton
+        ├── components/          # Nav, Footer, Button, Section, Testimonial, CalcomButton, SocialIcon
         ├── data/                # site config, packages, event types, testimonials
         ├── layouts/Base.astro
         ├── pages/               # one .astro file per route
@@ -74,6 +77,8 @@ npm run preview      # preview the production build
 | Testimonials | `site/src/data/testimonials.ts` |
 | Colors, fonts, spacing | `site/src/styles/global.css` (`:root` block) |
 | Navigation order | `site/src/data/site.ts` (`nav`) |
+| Hero slideshow photos | `site/src/pages/index.astro` (the `<img class="slide">` list) |
+| Security headers / CSP | `netlify.toml` |
 
 Adding a new testimonial = appending an entry to the array in `testimonials.ts` and committing.
 
@@ -88,21 +93,34 @@ Palette and typography were extracted directly from the source Canva design:
 - Italic serif: **Libre Baskerville**
 - Sans body / UI: **Montserrat**
 
+All fonts are self-hosted via `@fontsource` packages and bundled with the build — no third-party CDN connections.
+
+## Hero slideshow
+
+Pure CSS auto-cycling slideshow on the home page. 8 photos, ~5 second hold each, 1 second cross-fade. Total cycle ~48 seconds. No JavaScript or external libraries; respects `prefers-reduced-motion`.
+
+To swap photos, edit the `<img class="slide">` list in `src/pages/index.astro` and drop the new files into `public/images/`.
+
+## Security
+
+Security headers are set in `netlify.toml`:
+
+- **Strict-Transport-Security** — HSTS, 2-year max-age, preload-eligible
+- **Content-Security-Policy** — strict default-deny, allow-list for self + Cal.com
+- **Permissions-Policy** — disables camera, microphone, geolocation, payment, etc.
+- **X-Frame-Options / frame-ancestors** — prevent clickjacking
+- **X-Content-Type-Options: nosniff**
+- **Referrer-Policy: strict-origin-when-cross-origin**
+
+The contact form uses a hidden honeypot field (`bot-field`). Akismet spam filtering should also be enabled in the Netlify dashboard.
+
 ## Deployment
 
 The site auto-deploys from the `main` branch via Netlify:
 
-1. Connect this repo to a new Netlify site.
-2. Build settings are read from `netlify.toml` (build command `npm run build`, publish dir `site/dist`).
-3. Each push to `main` triggers a new deploy.
-4. The contact form is auto-detected by Netlify and submissions appear in the Netlify dashboard.
-
-### Custom domain (after purchase)
-
-1. Buy `milestonesbygloria.ca` at [Porkbun](https://porkbun.com).
-2. In Netlify: **Domain settings → Add custom domain** → enter the `.ca`.
-3. At Porkbun: switch nameservers to Netlify's (or copy Netlify's DNS records).
-4. SSL provisions automatically; site goes live at `milestonesbygloria.ca`.
+1. Push to `main` triggers a new build.
+2. Build settings come from `netlify.toml` (base `site/`, build `npm run build`, publish `dist/`).
+3. The contact form is auto-detected by Netlify; submissions appear in the Netlify dashboard and email Gloria.
 
 ## Contact form behaviour
 
@@ -111,17 +129,24 @@ The form on `/contact` is a Netlify Form. On submit, Netlify:
 2. Sends an email notification to Gloria,
 3. Redirects the user to `/contact?success=true` (rendered with a thank-you state).
 
-Spam protection: a hidden honeypot field (`bot-field`).
+Spam protection: a hidden honeypot field (`bot-field`) plus optional Akismet (toggle in Netlify dashboard).
 
 ## Cal.com booking
 
-The `Book Free Consultation` button on `/services` lazy-loads the Cal.com popup embed on hover/focus, so the script doesn't impact page load unless someone interacts with it.
+The `Book Free Consultation` button on `/services` and `/contact` lazy-loads the Cal.com popup embed on hover/focus, so the script doesn't impact page load unless someone interacts with it.
 
-To wire it to Gloria's real calendar:
-1. Gloria signs up at [cal.com](https://cal.com) with her Google account and authorizes Google Calendar.
-2. She creates an event type (e.g. "Free 30-min Consultation").
-3. Update `calcomLink` in `site/src/data/site.ts` to her username/event slug (e.g. `gloria-mbg/consultation`).
-4. Commit and push — Netlify redeploys.
+The booking link is configured in `site/src/data/site.ts` as `calcomLink: 'gloria-niyomahoro/free-consultation'`. Update that string to point at a different event type.
+
+Cal.com → **Settings → Developer → Embed → Allowed origins** must include `https://milestonesbygloria.ca` and the Netlify URL.
+
+## Domain
+
+`milestonesbygloria.ca` is registered at Porkbun with two DNS records pointing at Netlify:
+
+- `ALIAS @ → apex-loadbalancer.netlify.com`
+- `CNAME www → milestones-by-gloria.netlify.app`
+
+SSL is auto-provisioned by Netlify via Let's Encrypt.
 
 ## License
 
