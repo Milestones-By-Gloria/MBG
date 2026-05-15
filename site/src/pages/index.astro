@@ -83,12 +83,12 @@ import { site } from '../data/site';
     position: absolute;
     inset: 0;
     z-index: -1;
-    /* Gradient overlay + flat tint stacked, tinted with the brand's darkest
-       navy (#2B3547) instead of pure black. The flat layer lifts the title
-       off the photo; the gradient adds depth at top/bottom. */
+    /* Gradient overlay + flat tint stacked. The flat layer is the "slight
+       black tint" that lifts the title off the photo regardless of which
+       slide is showing; the gradient adds extra depth at top/bottom. */
     background:
-      linear-gradient(180deg, rgba(51,76,107,0.52) 0%, rgba(51,76,107,0.38) 40%, rgba(51,76,107,0.68) 100%),
-      rgba(51, 76, 107, 0.24);
+      linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.30) 40%, rgba(0,0,0,0.60) 100%),
+      rgba(0, 0, 0, 0.18);
   }
   .hero-content {
     text-align: center;
