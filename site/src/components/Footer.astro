@@ -7,7 +7,9 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container-wide footer-inner">
     <div class="footer-brand">
-      <p class="brand-mark">{site.name}</p>
+      <a href="/" class="brand-mark" aria-label={site.name}>
+        <img src="/img/logo/wordmark-name-dark.png" alt={site.name} width="569" height="150" />
+      </a>
       <p class="brand-line">{site.tagline}</p>
     </div>
 
@@ -53,10 +55,13 @@ const year = new Date().getFullYear();
     text-align: center;
   }
   .footer-brand .brand-mark {
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    line-height: 1.1;
-    color: var(--color-brown);
+    display: inline-block;
+    line-height: 0;
+  }
+  .footer-brand .brand-mark img {
+    height: 64px;
+    width: auto;
+    max-width: 100%;
   }
   .footer-brand .brand-line {
     margin-top: var(--sp-3);

@@ -11,7 +11,10 @@ const { transparent = false, current = '' } = Astro.props;
 
 <header class:list={['site-nav', { 'is-transparent': transparent }]}>
   <div class="container-wide nav-inner">
-    <a href="/" class="brand" aria-label={site.name}>{site.name}</a>
+    <a href="/" class="brand" aria-label={site.name}>
+      <img src="/img/logo/wordmark-name-dark.png" alt={site.name} class="brand-img brand-img-dark" width="569" height="150" />
+      <img src="/img/logo/wordmark-name-light.png" alt="" aria-hidden="true" class="brand-img brand-img-light" width="569" height="150" />
+    </a>
 
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
       <span></span><span></span><span></span>
@@ -60,15 +63,24 @@ const { transparent = false, current = '' } = Astro.props;
     gap: var(--sp-5);
   }
   .brand {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    color: var(--color-brown);
+    display: inline-flex;
+    align-items: center;
     line-height: 1;
-    letter-spacing: 0.01em;
   }
-  .site-nav.is-transparent:not(.scrolled) .brand,
+  .brand-img {
+    display: block;
+    height: 44px;
+    width: auto;
+    max-width: 320px;
+  }
+  .brand-img-light { display: none; }
+  .site-nav.is-transparent:not(.scrolled) .brand-img-dark { display: none; }
+  .site-nav.is-transparent:not(.scrolled) .brand-img-light { display: block; }
   .site-nav.is-transparent:not(.scrolled) .nav-link {
     color: var(--color-white);
+  }
+  @media (max-width: 600px) {
+    .brand-img { height: 36px; max-width: 220px; }
   }
   .nav-links {
     display: flex;
@@ -98,11 +110,11 @@ const { transparent = false, current = '' } = Astro.props;
   .nav-cta { padding: 0.65rem 1.25rem; font-size: 0.72rem; }
   /* Home-only: nav Inquire Now button matches the hero CTAs (soft periwinkle) */
   .site-nav.is-transparent .nav-cta {
-    background: #f4f6fc;
+    background: #F3EEEA;
     color: var(--color-black);
   }
   .site-nav.is-transparent .nav-cta:hover {
-    background: #e6eaf5;
+    background: #C6D8E4;
   }
 
   .nav-toggle {

@@ -1,45 +1,51 @@
 /* === Self-hosted fonts (via @fontsource) === */
 /* Bundled with the build → served from /_astro/ — no third-party connections. */
+@import '@fontsource/bodoni-moda/400.css';
+@import '@fontsource/bodoni-moda/500.css';
 @import '@fontsource/italiana/400.css';
-@import '@fontsource/libre-baskerville/400.css';
-@import '@fontsource/libre-baskerville/400-italic.css';
-@import '@fontsource/libre-baskerville/700.css';
-@import '@fontsource/montserrat/300.css';
-@import '@fontsource/montserrat/400.css';
-@import '@fontsource/montserrat/500.css';
-@import '@fontsource/montserrat/600.css';
-@import '@fontsource/dm-sans/400-italic.css';
+@import '@fontsource/cormorant-garamond/300.css';
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+@import '@fontsource/cormorant-garamond/500.css';
+@import '@fontsource/cormorant-garamond/600.css';
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
 
 /* === Milestones by Gloria — Design tokens === */
+/* Rebrand note: token NAMES are kept from the previous palette to minimize
+   diff churn — the VALUES now map to the new brand board (5-color blue/cream).
+   A future cleanup pass should rename to semantic tokens (--color-text,
+   --color-accent, --color-bg-warm, etc.). */
 
 :root {
-  /* Palette (sampled directly from the Canva PDF) */
-  --color-cream: #fbf7f7;          /* warm section bg */
-  --color-periwinkle: #f4f5fb;     /* cool section bg */
-  --color-pink-soft: #efe4e0;      /* deeper pink accent */
-  --color-lavender-soft: #dcdce7;  /* deeper lavender accent */
+  /* Palette (sampled directly from the new brand board) */
+  --color-cream: #F4F6FC;          /* cool off-white / default page bg */
+  --color-periwinkle: #F3EEEA;     /* warm cream section bg */
+  --color-pink-soft: #C6D8E4;      /* light-blue accent (was warm pink) */
+  --color-lavender-soft: #C6D8E4;  /* light-blue accent (was lavender) */
 
-  --color-brown: #623e2a;          /* primary heading + accent (PDF brand) */
-  --color-brown-deep: #4a2e1f;
-  --color-navy: #1a2c4b;           /* CTA button bg */
-  --color-navy-deep: #25406b;      /* CTA hover */
-  --color-ink: #2e2e2e;            /* primary body text */
-  --color-ink-soft: #343434;
+  --color-brown: #2B3547;          /* primary heading + body text (was warm brown) */
+  --color-brown-deep: #1F2733;     /* deeper navy for hover */
+  --color-navy: #334C6B;           /* CTA button bg (medium blue) */
+  --color-navy-deep: #2B3547;      /* CTA hover (dark navy) */
+  --color-ink: #2B3547;            /* primary body text */
+  --color-ink-soft: #334C6B;
   --color-black: #000000;
   --color-white: #ffffff;
 
-  --color-border: rgba(98, 62, 42, 0.12);
+  --color-border: rgba(43, 53, 71, 0.12);
 
   /* Typography
-     Display: CatchyMager (Canva-only) → Italiana (closest free Didone match)
-     Secondary serif: Libre Baskerville (kept as-is, Google Fonts native)
-     Sans (replaces CocoGothic + Noah): Montserrat
-     Italic small label (Founder): DM Sans Italic
+     Display heading: BODONI MODA → free substitute for FERLY (Pangram Pangram, commercial)
+     Body serif: CORMORANT GARAMOND (per brand board, free on Google Fonts)
+     Sans / labels / buttons: INTER → free substitute for UNIVERS (Linotype, commercial)
   */
-  --font-display: 'Italiana', 'Cormorant Garamond', Georgia, serif;
-  --font-serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-  --font-label: 'DM Sans', 'Montserrat', sans-serif;
+  --font-display: 'Bodoni Moda', 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 
   /* Type scale */
   --fs-display: clamp(3.25rem, 8vw, 6.5rem);   /* hero title */
@@ -79,8 +85,8 @@
   --radius-lg: 22px;
 
   --nav-height: 76px;
-  --shadow-soft: 0 6px 24px rgba(98, 62, 42, 0.07);
-  --shadow-lift: 0 12px 36px rgba(98, 62, 42, 0.12);
+  --shadow-soft: 0 6px 24px rgba(43, 53, 71, 0.07);
+  --shadow-lift: 0 12px 36px rgba(43, 53, 71, 0.12);
 
   --transition: 200ms ease;
 }

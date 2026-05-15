@@ -83,12 +83,12 @@ import { site } from '../data/site';
     position: absolute;
     inset: 0;
     z-index: -1;
-    /* Gradient overlay + flat tint stacked. The flat layer is the "slight
-       black tint" that lifts the title off the photo regardless of which
-       slide is showing; the gradient adds extra depth at top/bottom. */
+    /* Gradient overlay + flat tint stacked, tinted with the brand's darkest
+       navy (#2B3547) instead of pure black. The flat layer lifts the title
+       off the photo; the gradient adds depth at top/bottom. */
     background:
-      linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.30) 40%, rgba(0,0,0,0.60) 100%),
-      rgba(0, 0, 0, 0.18);
+      linear-gradient(180deg, rgba(51,76,107,0.52) 0%, rgba(51,76,107,0.38) 40%, rgba(51,76,107,0.68) 100%),
+      rgba(51, 76, 107, 0.24);
   }
   .hero-content {
     text-align: center;
@@ -98,10 +98,16 @@ import { site } from '../data/site';
     width: 100%;
   }
   .hero-content .display {
+    /* Hero-only: keeps the pre-rebrand display font (Italiana) for the title. */
+    font-family: 'Italiana', Georgia, serif;
     font-size: clamp(2.75rem, 9vw, 7.25rem);
     line-height: 1;
     color: var(--color-white);
     text-shadow: 0 4px 30px rgba(0,0,0,0.35);
+    white-space: nowrap;
+  }
+  @media (max-width: 520px) {
+    .hero-content .display { white-space: normal; }
   }
   .hero-tagline {
     margin-top: var(--sp-5);
@@ -121,12 +127,12 @@ import { site } from '../data/site';
   }
   /* Home-only: hero buttons use a soft periwinkle-tinted off-white */
   .hero-ctas .btn {
-    background: #f4f6fc;
+    background: #F3EEEA;
     color: var(--color-black);
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
   }
   .hero-ctas .btn:hover {
-    background: #e6eaf5;
+    background: #C6D8E4;
     transform: translateY(-1px);
   }
   @media (max-width: 600px) {
