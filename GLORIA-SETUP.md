@@ -13,7 +13,7 @@ Press the Start button, type `PowerShell`, press Enter.
 ## Step 2 — Go to the project folder
 
 ```
-cd Desktop\MBG\site
+cd C:\Users\User\Desktop\MBG\site
 ```
 
 ---
