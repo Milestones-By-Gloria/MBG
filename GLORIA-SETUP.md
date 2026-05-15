@@ -1,97 +1,90 @@
 # How to view the Milestones by Gloria website on your computer
 
-These instructions show you how to download the website code and open it in your browser. You only need to do the "first-time" steps once.
+Every time you want to see the latest version of the site, follow these steps.
 
 ---
 
-## Step 1 — Install these two programs (only once, ever)
+## Step 1 — Open the terminal
 
-1. **Git** — go to https://git-scm.com/download/win and install it.
-2. **Node.js** — go to https://nodejs.org and install the green "LTS" version.
-
-Click "Next" through both installers, accepting all the default options. **Restart your computer when both are installed.**
+Press the Start button, type `PowerShell`, press Enter.
 
 ---
 
-## Step 2 — Open a terminal
-
-- **Windows:** press the Start button, type `PowerShell`, press Enter.
-- **Mac:** press ⌘ + Space, type `Terminal`, press Enter.
-
-A dark window will open. This is where you type the commands below.
-
----
-
-## Step 3 — First-time download of the website (only once)
-
-Copy and paste each command below into the terminal, **one at a time**. Press Enter after each one. Wait until you see the prompt blink again before doing the next.
+## Step 2 — Go to the project folder
 
 ```
-cd Documents
-```
-
-```
-git clone https://github.com/Milestones-By-Gloria/MBG.git
-```
-
-```
-cd MBG\site
-```
-
-```
-npm install
-```
-
-The last command takes 1–3 minutes. It's downloading parts the website needs. You'll see lots of text scroll by — that's normal.
-
----
-
-## Step 4 — Switch to the new rebrand version
-
-```
-git checkout rebrand
+cd Desktop\MBG\site
 ```
 
 ---
 
-## Step 5 — Start the website
-
-```
-npm run dev
-```
-
-You'll see some text, ending with a line like `Local: http://localhost:4321/`.
-
-Open your web browser and go to:
-
-**http://localhost:4321**
-
-That's the website running on your own computer.
-
-**To stop it:** click the terminal window and press `Ctrl` + `C`.
-
----
-
-## Every time after that — viewing the latest version
-
-Open the terminal again and run these commands one at a time:
-
-```
-cd Documents\MBG\site
-```
+## Step 3 — Get the latest version of the code
 
 ```
 git pull
 ```
 
+---
+
+## Step 4 — Switch branches (only if you want a different version)
+
+To see the new rebrand version:
+```
+git checkout rebrand
+```
+
+To go back to the live version:
+```
+git checkout main
+```
+
+---
+
+## Step 5 — Install new parts (only when Thomas says new packages were added)
+
+```
+npm install
+```
+
+This downloads any new pieces the website needs. It can take 1–3 minutes. You only need to run this when Thomas tells you a new package was added — otherwise skip it.
+
+---
+
+## Step 6 — Start the website
+
 ```
 npm run dev
 ```
 
-Then open **http://localhost:4321** in your browser.
+When it says `Local: http://localhost:4321/`, the website is running.
 
 ---
 
-## If something goes wrong
+## Step 7 — View it in your browser
+
+Open your browser and go to:
+
+**http://localhost:4321**
+
+That's the website running on your own computer.
+
+---
+
+## To stop the website
+
+Click the terminal window and press `Ctrl` + `C`.
+
+---
+
+## If `npm` says "not recognized"
+
+Run this once in PowerShell, type `Y` when asked, then close and reopen PowerShell:
+```
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+
+---
+
+## If anything else goes wrong
 
 Take a screenshot of the terminal window and send it to Thomas.
