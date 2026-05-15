@@ -6,7 +6,7 @@ Every time you want to see the latest version of the site, follow these steps.
 
 ## Step 1 — Open the terminal
 
-Press the Start button, type `PowerShell`, press Enter.
+Open a Terminal by clicking 'Terminal' at the top of the screen and then clicking 'New Terminal'
 
 ---
 
@@ -40,13 +40,11 @@ git checkout main
 
 ---
 
-## Step 5 — Install new parts (only when Thomas says new packages were added)
+## Step 5 — Install new parts (only if Thomas says to do so)
 
 ```
-npm install
+npm install 
 ```
-
-This downloads any new pieces the website needs. It can take 1–3 minutes. You only need to run this when Thomas tells you a new package was added — otherwise skip it.
 
 ---
 
