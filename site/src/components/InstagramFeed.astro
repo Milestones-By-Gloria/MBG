@@ -35,13 +35,16 @@ const shown = fallback.slice(0, limit);
   </p>
 </div>
 
-<style>
-  .ig-grid {
+<!-- Styles are GLOBAL (namespaced under .ig-feed) so they also apply to the
+     tiles the client script injects via innerHTML — Astro's scoped-style
+     attribute is not added to runtime-generated elements. -->
+<style is:global>
+  .ig-feed .ig-grid {
     display: grid;
-    grid-template-columns: repeat(var(--cols), 1fr);
+    grid-template-columns: repeat(var(--cols, 4), 1fr);
     gap: var(--sp-3);
   }
-  .ig-tile {
+  .ig-feed .ig-tile {
     position: relative;
     display: block;
     aspect-ratio: 1 / 1;
@@ -50,9 +53,9 @@ const shown = fallback.slice(0, limit);
     background: var(--color-bg-warm);
     box-shadow: var(--shadow-soft);
   }
-  .ig-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
-  .ig-tile:hover img { transform: scale(1.05); }
-  .ig-hover {
+  .ig-feed .ig-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
+  .ig-feed .ig-tile:hover img { transform: scale(1.05); }
+  .ig-feed .ig-hover {
     position: absolute;
     inset: 0;
     display: flex;
@@ -61,11 +64,11 @@ const shown = fallback.slice(0, limit);
     color: #fff;
     background: rgba(31, 39, 51, 0.35);
     opacity: 0;
-    transition: opacity var(--transition);
+    transition: opacity 200ms ease;
   }
-  .ig-tile:hover .ig-hover,
-  .ig-tile:focus-visible .ig-hover { opacity: 1; }
-  .ig-badge {
+  .ig-feed .ig-tile:hover .ig-hover,
+  .ig-feed .ig-tile:focus-visible .ig-hover { opacity: 1; }
+  .ig-feed .ig-badge {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -73,17 +76,17 @@ const shown = fallback.slice(0, limit);
     filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
     z-index: 1;
   }
-  .ig-follow {
+  .ig-feed .ig-follow {
     text-align: center;
     margin-top: var(--sp-6);
     color: var(--color-accent);
     font-size: var(--fs-body-sm);
     letter-spacing: 0.04em;
   }
-  .ig-follow a { border-bottom: 1px solid transparent; transition: border-color var(--transition); }
-  .ig-follow a:hover { border-bottom-color: var(--color-accent); }
-  @media (max-width: 900px) { .ig-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 600px) { .ig-grid { grid-template-columns: repeat(2, 1fr); } }
+  .ig-feed .ig-follow a { border-bottom: 1px solid transparent; transition: border-color 200ms ease; }
+  .ig-feed .ig-follow a:hover { border-bottom-color: var(--color-accent); }
+  @media (max-width: 900px) { .ig-feed .ig-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .ig-feed .ig-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 
 <script>
