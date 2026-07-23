@@ -21,6 +21,12 @@
   to = "/.netlify/functions/instagram"
   status = 200
 
+# The Benefits page was folded into About in the 2026 redesign — keep old links alive.
+[[redirects]]
+  from = "/benefits"
+  to = "/about"
+  status = 301
+
 # ──────────────────────────────────────────────────────────────────────
 # Security headers — applied to every page
 # ──────────────────────────────────────────────────────────────────────

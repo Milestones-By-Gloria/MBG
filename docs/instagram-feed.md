@@ -7,6 +7,37 @@ third-party widget, no monthly fee — runs entirely on Netlify's free tier.
 feed component) is intentionally **not** built yet — it lands during the site
 remodel and just consumes the JSON endpoint below.
 
+## Progress & setup record
+
+Done:
+- [x] Instagram account switched to professional — **`milestonesbygloria`**
+      (account_type `MEDIA_CREATOR`, IG user id `38162666596665763`, ~29 posts).
+- [x] Meta developer app created — **`MBG-IG`**, use case *"Manage messaging &
+      content on Instagram"* (Instagram API with Instagram Login).
+- [x] Granted scopes include `instagram_business_basic` (all we need to read
+      the feed).
+- [x] Long-lived token obtained and verified live against `/me` and `/me/media`.
+      Refresh confirmed working (`ig_refresh_token`, ~60-day life, no app secret).
+- [x] Backend written & validated (functions below); site build unaffected.
+
+Remaining:
+- [ ] Set `IG_SEED_TOKEN` in Netlify env vars (see below).
+- [ ] Deploy branch + bootstrap the cache.
+- [ ] **Rotate the token** after launch — the token used in setup briefly
+      passed through a chat transcript.
+- [ ] Frontend feed component (during the remodel) — consumes `/api/instagram`.
+
+Setup gotchas worth remembering:
+- The token generator lives inside **Use case → Customize → API setup with
+  Instagram login → Generate access tokens**, *not* under App settings (the
+  "Client token" there is a different, unrelated value).
+- Generating a token throws **"Insufficient Developer Role"** until the target
+  Instagram account is added as an **Instagram Tester** (App roles → Roles →
+  *Instagram testers* — its own section, not the generic "Add People") **and**
+  the invite is accepted from the IG account at
+  `instagram.com/accounts/manage_access/` → *Tester Invites*. No notification
+  is sent; you must open that page to accept.
+
 ## How it works
 
 ```
