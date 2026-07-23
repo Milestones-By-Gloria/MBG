@@ -105,6 +105,34 @@ export const milestones: Service = {
   ],
 };
 
+export const corporateEvents: Service = {
+  slug: 'corporate-events',
+  navLabel: 'Corporate Events',
+  title: 'Corporate Events',
+  tagline: 'Professional, polished, and purposeful.',
+  intro:
+    'From staff celebrations to large-scale community functions, every gathering deserves thoughtful planning and seamless execution — organized, creative, and calmly coordinated so your event runs smoothly and leaves a lasting impression.',
+  image: '/images/reception-navy-banquet.jpg',
+  imageAlt: 'Elegant corporate banquet table setting',
+  cardText: 'Polished corporate and community events that reflect your brand and purpose.',
+  cardImage: '/images/reception-navy-banquet.jpg',
+  whatsIncluded: [
+    { icon: 'clipboard-pen', title: 'Event Planning', text: 'We develop the concept and plan aligned to your goals and audience.' },
+    { icon: 'users-care', title: 'Vendor Coordination', text: 'We source and manage trusted vendors on your behalf.' },
+    { icon: 'calendar-clock', title: 'Timeline & Logistics', text: 'A detailed run-of-show so every moving part flows seamlessly.' },
+    { icon: 'shield-check', title: 'On-site Management', text: 'We oversee setup and execution so your team can stay present.' },
+    { icon: 'sparkles', title: 'Guest Experience', text: 'Thoughtful details that reflect your brand and impress your guests.' },
+    { icon: 'gift', title: 'Setup & Styling', text: 'Professional styling and décor that elevate the space.' },
+  ],
+  process: [
+    { title: 'Inquire', text: 'Tell us about your organization, your goals, and the event you envision.' },
+    { title: 'Consultation', text: "We'll schedule a complimentary call to understand your objectives and recommend the right services." },
+    { title: 'Book Your Date', text: "Once you're ready to move forward, we'll send the agreement and secure your date." },
+    { title: 'Planning & Design', text: 'We coordinate vendors, build the timeline, and finalize every logistical detail.' },
+    { title: 'Event Day', text: 'Relax and focus on your guests while we manage everything behind the scenes.' },
+  ],
+};
+
 // Childcare has a distinct shape (activities + important-to-know + two-up pricing),
 // so it is defined separately rather than as a generic Service.
 export const childcare = {
@@ -148,4 +176,4 @@ export const childcare = {
 };
 
 // Ordered list used by the Services hub and any "all services" listing.
-export const services: Service[] = [weddingCoordination, weddingPlanning, milestones];
+export const services: Service[] = [weddingCoordination, weddingPlanning, milestones, corporateEvents];

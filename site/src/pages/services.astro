@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import EventCard from '../components/EventCard.astro';
-import { weddingCoordination, weddingPlanning, milestones, childcare } from '../data/services';
+import { weddingCoordination, weddingPlanning, milestones, childcare, corporateEvents } from '../data/services';
 import { site } from '../data/site';
 
 const cards = [
@@ -11,6 +11,7 @@ const cards = [
   { label: weddingPlanning.navLabel, text: weddingPlanning.cardText, image: weddingPlanning.cardImage, href: '/services/wedding-planning' },
   { label: childcare.navLabel, text: childcare.cardText, image: childcare.cardImage, href: '/services/childcare' },
   { label: milestones.navLabel, text: milestones.cardText, image: milestones.cardImage, href: '/services/milestones' },
+  { label: corporateEvents.navLabel, text: corporateEvents.cardText, image: corporateEvents.cardImage, href: '/services/corporate-events' },
 ];
 ---
 <Base title="Services" current="/services" description="Wedding planning, wedding childcare, and milestone & social event planning by Milestones by Gloria.">
@@ -39,11 +40,12 @@ const cards = [
 
 <style>
   .services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--sp-5);
   }
+  .services-grid > * { flex: 1 1 260px; max-width: 300px; }
   .services-cta { display: flex; flex-wrap: wrap; gap: var(--sp-4); justify-content: center; }
-  @media (max-width: 960px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px) { .services-grid { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; } }
+  @media (max-width: 480px) { .services-grid > * { max-width: 380px; } }
 </style>

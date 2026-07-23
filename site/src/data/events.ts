@@ -18,3 +18,14 @@ export const eventsWePlan: EventType[] = [
   { title: 'Holiday Parties', text: 'Gatherings for family, friends or organizations.', image: '/images/event-holiday.jpg' },
   { title: 'And More', text: 'Family reunions, private dinners and special events…', image: '/images/event-dessert.jpg' },
 ];
+
+// Types of corporate & community events (from the brand guide). Photos use the
+// existing corp-* images.
+export const corporateEventTypes: EventType[] = [
+  { title: 'School Events', text: 'Graduations to school-wide celebrations — memorable experiences for students, families, and staff.', image: '/images/corp-school.jpg' },
+  { title: 'Grandparents & Family Appreciation', text: 'Heartfelt gatherings that celebrate connection across generations.', image: '/images/corp-grandparents.jpg' },
+  { title: 'Prom & Formal Events', text: 'Elegant, exciting, and unforgettable formals, coordinated seamlessly.', image: '/images/corp-prom.jpg' },
+  { title: 'Large-Scale & Promotional Events', text: 'Grand openings, festivals, and brand activations designed to make an impact.', image: '/images/corp-large-scale.jpg' },
+  { title: 'Daycare & Childcare Events', text: 'Safe, structured, and engaging events for children, families, and staff.', image: '/images/corp-daycare.jpg' },
+  { title: 'Corporate Gatherings & Staff Events', text: "Team celebrations and appreciation events that reflect your organization's values.", image: '/images/corp-staff.jpg' },
+];
