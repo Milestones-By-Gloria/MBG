@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import Hero from '../../components/Hero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import FeatureGrid from '../../components/FeatureGrid.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import PricingCard from '../../components/PricingCard.astro';
+import CalcomButton from '../../components/CalcomButton.astro';
+import { weddingPlanning as s } from '../../data/services';
+import { site } from '../../data/site';
+---
+<Base title="Wedding Planning" current="/services" description={s.intro}>
+  <Hero
+    eyebrow="Services"
+    title={s.title}
+    lead={s.intro}
+    image={s.image}
+    imageAlt={s.imageAlt}
+  >
+    <a href="/contact" class="btn btn-dark">Inquire About Your Date</a>
+    <a href={`https://cal.com/${site.calcomLink}`} target="_blank" rel="noopener" class="btn btn-gold">Book a Consultation</a>
+  </Hero>
+
+  <Section bg="warm">
+    <div class="container-wide">
+      <SectionHeading title="What's Included" class="mb-7" />
+      <FeatureGrid items={s.whatsIncluded} columns={6} dividers />
+    </div>
+  </Section>
+
+  <Section bg="default">
+    <div class="container">
+      <div class="process-invest">
+        <div>
+          <SectionHeading title="The Planning Process" align="left" class="mb-7" />
+          <ProcessSteps steps={s.process} />
+        </div>
+        <div class="invest">
+          <SectionHeading title="Investment" align="left" class="mb-7" />
+          <PricingCard
+            label="Full Service Wedding Planning"
+            price={site.pricing.weddingRate}
+            sub={site.pricing.weddingMin}
+            note="Custom packages available based on the scope of your wedding and your needs."
+            align="left"
+          >
+            <CalcomButton label="Get a Custom Quote" />
+          </PricingCard>
+        </div>
+      </div>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .process-invest {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--sp-9);
+    align-items: start;
+  }
+  .invest {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--sp-6));
+  }
+  @media (max-width: 860px) {
+    .process-invest { grid-template-columns: 1fr; gap: var(--sp-8); }
+    .invest { position: static; }
+  }
+</style>

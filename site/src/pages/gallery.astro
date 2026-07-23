@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import InstagramFeed from '../components/InstagramFeed.astro';
+import { galleryImages } from '../data/gallery';
+---
+<Base title="Gallery" current="/gallery" description="Moments beautifully captured — a gallery of celebrations by Milestones by Gloria, straight from Instagram.">
+  <Section bg="default">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Gallery"
+        title="Celebrating Life's Special Moments"
+        script="Moments beautifully captured"
+        scriptPosition="above"
+      >
+        <p>From intimate gatherings to grand celebrations, every event we plan is crafted with intention, style, and heart. Tap any photo to view it on Instagram.</p>
+      </SectionHeading>
+
+      {/* Live Instagram feed — each tile links to its direct post. The curated
+          images below are only a placeholder until the feed is live. */}
+      <div class="mt-8">
+        <InstagramFeed limit={12} columns={4} fallback={galleryImages} />
+      </div>
+    </div>
+  </Section>
+</Base>
