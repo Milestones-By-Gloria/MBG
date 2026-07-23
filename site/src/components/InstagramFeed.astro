@@ -22,7 +22,7 @@ const shown = fallback.slice(0, limit);
 <div class:list={['ig-feed', className]} data-ig-feed data-ig-limit={limit}>
   <div class="ig-grid" data-ig-grid style={`--cols:${columns}`}>
     {shown.map((img) => (
-      <a class="ig-tile" href={site.socials.instagram} target="_blank" rel="noopener" aria-label={`${img.alt} — Instagram`}>
+      <a class="ig-tile" href={site.socials.instagram} target="_blank" rel="noopener" aria-label={`${img.alt} on Instagram`}>
         <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
         <span class="ig-hover" aria-hidden="true">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" set:html={`<path d="${IG_GLYPH}"/>`} />

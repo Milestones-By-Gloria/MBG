@@ -23,7 +23,7 @@ export const weddingPlanning: Service = {
   slug: 'wedding-planning',
   navLabel: 'Wedding Planning',
   title: 'Wedding Planning',
-  tagline: 'Your vision, our expertise — a day to remember.',
+  tagline: 'Your vision, our expertise. A day to remember.',
   intro:
     'Full-service wedding planning for couples who want a beautifully designed celebration and a stress-free journey from “yes” to “I do.”',
   image: '/images/wedding-planning-plan.jpg',
@@ -42,7 +42,7 @@ export const weddingPlanning: Service = {
     { title: 'Inquire', text: 'Submit an inquiry and tell us about your wedding vision.' },
     { title: 'Consultation', text: "We'll schedule a complimentary call to learn more about your needs, style and priorities." },
     { title: 'Proposal & Booking', text: "You'll receive a custom proposal. Once confirmed, we'll reserve your date and get started!" },
-    { title: 'Planning & Design', text: "We'll bring your vision to life — securing vendors, creating design concepts, and managing all the details." },
+    { title: 'Planning & Design', text: "We'll bring your vision to life, securing vendors, creating design concepts, and managing all the details." },
     { title: 'Timeline & Final Details', text: "We'll finalize logistics, confirm details, and create your seamless wedding day timeline." },
     { title: 'Wedding Day', text: 'Relax and be fully present while we handle everything behind the scenes.' },
   ],
@@ -111,7 +111,7 @@ export const corporateEvents: Service = {
   title: 'Corporate Events',
   tagline: 'Professional, polished, and purposeful.',
   intro:
-    'From staff celebrations to large-scale community functions, every gathering deserves thoughtful planning and seamless execution — organized, creative, and calmly coordinated so your event runs smoothly and leaves a lasting impression.',
+    'From staff celebrations to large-scale community functions, every gathering deserves thoughtful planning and seamless execution. Organized, creative, and calmly coordinated so your event runs smoothly and leaves a lasting impression.',
   image: '/images/reception-navy-banquet.jpg',
   imageAlt: 'Elegant corporate banquet table setting',
   cardText: 'Polished corporate and community events that reflect your brand and purpose.',
