@@ -1,0 +1,23 @@
+---
+// Row of gold stars for testimonials.
+interface Props {
+  rating?: number;
+  size?: number;
+  class?: string;
+}
+const { rating = 5, size = 22, class: className = '' } = Astro.props;
+const stars = Array.from({ length: 5 }, (_, i) => i < rating);
+---
+<div class:list={['stars', className]} role="img" aria-label={`${rating} out of 5 stars`}>
+  {stars.map((filled) => (
+    <svg width={size} height={size} viewBox="0 0 24 24"
+      fill={filled ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="1.2"
+      stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 3.6l2.5 5 5.5.8-4 3.9.95 5.5L12 16.4l-4.9 2.6.95-5.5-4-3.9 5.5-.8Z" />
+    </svg>
+  ))}
+</div>
+
+<style>
+  .stars { display: inline-flex; gap: 4px; color: var(--color-accent); }
+</style>

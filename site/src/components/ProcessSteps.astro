@@ -1,0 +1,79 @@
+---
+// Numbered process — navy circle badges joined by a hairline, used for the
+// genuine step sequences (planning process, "our process"). Numbers are
+// meaningful here: the steps happen in order.
+export interface Step {
+  title: string;
+  text: string;
+}
+interface Props {
+  steps: Step[];
+  class?: string;
+}
+const { steps, class: className = '' } = Astro.props;
+---
+<ol class:list={['process', className]}>
+  {steps.map((s, i) => (
+    <li class="step">
+      <span class="step-badge">{i + 1}</span>
+      <div class="step-body">
+        <h3 class="step-title">{s.title}</h3>
+        <p class="step-text">{s.text}</p>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .process {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+    counter-reset: step;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: var(--sp-4);
+    position: relative;
+  }
+  /* connector line between badges */
+  .step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 19.5px;
+    top: 40px;
+    bottom: calc(var(--sp-5) * -1);
+    width: 1px;
+    background: var(--color-hairline);
+  }
+  .step-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-ink);
+    color: var(--color-white);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  .step-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: var(--color-ink);
+    margin-bottom: var(--sp-1);
+    padding-top: 0.5rem;
+  }
+  .step-text {
+    font-size: var(--fs-body-sm);
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+</style>

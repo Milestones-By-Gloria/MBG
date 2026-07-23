@@ -30,7 +30,7 @@ const { transparent = false, current = '' } = Astro.props;
           {item.label}
         </a>
       ))}
-      <a href="/contact" class:list={['btn btn-dark nav-cta', { active: current === '/contact' }]}>Inquire Now</a>
+      <a href={`https://cal.com/${site.calcomLink}`} target="_blank" rel="noopener" class="btn btn-dark nav-cta">Book a Consultation</a>
     </nav>
   </div>
 </header>
@@ -51,7 +51,7 @@ const { transparent = false, current = '' } = Astro.props;
     border-bottom-color: transparent;
   }
   .site-nav.is-transparent.scrolled {
-    background: rgba(251, 247, 247, 0.92);
+    background: rgba(247, 243, 236, 0.94);
     backdrop-filter: blur(8px);
     border-bottom-color: var(--color-border);
   }
@@ -107,14 +107,14 @@ const { transparent = false, current = '' } = Astro.props;
     height: 1px;
     background: currentColor;
   }
-  .nav-cta { padding: 0.65rem 1.25rem; font-size: 0.72rem; }
-  /* Home-only: nav Inquire Now button matches the hero CTAs (soft periwinkle) */
+  .nav-cta { padding: 0.7rem 1.35rem; font-size: 0.72rem; }
+  /* Home-only: keep the CTA a solid navy pill so it stays readable over the hero image. */
   .site-nav.is-transparent .nav-cta {
-    background: #F3EEEA;
-    color: var(--color-black);
+    background: var(--color-ink);
+    color: var(--color-white);
   }
   .site-nav.is-transparent .nav-cta:hover {
-    background: #C6D8E4;
+    background: var(--color-ink-deep);
   }
 
   .nav-toggle {

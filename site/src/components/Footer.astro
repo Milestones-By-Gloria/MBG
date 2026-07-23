@@ -31,7 +31,7 @@ const year = new Date().getFullYear();
 
   <nav class="container-wide footer-links" aria-label="Footer">
     {nav.map((item) => <a href={item.href}>{item.label}</a>)}
-    <a href="/contact">Inquire</a>
+    <a href={`https://cal.com/${site.calcomLink}`} target="_blank" rel="noopener">Book</a>
   </nav>
 
   <div class="container-wide footer-bottom">
