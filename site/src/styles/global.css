@@ -1,51 +1,57 @@
 /* === Self-hosted fonts (via @fontsource) === */
 /* Bundled with the build → served from /_astro/ — no third-party connections. */
-@import '@fontsource/bodoni-moda/400.css';
-@import '@fontsource/bodoni-moda/500.css';
-@import '@fontsource/italiana/400.css';
-@import '@fontsource/cormorant-garamond/300.css';
 @import '@fontsource/cormorant-garamond/400.css';
 @import '@fontsource/cormorant-garamond/400-italic.css';
 @import '@fontsource/cormorant-garamond/500.css';
 @import '@fontsource/cormorant-garamond/600.css';
-@import '@fontsource/inter/300.css';
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
+@import '@fontsource/montserrat/300.css';
+@import '@fontsource/montserrat/400.css';
+@import '@fontsource/montserrat/500.css';
+@import '@fontsource/montserrat/600.css';
+@import '@fontsource/pinyon-script/400.css';
 
 /* === Milestones by Gloria — Design tokens === */
-/* Rebrand note: token NAMES are kept from the previous palette to minimize
-   diff churn — the VALUES now map to the new brand board (5-color blue/cream).
-   A future cleanup pass should rename to semantic tokens (--color-text,
-   --color-accent, --color-bg-warm, etc.). */
+/* 2026 redesign: warm-cream / navy / gold palette translated from Gloria's
+   mockups. Tokens are now SEMANTIC (--color-bg, --color-ink, --color-accent…).
+   Legacy names (--color-cream, --color-brown, --color-navy, --color-border…)
+   are kept as ALIASES at the end of :root so existing page/component styles
+   keep working while they are swept over to the semantic names. */
 
 :root {
-  /* Palette (sampled directly from the new brand board) */
-  --color-cream: #F4F6FC;          /* cool off-white / default page bg */
-  --color-periwinkle: #F3EEEA;     /* warm cream section bg */
-  --color-pink-soft: #C6D8E4;      /* light-blue accent (was warm pink) */
-  --color-lavender-soft: #C6D8E4;  /* light-blue accent (was lavender) */
-
-  --color-brown: #2B3547;          /* primary heading + body text (was warm brown) */
-  --color-brown-deep: #1F2733;     /* deeper navy for hover */
-  --color-navy: #334C6B;           /* CTA button bg (medium blue) */
-  --color-navy-deep: #2B3547;      /* CTA hover (dark navy) */
-  --color-ink: #2B3547;            /* primary body text */
-  --color-ink-soft: #334C6B;
-  --color-black: #000000;
+  /* === Semantic palette (sampled from the mockups) === */
+  --color-bg: #F7F3EC;             /* warm cream — default page background */
+  --color-bg-warm: #F4ECE0;        /* deeper cream — alternating sections */
+  --color-bg-blush: #F3E9E1;       /* soft blush — pricing / quote cards */
+  --color-ink: #2B3547;            /* navy — headings + primary text */
+  --color-ink-soft: #4A5464;       /* muted navy — secondary text */
+  --color-ink-deep: #1F2733;       /* near-black navy — hover */
+  --color-accent: #BFA06A;         /* gold — dividers, icon strokes, prices */
+  --color-accent-soft: #C9AE86;    /* lighter gold — script accent text */
+  --color-hairline: #D9C4A0;       /* thin gold rules / card borders */
   --color-white: #ffffff;
-
+  --color-black: #000000;
   --color-border: rgba(43, 53, 71, 0.12);
 
+  /* === Legacy aliases (do not use in new code; being swept out) === */
+  --color-cream: var(--color-bg);
+  --color-periwinkle: var(--color-bg-warm);
+  --color-pink-soft: var(--color-bg-blush);
+  --color-lavender-soft: var(--color-bg-blush);
+  --color-brown: var(--color-ink);
+  --color-brown-deep: var(--color-ink-deep);
+  --color-navy: var(--color-ink);
+  --color-navy-deep: var(--color-ink-deep);
+
   /* Typography
-     Display heading: BODONI MODA → free substitute for FERLY (Pangram Pangram, commercial)
-     Body serif: CORMORANT GARAMOND (per brand board, free on Google Fonts)
-     Sans / labels / buttons: INTER → free substitute for UNIVERS (Linotype, commercial)
+     Display heading: CORMORANT GARAMOND — all-caps, letter-spaced titles
+     Script accent:   PINYON SCRIPT — cursive accent words only
+     Body / UI / buttons: MONTSERRAT — geometric sans
   */
-  --font-display: 'Bodoni Moda', 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  --font-label: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-script: 'Pinyon Script', 'Cormorant Garamond', cursive;
+  --font-sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 
   /* Type scale */
   --fs-display: clamp(3.25rem, 8vw, 6.5rem);   /* hero title */
@@ -121,8 +127,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .h1, .h2, .h3 {
   font-family: var(--font-display);
-  color: var(--color-brown);
-  font-weight: 400;
+  color: var(--color-ink);
+  font-weight: 500;
   line-height: var(--lh-snug);
 }
 .h1 { font-size: var(--fs-h1); }
@@ -134,18 +140,46 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .serif-h {
   font-family: var(--font-serif);
-  font-weight: 400;
-  color: var(--color-brown);
+  font-weight: 500;
+  color: var(--color-ink);
 }
+/* Uppercase, letter-spaced Cormorant title — the mockups' primary section head
+   (WHAT'S INCLUDED, TESTIMONIALS, EVENTS WE PLAN, OUR PROCESS). */
+.title-caps {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: var(--lh-snug);
+}
+/* Flowing script accent word (Celebrations, Childcare, Celebrate…). */
+.script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--color-accent-soft);
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1;
+}
+/* Short centered gold rule under a heading. */
+.divider-gold {
+  width: 78px;
+  height: 2px;
+  border: 0;
+  margin: var(--sp-4) 0;
+  background: var(--color-accent);
+}
+.divider-gold.center { margin-left: auto; margin-right: auto; }
 .eyebrow {
   font-family: var(--font-sans);
   font-size: var(--fs-eyebrow);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   font-weight: 500;
-  color: var(--color-brown);
+  color: var(--color-accent);
 }
-.lead { font-size: 1.125rem; color: var(--color-brown); }
+.lead { font-size: 1.125rem; color: var(--color-ink-soft); }
 em, .italic { font-style: italic; }
 
 /* === Layout helpers === */
@@ -155,10 +189,11 @@ em, .italic { font-style: italic; }
 
 .section { padding: var(--sp-9) 0; }
 .section-tight { padding: var(--sp-8) 0; }
-.bg-cream { background: var(--color-cream); }
-.bg-periwinkle { background: var(--color-periwinkle); }
-.bg-pink-soft { background: var(--color-pink-soft); }
-.bg-lavender-soft { background: var(--color-lavender-soft); }
+.bg-cream, .bg-default { background: var(--color-bg); }
+.bg-warm, .bg-periwinkle { background: var(--color-bg-warm); }
+.bg-blush, .bg-pink-soft, .bg-lavender-soft { background: var(--color-bg-blush); }
+.bg-ink { background: var(--color-ink); }
+.bg-ink, .bg-ink * { color: var(--color-white); }
 
 /* === Buttons === */
 .btn {
@@ -166,11 +201,11 @@ em, .italic { font-style: italic; }
   align-items: center;
   justify-content: center;
   gap: var(--sp-2);
-  padding: 0.95rem 1.6rem;
+  padding: 0.95rem 1.7rem;
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: var(--tracking-button);
   text-transform: uppercase;
@@ -178,23 +213,30 @@ em, .italic { font-style: italic; }
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
   white-space: nowrap;
 }
-.btn-primary {
-  background: var(--color-white);
-  color: var(--color-black);
-  box-shadow: var(--shadow-soft);
-}
-.btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-lift); }
-.btn-dark {
-  background: var(--color-brown);
+/* Primary CTA — navy fill, the mockups' main button (BOOK A CONSULTATION…). */
+.btn-dark, .btn-primary {
+  background: var(--color-ink);
   color: var(--color-white);
 }
-.btn-dark:hover { background: var(--color-brown-deep); transform: translateY(-1px); }
+.btn-dark:hover, .btn-primary:hover { background: var(--color-ink-deep); transform: translateY(-1px); }
+/* Gold outline — secondary emphasis. */
+.btn-gold {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-accent);
+}
+.btn-gold:hover { background: var(--color-accent); color: var(--color-white); border-color: var(--color-accent); }
 .btn-ghost {
   background: transparent;
-  color: var(--color-brown);
-  border-color: var(--color-brown);
+  color: var(--color-ink);
+  border-color: var(--color-ink);
 }
-.btn-ghost:hover { background: var(--color-brown); color: var(--color-white); }
+.btn-ghost:hover { background: var(--color-ink); color: var(--color-white); }
+/* On dark/navy sections, invert the ghost button. */
+.bg-ink .btn-ghost { color: var(--color-white); border-color: rgba(255,255,255,0.6); }
+.bg-ink .btn-ghost:hover { background: var(--color-white); color: var(--color-ink); }
+.bg-ink .btn-primary { background: var(--color-white); color: var(--color-ink); }
+.bg-ink .btn-primary:hover { background: var(--color-bg-warm); }
 
 /* === Image helpers === */
 .img-rounded { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-soft); }
