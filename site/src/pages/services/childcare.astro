@@ -86,9 +86,12 @@ import { site } from '../../data/site';
   <Section bg="warm" tight>
     <div class="container closing-band">
       <span class="closing-icon"><Icon name="heart" size={54} /></span>
-      <div>
+      <div class="closing-copy">
         <p class="script closing-title">{c.closingTitle}</p>
         <p class="closing-text">{c.closingText}</p>
+      </div>
+      <div class="closing-photo">
+        <img src="/images/childcare-teddy.jpg" alt="Teddy bear and wooden toys in the children's play area" loading="lazy" decoding="async" />
       </div>
     </div>
   </Section>
@@ -113,8 +116,11 @@ import { site } from '../../data/site';
   .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
   .closing-band { display: flex; align-items: center; gap: var(--sp-6); }
   .closing-icon { color: var(--color-accent); flex-shrink: 0; }
+  .closing-copy { flex: 1; }
   .closing-title { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: var(--sp-2); }
   .closing-text { color: var(--color-ink-soft); max-width: 60ch; }
+  .closing-photo { flex-shrink: 0; width: 260px; aspect-ratio: 5 / 4; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-soft); }
+  .closing-photo img { width: 100%; height: 100%; object-fit: cover; }
   @media (max-width: 860px) {
     .activities-grid { grid-template-columns: 1fr; gap: var(--sp-7); }
     .pricing-grid { grid-template-columns: 1fr; }

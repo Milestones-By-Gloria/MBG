@@ -26,10 +26,10 @@ export const weddingPlanning: Service = {
   tagline: 'Your vision, our expertise — a day to remember.',
   intro:
     'Full-service wedding planning for couples who want a beautifully designed celebration and a stress-free journey from “yes” to “I do.”',
-  image: '/images/wedding-full.jpg',
-  imageAlt: 'Elegant wedding planning flatlay',
+  image: '/images/wedding-planning-plan.jpg',
+  imageAlt: 'Wedding planning flatlay with "The Plan" checklist and MG notebook',
   cardText: 'Full-service planning and coordination so your day unfolds exactly as you imagined.',
-  cardImage: '/images/service-card-wedding.jpg',
+  cardImage: '/images/wedding-planning-plan.jpg',
   whatsIncluded: [
     { icon: 'clipboard-pen', title: 'Planning Guidance', text: 'Expert guidance from the beginning to help bring your vision to life.' },
     { icon: 'user', title: 'Vendor Management', text: 'We research, recommend, and manage trusted vendors on your behalf.' },
@@ -55,10 +55,10 @@ export const weddingCoordination: Service = {
   tagline: "Enjoy your day. We've got the details.",
   intro:
     'For couples who have planned their wedding and want a trusted professional to bring it all together seamlessly on the big day.',
-  image: '/images/wedding-day-of.jpg',
-  imageAlt: 'Elegant wedding reception table set for the celebration',
+  image: '/images/reception-round-gold.jpg',
+  imageAlt: 'Elegant candlelit reception table set for the celebration',
   cardText: 'Day-of coordination so your fully-planned day unfolds without a hitch.',
-  cardImage: '/images/wedding-day-of.jpg',
+  cardImage: '/images/reception-round-gold.jpg',
   whatsIncluded: [
     { icon: 'calendar-clock', title: 'Timeline Management', text: 'We create a detailed wedding-day timeline and keep everyone on track.' },
     { icon: 'users-care', title: 'Vendor Liaison', text: "We confirm and communicate with all your vendors so you don't have to." },
@@ -84,10 +84,10 @@ export const milestones: Service = {
   tagline: 'Every celebration deserves to feel extraordinary.',
   intro:
     "Whether you're celebrating a birthday, baby shower, anniversary, engagement, graduation, or another meaningful milestone, we'll thoughtfully design every detail so you can be fully present with the people you love.",
-  image: '/images/milestone-birthday.jpg',
-  imageAlt: 'Elegant milestone celebration table setting',
+  image: '/images/hero-milestone-lakeside.jpg',
+  imageAlt: 'Elegant milestone celebration table overlooking a lake at sunset',
   cardText: 'Birthdays, baby showers, anniversaries, and life celebrations, designed with intention.',
-  cardImage: '/images/service-card-milestone.jpg',
+  cardImage: '/images/hero-milestone-lakeside.jpg',
   whatsIncluded: [
     { icon: 'party', title: 'Event Planning', text: 'We help develop your vision from the very beginning.' },
     { icon: 'flower', title: 'Design & Styling', text: 'Beautiful decor and styling tailored to your celebration.' },
@@ -115,10 +115,10 @@ export const childcare = {
   tagline: 'So everyone can enjoy the celebration.',
   intro:
     'Professional on-site childcare so little guests can play, laugh, and make memories while you enjoy every moment of your day.',
-  image: '/images/hero-family-portrait.jpg',
-  imageAlt: 'Cozy children’s play space at a celebration',
+  image: '/images/childcare-teepee.jpg',
+  imageAlt: 'Cozy children’s teepee play space with a teddy bear at a celebration',
   cardText: 'On-site care so little guests are happy and safe while you celebrate.',
-  cardImage: '/images/hero-family-portrait.jpg',
+  cardImage: '/images/childcare-teepee.jpg',
   whatsIncluded: [
     { icon: 'users-care', title: 'Professional Care', text: 'Experienced, qualified caregivers who love working with children.' },
     { icon: 'palette', title: 'Fun & Engaging Activities', text: 'Games, crafts, books, movies, and more for all ages.' },
