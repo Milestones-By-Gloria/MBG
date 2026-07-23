@@ -30,9 +30,15 @@ Childcare **$95/hr** up to 15 children, **+$40/hr** beyond. (The home mockup's "
 Under plain `astro dev` the function isn't served, so it shows a "Follow on Instagram" fallback.
 On Netlify it populates once `IG_SEED_TOKEN` is set (see `docs/instagram-feed.md`).
 
-## Images to source (replace stand-ins)
-Content copy is final; several photos are best-fit stand-ins from existing `public/images/`.
-Drop real photos in at the same paths (or update the data files) to finalize:
+## Images
+The real design photos were pulled from Gloria's Drive (`BRANDING/WEBSITE`, AI-generated decor
+shots) and wired in as optimized JPEGs (`hero-milestone-lakeside`, `wedding-planning-plan`,
+`childcare-teepee`, `event-*`, `reception-*`, etc.) matched to each mockup slot. Still using
+existing repo photos: About portrait (`gloria-portrait.jpg`, real Gloria) and the 3 testimonial
+photos (need actual client photos). Contact hero is text-only; `contact-place-setting.jpg` is
+available if a hero image is wanted.
+
+### (Historical) earlier stand-in mapping — now replaced:
 
 | Where | Data file | Currently using | Needs |
 |---|---|---|---|
