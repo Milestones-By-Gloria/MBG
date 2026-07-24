@@ -45,7 +45,7 @@ export const testimonials: Testimonial[] = [
     date: 'May 2, 2026',
     context: 'Childcare & party coordination',
     rating: 5,
-    image: '/images/hero-family-portrait.jpg',
-    alt: 'Family celebrating a dinosaur-themed birthday party',
+    image: '/images/event-birthday.jpg',
+    alt: 'Birthday party celebration setup',
   },
 ];
