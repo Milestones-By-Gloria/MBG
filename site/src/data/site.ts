@@ -28,11 +28,13 @@ export const site = {
   // "$85" and "$90" in the mockups are not a typo.
   pricing: {
     coordinationRate: '$85/hr',
-    coordinationMin: 'Minimum 6 hours',
+    coordinationMin: 'Minimum 4 hours',
     weddingRate: '$90/hr',
     weddingMin: 'Minimum 10 hours',
     socialRate: '$90/hr',
     socialMin: 'Minimum 4 hours',
+    corporateRate: '$90/hr',
+    corporateMin: 'Minimum 4 hours',
     childcareRate: '$95/hr',
     childcareBase: 'Up to 15 children',
     childcareExtra: '+$40/hr',

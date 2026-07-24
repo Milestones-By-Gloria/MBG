@@ -54,9 +54,9 @@ import { site } from '../../data/site';
           <SectionHeading title="Investment" align="left" class="mb-7" />
           <PricingCard
             label="Corporate & Community Events"
-            price="Custom Quote"
-            sub="Tailored to your event"
-            note="Every corporate event is unique, so pricing is tailored to your size, scope, and goals."
+            price={site.pricing.corporateRate}
+            sub={site.pricing.corporateMin}
+            note="Need more or fewer hours? Custom packages available to fit your event size, scope, and goals."
             align="left"
           >
             <CalcomButton label="Get a Custom Quote" />

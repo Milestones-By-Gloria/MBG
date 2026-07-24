@@ -19,8 +19,8 @@ export const testimonials: Testimonial[] = [
     date: 'July 15, 2026',
     context: 'Day-of Coordination · 80-guest wedding',
     rating: 5,
-    image: '/images/testimonial-couple.jpg',
-    alt: 'Elegant candlelit wedding table setting',
+    image: '/images/reception-round-gold.jpg',
+    alt: 'Elegant candlelit wedding reception table',
   },
   {
     quote: [
@@ -32,8 +32,8 @@ export const testimonials: Testimonial[] = [
     date: 'August 16, 2025',
     context: 'Day-of Coordination · 300-person wedding',
     rating: 5,
-    image: '/images/hero-bridal-party.jpg',
-    alt: 'Gloria with the bride on her wedding day',
+    image: '/images/testimonial-couple.jpg',
+    alt: 'Gloria with bride Ainah on her wedding day',
   },
   {
     quote: [
