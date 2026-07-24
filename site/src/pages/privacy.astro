@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import { site } from '../data/site';
+---
+<Base title="Privacy Policy" description="How Milestones by Gloria handles the information you share.">
+  <Section bg="default">
+    <div class="container-narrow privacy">
+      <p class="eyebrow">Privacy</p>
+      <h1 class="title-caps privacy-title">Privacy Policy</h1>
+      <hr class="divider-gold" />
+
+      <p class="lead">
+        Your trust matters. This page explains, in plain language, what information
+        Milestones by Gloria collects and how it is used.
+      </p>
+
+      <h2 class="serif-h">What we collect</h2>
+      <p>
+        When you fill out the contact form, we collect the name, email address, and
+        message you choose to share. If you book a complimentary consultation, that
+        booking is handled through Cal.com, which collects the details you enter to
+        schedule your call.
+      </p>
+
+      <h2 class="serif-h">How we use it</h2>
+      <p>
+        We use your information for one purpose: to respond to your inquiry and help
+        plan your event. We do not sell, rent, or trade your information, and we do not
+        send marketing emails you did not ask for.
+      </p>
+
+      <h2 class="serif-h">Who handles it</h2>
+      <p>
+        This website is hosted on Netlify, and contact form submissions are processed
+        through Netlify Forms. Consultation bookings are handled by Cal.com. These
+        services process your information only to deliver their function.
+      </p>
+
+      <h2 class="serif-h">Your choices</h2>
+      <p>
+        You can ask us to access or delete the information you have shared at any time.
+        Just email <a href={site.emailHref} class="privacy-link">{site.email}</a> and
+        we will take care of it.
+      </p>
+
+      <p class="privacy-note">
+        If this policy changes, the updated version will always be available on this page.
+      </p>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .privacy-title { font-size: var(--fs-h1); margin-bottom: var(--sp-2); }
+  .privacy .lead { margin-bottom: var(--sp-6); color: var(--color-ink-soft); }
+  .privacy h2 { font-size: 1.4rem; margin: var(--sp-6) 0 var(--sp-2); }
+  .privacy p { color: var(--color-ink-soft); margin-bottom: var(--sp-3); }
+  .privacy-link { color: var(--color-accent); border-bottom: 1px solid var(--color-accent); }
+  .privacy-note { font-style: italic; margin-top: var(--sp-6); }
+</style>

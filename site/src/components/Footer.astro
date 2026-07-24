@@ -11,6 +11,7 @@ const year = new Date().getFullYear();
         <img src="/img/logo/wordmark-name-dark.png" alt={site.name} width="569" height="150" />
       </a>
       <p class="brand-line">{site.tagline}</p>
+      <p class="brand-area">Proudly serving British Columbia</p>
     </div>
 
     <div class="footer-meta">
@@ -35,7 +36,7 @@ const year = new Date().getFullYear();
   </nav>
 
   <div class="container-wide footer-bottom">
-    <p>© {year} {site.name}. All rights reserved.</p>
+    <p>© {year} {site.name}. All rights reserved. · <a href="/privacy" class="footer-privacy">Privacy Policy</a></p>
   </div>
 </footer>
 
@@ -70,6 +71,15 @@ const year = new Date().getFullYear();
     font-size: 0.7rem;
     opacity: 0.8;
   }
+  .footer-brand .brand-area {
+    margin-top: var(--sp-2);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--color-accent);
+  }
+  .footer-privacy { border-bottom: 1px solid transparent; transition: border-color var(--transition); }
+  .footer-privacy:hover { border-bottom-color: currentColor; }
   .footer-links {
     margin-top: var(--sp-7);
     padding-top: var(--sp-5);

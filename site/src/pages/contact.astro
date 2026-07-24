@@ -6,6 +6,25 @@ import SocialIcon from '../components/SocialIcon.astro';
 import { site } from '../data/site';
 
 const success = Astro.url.searchParams.get('success') === 'true';
+
+const faqs = [
+  { q: 'What areas do you serve?', a: 'Milestones by Gloria proudly serves clients throughout British Columbia. If you are planning something a little further out, reach out and we will see how we can help.' },
+  { q: 'How do I get started?', a: 'Submit an inquiry through the form on this page or book a complimentary consultation. We will schedule a relaxed call to learn about your vision and recommend the services that fit your celebration.' },
+  { q: 'What happens during the consultation?', a: 'It is a relaxed, 30-minute call to share your vision, ask questions, and see if we are the right fit. There is no pressure and no commitment.' },
+  { q: 'Do you offer custom packages?', a: 'Yes. Every celebration is different, so packages are tailored to your event size, vision, and budget. Just ask for a custom quote.' },
+  { q: 'Do you plan events of all sizes?', a: 'Absolutely, from intimate dinners to celebrations for hundreds of guests. Every detail is managed with the same care.' },
+  { q: 'How far in advance should I reach out?', a: 'The earlier the better, so we can secure your date and plan with room to breathe. That said, we also welcome shorter timelines, so do not hesitate to ask.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 <Base title="Contact" current="/contact" description="Reach out to Milestones by Gloria. Let's bring your vision to life.">
   <Section bg="default">
@@ -17,6 +36,10 @@ const success = Astro.url.searchParams.get('success') === 'true';
         <p class="lead contact-lead">
           I'd love to hear about your celebration and how I can help make it unforgettable.
         </p>
+      </div>
+
+      <div class="contact-hero-photo mt-7">
+        <img src="/images/contact-place-setting.jpg" alt="Elegant place setting with a Milestones by Gloria place card" loading="lazy" decoding="async" />
       </div>
 
       {success ? (
@@ -94,13 +117,62 @@ const success = Astro.url.searchParams.get('success') === 'true';
           )}
         </div>
       </div>
+
+      <div class="faq mt-8">
+        <p class="eyebrow text-center">Good to Know</p>
+        <h2 class="title-caps faq-title text-center">Frequently Asked Questions</h2>
+        <hr class="divider-gold center" />
+        <div class="faq-list mt-6">
+          {faqs.map((f) => (
+            <details class="faq-item">
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
     </div>
   </Section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 </Base>
 
 <style>
   .contact-script { font-size: clamp(2rem, 5vw, 3rem); color: var(--color-accent-soft); margin-top: var(--sp-1); }
   .contact-lead { max-width: 520px; margin: var(--sp-4) auto 0; color: var(--color-ink-soft); }
+  .contact-hero-photo { aspect-ratio: 16 / 7; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-soft); }
+  .contact-hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  .faq-title { font-size: var(--fs-h2); margin-bottom: var(--sp-1); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--sp-3); max-width: 640px; margin-left: auto; margin-right: auto; }
+  .faq-item {
+    background: var(--color-white);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-sm);
+    padding: var(--sp-4) var(--sp-5);
+  }
+  .faq-item summary {
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--color-ink);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    color: var(--color-accent);
+    font-size: 1.4rem;
+    line-height: 1;
+    transition: transform var(--transition);
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { color: var(--color-ink-soft); font-size: var(--fs-body-sm); line-height: 1.6; margin-top: var(--sp-3); }
 
   .contact-form {
     background: var(--color-white);

@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+---
+<Base title="Page Not Found" description="This page could not be found.">
+  <Section bg="default">
+    <div class="container-narrow notfound">
+      <p class="eyebrow">Error 404</p>
+      <p class="script nf-script">Well, this is a detour</p>
+      <h1 class="title-caps nf-title">This Page Wandered Off</h1>
+      <hr class="divider-gold center" />
+      <p class="lead nf-lead">
+        The page you're looking for isn't here, but your celebration still can be.
+        Let's get you back on track.
+      </p>
+      <div class="nf-cta">
+        <a href="/" class="btn btn-dark">Return Home</a>
+        <a href="/services" class="btn btn-gold">View Services</a>
+      </div>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .notfound { text-align: center; display: flex; flex-direction: column; align-items: center; padding: var(--sp-7) 0; }
+  .nf-script { font-size: clamp(2rem, 5vw, 3rem); color: var(--color-accent-soft); }
+  .nf-title { font-size: var(--fs-h1); }
+  .nf-lead { max-width: 44ch; margin-top: var(--sp-4); color: var(--color-ink-soft); }
+  .nf-cta { display: flex; flex-wrap: wrap; gap: var(--sp-4); justify-content: center; margin-top: var(--sp-6); }
+</style>
