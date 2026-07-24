@@ -23,7 +23,25 @@ const {
 } = Astro.props;
 
 const fullTitle = title ? `${title} · ${site.name}` : site.name;
-const ogImage = '/images/hero-wedding-party.jpg';
+// Absolute URL so link previews (SMS, Facebook, etc.) resolve the image.
+const ogImage = new URL('/images/hero-milestone-lakeside.jpg', Astro.site).href;
+
+// Site-wide structured data for local SEO (name, area served, socials, founder).
+const businessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://milestonesbygloria.ca/#business',
+  name: site.name,
+  description: site.shortDescription,
+  url: 'https://milestonesbygloria.ca',
+  email: site.email,
+  image: ogImage,
+  slogan: site.tagline,
+  priceRange: '$$',
+  areaServed: { '@type': 'AdministrativeArea', name: 'British Columbia, Canada' },
+  founder: { '@type': 'Person', name: site.founder.name },
+  sameAs: [site.socials.instagram, site.socials.facebook, site.socials.pinterest],
+};
 ---
 
 <!doctype html>
@@ -53,6 +71,8 @@ const ogImage = '/images/hero-wedding-party.jpg';
 
     {/* Fonts are now self-hosted via @fontsource and bundled with the build —
         no preconnect / no Google Fonts CDN. See src/styles/global.css. */}
+
+    <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
   </head>
   <body class={bodyClass}>
     <a href="#main" class="skip-link">Skip to content</a>
