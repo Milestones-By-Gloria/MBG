@@ -24,6 +24,26 @@ Nav: HOME · ABOUT · SERVICES · GALLERY · TESTIMONIALS · CONTACT + "Book a C
   `/milestones`, `/corporate-events`.
 - `/benefits` removed → 301 to `/about` (`netlify.toml`).
 
+### `/contact` — rebuilt 2026-07-29 to Gloria's contact mockup
+Split hero (copy on cream, photo bleeding off the right edge, torn-paper base as an inline
+SVG) → "I'M HERE TO HELP" → two columns, "LET'S CONNECT" contact rows beside "SEND ME A
+MESSAGE" with a gold ornament rule between → consultation band → FAQ (kept; carries the
+FAQPage structured data, which the mockup has no equivalent for).
+- Form fields: first/last name, email, event type (`select`), event date, message with a
+  live 0/500 counter. Netlify picks the new fields up on the next deploy.
+- Placeholder-only fields, as in the mockup, each with an `.sr-only` label.
+- The date field ships as `type="text"` so its "Event Date" placeholder shows, and swaps to
+  `type="date"` on focus — date inputs ignore `placeholder` and render `yyyy-mm-dd`.
+- Contact details (phone, hours, service area) live in `site.ts`, shared with the footer.
+
+### Footer — deep navy across the whole site (2026-07-29)
+Three columns (brand / quick links / "let's create your next milestone" + contact rows),
+gold botanical line art in the outer corners, closed by a bronze-gold copyright strip.
+Colours are sampled from the mockup: `--color-footer: #051A2F`, `--color-footer-bar: #C39156`
+— both deeper and bluer than `--color-ink`, hence their own tokens. The footer carries a
+faint gold top hairline so the seam stays legible on pages that end on the lighter navy CTA
+band (home, service pages).
+
 ## Reusable components (`site/src/components/`)
 `Icon` (line-icon set), `SectionHeading`, `Hero`, `FeatureGrid`, `ProcessSteps`, `PricingCard`,
 `EventCard`, `StarRating`, `TestimonialCard`, `InstagramFeed`.

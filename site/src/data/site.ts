@@ -9,6 +9,19 @@ export const site = {
 
   email: 'milestonesbygloria@gmail.com',
   emailHref: 'mailto:milestonesbygloria@gmail.com',
+  // NOTE: the mockups show info@milestonesbygloria.ca. Keep the Gmail address
+  // until the Porkbun email forwarding for the .ca is set up — otherwise mail
+  // to the .ca address bounces.
+
+  // Contact details as given in Gloria's contact-page mockup.
+  phone: '236-788-7631',
+  phoneHref: 'tel:+12367887631',
+  hours: 'Monday – Friday | 9 AM – 6 PM PST',
+  responseTime: 'I aim to respond within 24–48 hours.',
+  serviceArea: 'Vancouver, BC and beyond',
+  serviceAreaNote: 'Available for travel',
+  instagramHandle: '@milestonesbygloria',
+  footerScript: ['Moments beautifully planned.', 'Memories that last a lifetime.'],
 
   socials: {
     instagram: 'https://instagram.com/milestonesbygloria',

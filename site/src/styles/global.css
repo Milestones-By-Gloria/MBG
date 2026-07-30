@@ -31,6 +31,10 @@
   --color-white: #ffffff;
   --color-black: #000000;
   --color-border: rgba(43, 53, 71, 0.12);
+  /* Deep navy footer band + its bronze-gold copyright strip. Both sampled from
+     the mockups, where they are noticeably deeper/bluer than --color-ink. */
+  --color-footer: #051A2F;
+  --color-footer-bar: #C39156;
 
   /* === Legacy aliases (do not use in new code; being swept out) === */
   --color-cream: var(--color-bg);
@@ -263,7 +267,7 @@ em, .italic { font-style: italic; }
   color: var(--color-brown);
   font-weight: 500;
 }
-.form-group input, .form-group textarea {
+.form-group input, .form-group textarea, .form-group select {
   width: 100%;
   padding: 0.85rem 1rem;
   font-family: var(--font-sans);
@@ -274,13 +278,27 @@ em, .italic { font-style: italic; }
   border-radius: var(--radius-sm);
   transition: border-color var(--transition);
 }
-.form-group input:focus, .form-group textarea:focus {
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
   outline: none;
-  border-color: var(--color-brown);
+  border-color: var(--color-accent);
 }
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--color-ink-soft); opacity: 0.75; }
 .form-group textarea { resize: vertical; min-height: 140px; }
 
 /* === Utilities === */
+/* Visually hidden but still read out — used for labels on the placeholder-only
+   form fields in the mockups. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 .text-center { text-align: center; }
 .text-brown { color: var(--color-brown); }
 .text-ink { color: var(--color-ink); }
