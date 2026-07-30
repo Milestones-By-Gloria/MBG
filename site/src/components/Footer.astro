@@ -154,17 +154,24 @@ const year = new Date().getFullYear();
     color: var(--color-accent);
     margin-bottom: var(--sp-4);
   }
+  /* Rule + heart read as one centred ornament under the heading, as in the
+     mockup — left-aligned they look like stray marks. */
   .footer-invite .footer-h { margin-bottom: var(--sp-2); }
   .footer-invite .footer-h::after {
     content: '';
     display: block;
-    width: 54px;
+    width: 90px;
     height: 1px;
-    margin-top: var(--sp-3);
+    margin: var(--sp-3) auto 0;
     background: var(--color-accent);
     opacity: 0.7;
   }
-  .footer-heart { display: block; color: var(--color-accent); margin-bottom: var(--sp-4); }
+  .footer-heart {
+    display: flex;
+    justify-content: center;
+    color: var(--color-accent);
+    margin: var(--sp-2) 0 var(--sp-4);
+  }
 
   .footer-links { display: flex; flex-direction: column; gap: var(--sp-3); }
   .footer-links a {
@@ -216,7 +223,6 @@ const year = new Date().getFullYear();
   }
   @media (max-width: 600px) {
     .footer-grid { grid-template-columns: 1fr; text-align: center; }
-    .footer-invite .footer-h::after, .footer-heart { margin-left: auto; margin-right: auto; }
     .footer-links { align-items: center; }
     .footer-contact li { justify-content: center; }
     .footer-socials { justify-content: center; }
