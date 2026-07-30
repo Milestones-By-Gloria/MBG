@@ -56,11 +56,18 @@ Coordination and Planning are **intentionally distinct services** (the $85/$90 s
   `reception-{round-gold,long-white,navy-roses,navy-banquet,roses-navy}`, `contact-place-setting`.
 - Gloria's portrait: `gloria-portrait.jpg` (user-uploaded branded white-top photo).
 - Corporate "Types of Events": existing `corp-*.jpg`.
-- Testimonials: Ainah=`testimonial-couple.jpg` (Gloria+bride), Ceejae=`reception-round-gold.jpg`,
-  **Ezra=`event-birthday.jpg` (STAND-IN — real dinosaur-party family photo still needed).**
+- Testimonials (all real client photos as of 2026-07-29): Ainah=`testimonial-couple.jpg`
+  (Gloria+bride), Ceejae=`testimonial-ceejae-nathan.jpg` (sunset beach portrait),
+  Ezra=`testimonial-ezra-birthday.jpg` (dinosaur-party family photo). The stock
+  stand-ins they replaced (`reception-round-gold.jpg`, `event-birthday.jpg`) are still
+  used by the gallery, service cards and home hero slideshow — don't delete them.
+- Testimonial photos are portrait; `Testimonial.focus` sets `object-position` where a
+  centre crop would cut faces (the card is 3/4 on desktop, 4/3 under 820px).
 - Unused old stand-ins pruned (public/images now ~39 files).
 - **Convert tip:** ImageMagick is NOT available (`convert` on this box is the Windows disk tool).
-  Use Python **PIL** to resize/convert (thumbnail to ~1500px, JPEG q85, progressive).
+  Use **sharp** — already in `site/node_modules` via Astro — run from `site/`:
+  `.rotate().resize({width:1000}).jpeg({quality:82,mozjpeg:true})`. (`.rotate()` applies the
+  EXIF orientation phone photos carry.) Python **PIL** also works.
 
 ## SEO / infra
 - `@astrojs/sitemap@3.2.1` (PINNED — newer versions break the build on Astro 4.16) auto-generates

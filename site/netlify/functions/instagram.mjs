@@ -15,15 +15,32 @@
 
 import { readPosts, syncInstagram } from './lib/ig.mjs';
 
+// Re-sync inline once the cached payload is older than this. Instagram's signed
+// media URLs die after a day or two, so a stale cache is as useless as an empty
+// one — it just fails later, in the browser, as broken images.
+const MAX_CACHE_AGE_MS = 60 * 60 * 1000; // 1h, same cadence as ig-sync
+
+function isStale(cached) {
+  if (!cached?.posts?.length) return true;
+  const fetchedAt = Date.parse(cached.fetchedAt ?? '');
+  return !Number.isFinite(fetchedAt) || Date.now() - fetchedAt > MAX_CACHE_AGE_MS;
+}
+
 export default async () => {
   let cached = await readPosts();
 
-  // Cold cache (e.g. right after first deploy, before the schedule has run):
-  // populate it inline so the very first request still returns posts.
-  if (!cached?.posts?.length) {
+  // Cold OR stale cache: populate it inline. The cold case is the first request
+  // after a deploy, before the schedule has run. The stale case covers contexts
+  // where the hourly `ig-sync` schedule never runs at all — deploy previews and
+  // branch deploys, where Netlify only runs scheduled functions in production —
+  // and any production run where the schedule has been failing. The CDN holds
+  // this response for an hour, so at most one request per hour pays for it.
+  if (isStale(cached)) {
     try {
       await syncInstagram();
-      cached = await readPosts();
+      // A failed sync leaves the previous payload in Blobs, so the worst case
+      // is that we re-read (and serve) the same stale posts we already had.
+      cached = (await readPosts()) ?? cached;
     } catch (err) {
       console.error('[instagram] lazy sync failed:', err.message);
     }

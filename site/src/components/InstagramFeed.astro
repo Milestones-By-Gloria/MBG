@@ -98,6 +98,7 @@ const shown = fallback.slice(0, limit);
     const grid = root.querySelector('[data-ig-grid]') as HTMLElement | null;
     const limit = Number(root.getAttribute('data-ig-limit') || '12');
     if (!grid) return;
+    const fallbackHTML = grid.innerHTML;
     try {
       const res = await fetch('/api/instagram', { headers: { accept: 'application/json' } });
       if (!res.ok) return; // keep fallback grid
@@ -108,9 +109,26 @@ const shown = fallback.slice(0, limit);
         .map((p: any) => {
           const cap = (p.caption || 'Instagram post').replace(/"/g, '&quot;').slice(0, 120);
           const badge = p.isVideo ? PLAY : '';
-          return `<a class="ig-tile" href="${p.permalink}" target="_blank" rel="noopener" aria-label="${cap}">${badge}<img src="${p.image}" alt="${cap}" loading="lazy" decoding="async" />${HOVER}</a>`;
+          // alt="" (decorative) on purpose: the caption is on the link's
+          // aria-label, so screen readers still get it — and a broken image
+          // renders nothing instead of dumping the caption onto the page.
+          return `<a class="ig-tile" href="${p.permalink}" target="_blank" rel="noopener" aria-label="${cap}">${badge}<img src="${p.image}" alt="" loading="lazy" decoding="async" />${HOVER}</a>`;
         })
         .join('');
+
+      // Instagram's signed CDN URLs expire after a day or two, so any tile can
+      // 403 at load time. Drop the dead ones; if every one dies (a fully stale
+      // cache) put the fallback grid back rather than leaving an empty section.
+      // Listeners are attached here, not via an inline onerror= attribute —
+      // the CSP in netlify.toml has no 'unsafe-inline' for scripts.
+      const tiles = Array.from(grid.querySelectorAll<HTMLElement>('.ig-tile'));
+      let dead = 0;
+      for (const tile of tiles) {
+        tile.querySelector('img')?.addEventListener('error', () => {
+          tile.remove();
+          if (++dead === tiles.length) grid.innerHTML = fallbackHTML;
+        });
+      }
     } catch {
       /* keep fallback grid */
     }

@@ -6,6 +6,9 @@ export interface Testimonial {
   rating?: number;
   image?: string;
   alt?: string;
+  /** `object-position` for the photo — set it when a centre crop would cut faces
+   *  out of the frame (the card crops to 3/4 on desktop, 4/3 on mobile). */
+  focus?: string;
 }
 
 export const testimonials: Testimonial[] = [
@@ -19,8 +22,8 @@ export const testimonials: Testimonial[] = [
     date: 'July 15, 2026',
     context: 'Day-of Coordination · 80-guest wedding',
     rating: 5,
-    image: '/images/reception-round-gold.jpg',
-    alt: 'Elegant candlelit wedding reception table',
+    image: '/images/testimonial-ceejae-nathan.jpg',
+    alt: 'Ceejae and Nathan at sunset on their wedding day',
   },
   {
     quote: [
@@ -45,7 +48,8 @@ export const testimonials: Testimonial[] = [
     date: 'May 2, 2026',
     context: 'Childcare & party coordination',
     rating: 5,
-    image: '/images/event-birthday.jpg',
-    alt: 'Birthday party celebration setup',
+    image: '/images/testimonial-ezra-birthday.jpg',
+    alt: "Ezra's family at his dinosaur-themed 4th birthday party",
+    focus: 'center 18%',
   },
 ];

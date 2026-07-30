@@ -12,7 +12,13 @@ const { item, reverse = false } = Astro.props;
 <article class:list={['testimonial', { reverse }]}>
   {item.image && (
     <div class="t-photo">
-      <img src={item.image} alt={item.alt ?? ''} loading="lazy" decoding="async" />
+      <img
+        src={item.image}
+        alt={item.alt ?? ''}
+        loading="lazy"
+        decoding="async"
+        style={item.focus ? `object-position: ${item.focus}` : undefined}
+      />
     </div>
   )}
   <div class="t-quote">

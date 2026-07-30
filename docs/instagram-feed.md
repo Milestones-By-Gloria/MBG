@@ -55,7 +55,15 @@ Setup gotchas worth remembering:
 - **`site/netlify/functions/ig-sync.mjs`** — scheduled hourly (`@hourly`).
   Refreshes the token when it nears expiry and re-fetches posts into Blobs.
 - **`site/netlify/functions/instagram.mjs`** — public endpoint. Serves the
-  cached posts; lazily populates the cache on the very first hit.
+  cached posts; lazily re-syncs when the cache is empty **or older than an
+  hour**. The staleness check matters because Netlify only runs scheduled
+  functions on the *production* deploy — on a deploy preview or branch deploy
+  `ig-sync` never fires, so without it the cache is populated once and then
+  rots. It also covers a production schedule that has been failing.
+- **Expiring image URLs** — `media_url`/`thumbnail_url` are signed and die
+  after a day or two, so a stale cache fails in the browser as broken images,
+  not as an empty feed. `InstagramFeed.astro` therefore drops any tile whose
+  image errors, and restores the local fallback grid if every tile dies.
 
 ### Why this design
 - **Zero maintenance** — the token (~60 days) auto-refreshes long before it
