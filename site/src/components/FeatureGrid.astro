@@ -1,0 +1,93 @@
+---
+import Icon from './Icon.astro';
+// A responsive grid of icon + title + description cells — "What's Included",
+// "How We Help", the values row, and the childcare feature grids all use this.
+export interface Feature {
+  icon: string;
+  title: string;
+  text: string;
+}
+interface Props {
+  items: Feature[];
+  columns?: number;
+  dividers?: boolean;
+  iconCircle?: boolean;
+  class?: string;
+}
+const { items, columns = 3, dividers = false, iconCircle = false, class: className = '' } = Astro.props;
+---
+<ul
+  class:list={['feature-grid', { dividers, 'icon-circle': iconCircle }, className]}
+  style={`--cols:${columns}`}
+>
+  {items.map((f) => (
+    <li class="feature">
+      <span class="feature-icon"><Icon name={f.icon} size={iconCircle ? 30 : 40} /></span>
+      <h3 class="feature-title">{f.title}</h3>
+      <p class="feature-text">{f.text}</p>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    gap: var(--sp-6) var(--sp-5);
+  }
+  .feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 var(--sp-3);
+  }
+  .feature-icon {
+    color: var(--color-accent);
+    margin-bottom: var(--sp-3);
+    display: inline-flex;
+  }
+  .icon-circle .feature-icon {
+    width: 74px;
+    height: 74px;
+    border: 1px solid var(--color-hairline);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--sp-4);
+  }
+  .feature-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1rem;
+    color: var(--color-ink);
+    margin-bottom: var(--sp-2);
+  }
+  .feature-text {
+    font-size: var(--fs-body-sm);
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    max-width: 30ch;
+  }
+  /* Thin gold vertical rules between columns. Intended for single-row grids
+     (e.g. the wedding "What's Included" 6-up). */
+  .dividers .feature { position: relative; }
+  .dividers .feature + .feature::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--sp-5) / -2);
+    top: 6%;
+    bottom: 6%;
+    width: 1px;
+    background: var(--color-hairline);
+  }
+  @media (max-width: 900px) {
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .dividers .feature::before { content: none !important; }
+  }
+  @media (max-width: 520px) {
+    .feature-grid { grid-template-columns: 1fr; }
+  }
+</style>

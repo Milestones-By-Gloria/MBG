@@ -6,7 +6,7 @@
 - **Forms**: Netlify Forms (built-in, free up to 100 submissions/month, emails Gloria on submit)
 - **Booking**: Cal.com (Google Calendar two-way sync, free tier covers needs)
 - **Domain plan**: `.ca` via Porkbun (~$13 CAD/yr)
-- **Fonts**: Google Fonts — Cormorant Garamond (headings) + Inter (body)
+- **Fonts**: Self-hosted via @fontsource — Bodoni Moda (display, free substitute for Ferly) + Cormorant Garamond (serif) + Inter (sans, free substitute for Univers). Hero title keeps Italiana from the original design.
 - **Source control**: GitHub repo → connected to Netlify
 
 ## Pages
@@ -27,7 +27,7 @@
 - Consistent palette + typography across all pages
 
 ## Visual style
-- **Palette**: cream `#F2EEE9` · dusty pink `#E8DEDA` · periwinkle `#D8D9E5` · warm brown `#5C3A2E` · near-black body
+- **Palette**: cool off-white `#F4F6FC` · warm cream `#F3EEEA` · light blue `#C6D8E4` · medium blue `#334C6B` · dark navy `#2B3547`
 - **Typography**: serif headings, letter-spaced small-caps for tag labels, sans body
 - **Imagery**: rounded-corner photos, subtle gradients, generous whitespace
 - **Buttons**: light pill buttons with hover lift

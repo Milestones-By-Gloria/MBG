@@ -1,0 +1,79 @@
+---
+// Split page hero — copy on one side, image on the other. Used at the top of
+// the service pages, the milestones page, and contact. CTAs go in the slot.
+interface Props {
+  eyebrow?: string;
+  title: string;
+  script?: string;
+  scriptPosition?: 'above' | 'below';
+  lead?: string;
+  image?: string;
+  imageAlt?: string;
+  reverse?: boolean;
+  bg?: 'default' | 'warm';
+  class?: string;
+}
+const {
+  eyebrow,
+  title,
+  script,
+  scriptPosition = 'below',
+  lead,
+  image,
+  imageAlt = '',
+  reverse = false,
+  bg = 'default',
+  class: className = '',
+} = Astro.props;
+const hasCta = Astro.slots.has('default');
+---
+<section class:list={['page-hero', `bg-${bg}`, { reverse, 'no-image': !image }, className]}>
+  <div class="container-wide hero-grid">
+    <div class="hero-copy">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      {script && scriptPosition === 'above' && <p class="script hero-script">{script}</p>}
+      <h1 class="title-caps hero-title">{title}</h1>
+      {script && scriptPosition === 'below' && <p class="script hero-script">{script}</p>}
+      <hr class="divider-gold" />
+      {lead && <p class="hero-lead lead">{lead}</p>}
+      {hasCta && <div class="hero-cta"><slot /></div>}
+    </div>
+    {image && (
+      <div class="hero-media">
+        <img src={image} alt={imageAlt} fetchpriority="high" decoding="async" />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .page-hero { padding: var(--sp-9) 0; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-8);
+    align-items: center;
+  }
+  .no-image .hero-grid { grid-template-columns: 1fr; max-width: var(--container-narrow); text-align: center; justify-items: center; }
+  .reverse .hero-media { order: -1; }
+  .hero-title { font-size: clamp(2.5rem, 6vw, 4.25rem); }
+  .hero-script {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    margin-top: -0.15em;
+  }
+  .hero-lead { margin-top: var(--sp-5); max-width: 48ch; color: var(--color-ink-soft); }
+  .no-image .hero-lead { margin-left: auto; margin-right: auto; }
+  .hero-cta { margin-top: var(--sp-6); display: flex; flex-wrap: wrap; gap: var(--sp-4); }
+  .no-image .hero-cta { justify-content: center; }
+  .hero-media {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+  .hero-media img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 860px) {
+    .hero-grid, .reverse .hero-grid { grid-template-columns: 1fr; gap: var(--sp-6); }
+    .reverse .hero-media { order: 0; }
+  }
+</style>

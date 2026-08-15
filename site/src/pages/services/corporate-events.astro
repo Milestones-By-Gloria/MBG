@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import Hero from '../../components/Hero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import FeatureGrid from '../../components/FeatureGrid.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import PricingCard from '../../components/PricingCard.astro';
+import EventCard from '../../components/EventCard.astro';
+import CalcomButton from '../../components/CalcomButton.astro';
+import { corporateEvents as s } from '../../data/services';
+import { corporateEventTypes } from '../../data/events';
+import { site } from '../../data/site';
+---
+<Base title="Corporate Events" current="/services" description={s.intro}>
+  <Hero
+    eyebrow="Services"
+    title={s.title}
+    script={s.tagline}
+    lead={s.intro}
+    image={s.image}
+    imageAlt={s.imageAlt}
+  >
+    <a href="/contact" class="btn btn-dark">Inquire About Your Event</a>
+    <a href={`https://cal.com/${site.calcomLink}`} target="_blank" rel="noopener" class="btn btn-gold">Book a Consultation</a>
+  </Hero>
+
+  <Section bg="warm">
+    <div class="container-wide">
+      <SectionHeading title="How We Help" script="Professional, polished, purposeful" scriptPosition="above" class="mb-7" />
+      <FeatureGrid items={s.whatsIncluded} columns={6} iconCircle />
+    </div>
+  </Section>
+
+  <Section bg="default">
+    <div class="container-wide">
+      <SectionHeading title="Types of Events" class="mb-7" />
+      <div class="events-grid">
+        {corporateEventTypes.map((e) => (
+          <EventCard image={e.image} title={e.title} text={e.text} alt={e.title} />
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="warm">
+    <div class="container">
+      <div class="process-invest">
+        <div>
+          <SectionHeading title="Our Process" align="left" class="mb-7" />
+          <ProcessSteps steps={s.process} />
+        </div>
+        <div class="invest">
+          <SectionHeading title="Investment" align="left" class="mb-7" />
+          <PricingCard
+            label="Corporate & Community Events"
+            price={site.pricing.corporateRate}
+            sub={site.pricing.corporateMin}
+            note="Need more or fewer hours? Custom packages available to fit your event size, scope, and goals."
+            align="left"
+          >
+            <CalcomButton label="Get a Custom Quote" />
+          </PricingCard>
+        </div>
+      </div>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-5);
+  }
+  .process-invest {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--sp-9);
+    align-items: start;
+  }
+  .invest { position: sticky; top: calc(var(--nav-height) + var(--sp-6)); }
+  @media (max-width: 900px) { .events-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 860px) {
+    .process-invest { grid-template-columns: 1fr; gap: var(--sp-8); }
+    .invest { position: static; }
+  }
+  @media (max-width: 520px) { .events-grid { grid-template-columns: 1fr; } }
+</style>

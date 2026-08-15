@@ -1,0 +1,111 @@
+# Site redesign — 2026 (warm-gold) — STATUS & HANDOFF
+
+Full visual + structural redesign of the Milestones by Gloria site, translating Gloria's 18
+mockups (delivered 2026-07-22) into the Astro site. Built on branch **`instagram-feed`**.
+
+- **PR:** #1 → `main` — https://github.com/Milestones-By-Gloria/MBG/pull/1
+- **Live preview (public, shareable):** https://deploy-preview-1--milestones-by-gloria.netlify.app
+- **Status:** complete and on the preview; **NOT yet merged to production** (awaiting Gloria's review).
+- Last updated: 2026-07-24.
+
+## Design system (`site/src/styles/global.css`)
+- **Palette:** warm cream `#F7F3EC`, deeper cream `#F4ECE0`, blush `#F3E9E1`, navy ink `#2B3547`,
+  gold accent `#BFA06A` (soft gold `#C9AE86`, hairline `#D9C4A0`). Semantic tokens
+  (`--color-bg/-ink/-accent…`) with legacy names kept as aliases.
+- **Type:** Cormorant Garamond (display, all-caps), Pinyon Script (`--font-script`, cursive
+  accents only), Montserrat (body/UI/buttons). Self-hosted via `@fontsource`. Unused fonts pruned.
+- Buttons: `.btn-dark` (navy fill, primary), `.btn-gold` (gold outline), `.btn-ghost`.
+
+## Pages (13)
+Nav: HOME · ABOUT · SERVICES · GALLERY · TESTIMONIALS · CONTACT + "Book a Consultation".
+- `/` concise landing · `/about` · `/services` (hub, 5 cards) · `/gallery` · `/testimonials` ·
+  `/contact` (form + FAQ) · `/privacy` · custom `/404`.
+- Services sub-pages: `/services/wedding-coordination`, `/wedding-planning`, `/childcare`,
+  `/milestones`, `/corporate-events`.
+- `/benefits` removed → 301 to `/about` (`netlify.toml`).
+
+### `/contact` — rebuilt 2026-07-29 to Gloria's contact mockup
+Split hero (copy on cream, photo bleeding off the right edge, torn-paper base as an inline
+SVG) → "I'M HERE TO HELP" → two columns, "LET'S CONNECT" contact rows beside "SEND ME A
+MESSAGE" with a gold ornament rule between → consultation band → FAQ (kept; carries the
+FAQPage structured data, which the mockup has no equivalent for).
+- Form fields: first/last name, email, event type (`select`), event date, message with a
+  live 0/500 counter. Netlify picks the new fields up on the next deploy.
+- Placeholder-only fields, as in the mockup, each with an `.sr-only` label.
+- The date field ships as `type="text"` so its "Event Date" placeholder shows, and swaps to
+  `type="date"` on focus — date inputs ignore `placeholder` and render `yyyy-mm-dd`.
+- Contact details (phone, hours, service area) live in `site.ts`, shared with the footer.
+
+### Footer — deep navy across the whole site (2026-07-29)
+Three columns (brand / quick links / "let's create your next milestone" + contact rows),
+gold botanical line art in the outer corners, closed by a bronze-gold copyright strip.
+Colours are sampled from the mockup: `--color-footer: #051A2F`, `--color-footer-bar: #C39156`
+— both deeper and bluer than `--color-ink`, hence their own tokens. The footer carries a
+faint gold top hairline so the seam stays legible on pages that end on the lighter navy CTA
+band (home, service pages).
+
+## Reusable components (`site/src/components/`)
+`Icon` (line-icon set), `SectionHeading`, `Hero`, `FeatureGrid`, `ProcessSteps`, `PricingCard`,
+`EventCard`, `StarRating`, `TestimonialCard`, `InstagramFeed`.
+
+## Pricing (published, `site.pricing` in `src/data/site.ts`; all user-confirmed 2026-07-24)
+| Service | Rate | Minimum |
+|---|---|---|
+| Wedding Coordination (day-of) | $85/hr | 4 hours |
+| Wedding Planning (full) | $90/hr | 10 hours |
+| Milestone / Social Events | $90/hr | 4 hours |
+| Corporate Events | $90/hr | 4 hours |
+| Childcare | $95/hr (up to 15 kids), +$40/hr beyond | — |
+
+Coordination and Planning are **intentionally distinct services** (the $85/$90 split is not a typo).
+
+## Instagram gallery (WORKING)
+- `IG_SEED_TOKEN` is set in Netlify (all deploy contexts, marked secret). The feed returns Gloria's
+  real 12 posts; `/gallery` renders them linking to their **direct post permalinks**, with the
+  curated photos as a fallback until the feed loads.
+- Backend: `site/netlify/functions/` (see `docs/instagram-feed.md`). Frontend: `InstagramFeed.astro`.
+- **Gotcha:** IG feed styles are `<style is:global>` namespaced under `.ig-feed`, because Astro's
+  scoped-style attribute is NOT applied to tiles the client script injects via `innerHTML`.
+- Under plain `astro dev` the function isn't served → shows fallback grid (real feed only on Netlify).
+
+## Photos
+- Real design photos pulled from Gloria's Drive (`Milestones by Gloria › BRANDING › WEBSITE`,
+  AI-generated decor), optimized to web JPEGs via PIL and matched to each mockup slot:
+  `hero-milestone-lakeside`, `wedding-planning-plan`, `childcare-teepee`, `childcare-teddy`,
+  `event-{birthday,baby-shower,engagement,bridal-shower,graduation,anniversary,housewarming,holiday,dessert}`,
+  `reception-{round-gold,long-white,navy-roses,navy-banquet,roses-navy}`, `contact-place-setting`.
+- Gloria's portrait: `gloria-portrait.jpg` (user-uploaded branded white-top photo).
+- Corporate "Types of Events": existing `corp-*.jpg`.
+- Testimonials (all real client photos as of 2026-07-29): Ainah=`testimonial-couple.jpg`
+  (Gloria+bride), Ceejae=`testimonial-ceejae-nathan.jpg` (sunset beach portrait),
+  Ezra=`testimonial-ezra-birthday.jpg` (dinosaur-party family photo). The stock
+  stand-ins they replaced (`reception-round-gold.jpg`, `event-birthday.jpg`) are still
+  used by the gallery, service cards and home hero slideshow — don't delete them.
+- Testimonial photos are portrait; `Testimonial.focus` sets `object-position` where a
+  centre crop would cut faces (the card is 3/4 on desktop, 4/3 under 820px).
+- Unused old stand-ins pruned (public/images now ~39 files).
+- **Convert tip:** ImageMagick is NOT available (`convert` on this box is the Windows disk tool).
+  Use **sharp** — already in `site/node_modules` via Astro — run from `site/`:
+  `.rotate().resize({width:1000}).jpeg({quality:82,mozjpeg:true})`. (`.rotate()` applies the
+  EXIF orientation phone photos carry.) Python **PIL** also works.
+
+## SEO / infra
+- `@astrojs/sitemap@3.2.1` (PINNED — newer versions break the build on Astro 4.16) auto-generates
+  `/sitemap-index.xml`; `robots.txt` points to it.
+- `LocalBusiness` JSON-LD site-wide (`Base.astro`) + `FAQPage` JSON-LD on Contact.
+- OG/share image = `hero-milestone-lakeside.jpg` as an absolute URL.
+- Contact has a 6-item FAQ; footer shows "Proudly serving British Columbia" + Privacy link.
+- Copy: all em dashes removed from user-facing text (only code comments still contain them).
+
+## Still open / next steps
+- **Merge PR #1 to `main`** to go live (production auto-deploys from main) — after Gloria signs off.
+- Real **Ezra** family photo (currently a birthday-decor stand-in) — user will upload.
+- **Analytics** (needs an account: Netlify Analytics or Plausible; Plausible would need a CSP update).
+- **Rotate the IG token** post-launch (see `docs/instagram-feed.md`).
+- **`.ca` email forwarding** at Porkbun (still unconfigured).
+- **Responsive images / WebP** — deferred (user said skip for now); would use `astro:assets`.
+
+## Verify
+`cd site && npm install && npm run dev` → walk every route. `npm run build` → **13 pages**, no
+errors, generates `dist/sitemap-index.xml`. Commit style: end messages with the Co-Authored-By +
+Claude-Session trailers. Work stays on `instagram-feed`; do not merge to main without the go-ahead.

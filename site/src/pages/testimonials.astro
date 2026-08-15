@@ -1,42 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
-import TestimonialComp from '../components/Testimonial.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
 import { testimonials } from '../data/testimonials';
+import { site } from '../data/site';
 ---
+<Base title="Testimonials" current="/testimonials" description="Kind words from amazing clients: real moments and unforgettable memories with Milestones by Gloria.">
+  <Section bg="default">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Real moments, real experiences, unforgettable memories."
+        title="Testimonials"
+        script="Kind words from amazing clients"
+      >
+        <p>It is truly an honour to be part of such meaningful celebrations. Here is what some of my clients have to say about their experience.</p>
+      </SectionHeading>
 
-<Base title="Testimonials" current="/testimonials">
-  <Section bg="cream">
-    <div class="container text-center">
-      <p class="eyebrow">Kind Words</p>
-      <h1 class="h1 mt-3">Testimonial</h1>
-      <p class="lead mt-5" style="max-width:640px;margin:var(--sp-5) auto 0;font-style:italic;font-family:var(--font-serif);">
-        Real moments from real clients. The kind of feedback that means everything.
-      </p>
-    </div>
-
-    <div class="container mt-8">
-      <div class="testimonial-stack">
-        {testimonials.map((t) => <TestimonialComp item={t} />)}
+      <div class="testimonial-stack mt-8">
+        {testimonials.map((t, i) => <TestimonialCard item={t} reverse={i % 2 === 1} />)}
       </div>
-    </div>
 
-    <div class="container text-center mt-8">
-      <p class="serif-h" style="font-style:italic;font-size:1.2rem;">
-        I would love to be part of your milestone, too.
-      </p>
-      <div class="cta-pair mt-5">
-        <a href="/contact" class="btn btn-dark">Inquire Now</a>
-        <a href="/services" class="btn btn-ghost">View Services</a>
+      <div class="t-cta text-center mt-8">
+        <p class="script t-cta-script">Thank you for trusting me</p>
+        <div class="cta-pair mt-5">
+          <a href="/contact" class="btn btn-dark">Inquire Now</a>
+          <a href={`https://cal.com/${site.calcomLink}`} target="_blank" rel="noopener" class="btn btn-gold">Book a Consultation</a>
+        </div>
       </div>
     </div>
   </Section>
 </Base>
 
 <style>
-  .testimonial-stack {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-7);
-  }
+  .testimonial-stack { display: flex; flex-direction: column; gap: var(--sp-8); }
+  .t-cta-script { font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--color-accent-soft); }
 </style>

@@ -1,0 +1,132 @@
+---
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import Hero from '../../components/Hero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import FeatureGrid from '../../components/FeatureGrid.astro';
+import PricingCard from '../../components/PricingCard.astro';
+import Icon from '../../components/Icon.astro';
+import CalcomButton from '../../components/CalcomButton.astro';
+import { childcare as c } from '../../data/services';
+import { site } from '../../data/site';
+---
+<Base title="Wedding Childcare" current="/services" description={c.intro}>
+  <Hero
+    eyebrow="Services"
+    title={c.title}
+    script={c.script}
+    lead={`${c.tagline} ${c.intro}`}
+    image={c.image}
+    imageAlt={c.imageAlt}
+  >
+    <a href="/contact" class="btn btn-dark">Inquire About Your Date</a>
+    <a href={`https://cal.com/${site.calcomLink}`} target="_blank" rel="noopener" class="btn btn-gold">Book a Consultation</a>
+  </Hero>
+
+  <Section bg="warm">
+    <div class="container-wide">
+      <SectionHeading title="What's Included" class="mb-7" />
+      <FeatureGrid items={c.whatsIncluded} columns={5} iconCircle />
+    </div>
+  </Section>
+
+  <Section bg="default">
+    <div class="container-wide">
+      <div class="activities-grid">
+        <div>
+          <SectionHeading title="Activities for All Ages" align="left" class="mb-7" />
+          <ul class="activity-list">
+            {c.activities.map((a) => (
+              <li class="activity">
+                <h3 class="activity-title serif-h">{a.title}</h3>
+                <p class="activity-text">{a.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <SectionHeading title="Important to Know" align="left" class="mb-7" />
+          <ul class="know-list">
+            {c.importantToKnow.map((item) => (
+              <li class="know-item">
+                <span class="know-check"><Icon name="check-circle" size={26} /></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="blush">
+    <div class="container">
+      <SectionHeading title="Pricing" class="mb-7" />
+      <div class="pricing-grid">
+        <PricingCard
+          variant="blush"
+          align="left"
+          icon="user"
+          label="Up to 15 Children"
+          price={site.pricing.childcareRate}
+          note="Includes one childcare coordinator and all activities & supplies."
+        />
+        <PricingCard
+          variant="blush"
+          align="left"
+          icon="users-care"
+          label="More than 15 Children"
+          price={site.pricing.childcareExtra}
+          note={site.pricing.childcareExtraNote}
+        />
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="warm" tight>
+    <div class="container closing-band">
+      <span class="closing-icon"><Icon name="heart" size={54} /></span>
+      <div class="closing-copy">
+        <p class="script closing-title">{c.closingTitle}</p>
+        <p class="closing-text">{c.closingText}</p>
+      </div>
+      <div class="closing-photo">
+        <img src="/images/childcare-teddy.jpg" alt="Teddy bear and wooden toys in the children's play area" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .activities-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--sp-8);
+  }
+  .activity-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-6) var(--sp-5);
+  }
+  .activity-title { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--font-display); margin-bottom: var(--sp-2); }
+  .activity-text { font-size: var(--fs-body-sm); color: var(--color-ink-soft); line-height: 1.55; }
+  .know-list { display: flex; flex-direction: column; gap: var(--sp-4); }
+  .know-item { display: grid; grid-template-columns: 26px 1fr; gap: var(--sp-3); align-items: start; color: var(--color-ink-soft); font-size: var(--fs-body-sm); line-height: 1.5; }
+  .know-check { color: var(--color-accent); }
+  .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+  .closing-band { display: flex; align-items: center; gap: var(--sp-6); }
+  .closing-icon { color: var(--color-accent); flex-shrink: 0; }
+  .closing-copy { flex: 1; }
+  .closing-title { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: var(--sp-2); }
+  .closing-text { color: var(--color-ink-soft); max-width: 60ch; }
+  .closing-photo { flex-shrink: 0; width: 260px; aspect-ratio: 5 / 4; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-soft); }
+  .closing-photo img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 860px) {
+    .activities-grid { grid-template-columns: 1fr; gap: var(--sp-7); }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .closing-band { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 520px) {
+    .activity-list { grid-template-columns: 1fr; }
+  }
+</style>

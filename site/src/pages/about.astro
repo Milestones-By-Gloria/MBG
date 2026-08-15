@@ -1,140 +1,120 @@
 ---
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
-import SocialIcon from '../components/SocialIcon.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
+
+const values = [
+  { icon: 'heart', title: "It's Personal", text: 'We take the time to understand what matters most to you and the people you love.' },
+  { icon: 'sparkles', title: "It's Thoughtful", text: 'From the big picture to the smallest details, everything is planned with intention.' },
+  { icon: 'compass', title: "It's Seamless", text: 'We handle the logistics behind the scenes so you can simply enjoy the moment.' },
+  { icon: 'star', title: "It's Memorable", text: 'Beautiful design and genuine moments come together to create lasting memories.' },
+];
+
+const promises = [
+  'Advocate for your vision',
+  'Communicate with honesty',
+  'Anticipate the unexpected',
+  'Handle every detail with care',
+  'Protect your time and your joy',
+];
+
+const facts = [
+  'My favourite part of every event is seeing my clients completely present in the moment.',
+  'Proudly serving clients throughout British Columbia.',
+  'My perfect planning day includes a coffee, a detailed timeline, and a glow in the background.',
+  'I believe the smallest details often create the biggest memories.',
+  'Outside of event planning I supervise a childcare program and have a background in caregiving, and I love building meaningful connections in my community.',
+];
 ---
+<Base title="About" current="/about" description="Meet Gloria Niyomahoro, the founder and lead planner behind Milestones by Gloria.">
+  <Hero
+    eyebrow="Meet Gloria"
+    title="The Heart Behind"
+    script="Milestones by Gloria"
+    image="/images/gloria-portrait.jpg"
+    imageAlt="Gloria Niyomahoro, founder of Milestones by Gloria"
+    reverse
+  >
+    <div class="bio">
+      <p>Hello! I'm Gloria, the founder and lead planner behind Milestones by Gloria, where thoughtful planning meets timeless celebrations.</p>
+      <p>I believe every milestone deserves to be experienced, not managed. Whether you're planning an elegant wedding, a milestone birthday, or a meaningful corporate event, my goal is to create an experience that allows you to be fully present while every detail is taken care of behind the scenes.</p>
+      <p>With years of experience coordinating events, tending teams, and managing every piece behind the scenes, I've developed a calm, organized approach that allows my clients to enjoy their celebration with confidence.</p>
+      <p class="bio-close">It would be an honour to be part of your milestone.</p>
+    </div>
+  </Hero>
 
-<Base title="About" current="/about">
-  <Section bg="cream">
+  <Section bg="warm">
     <div class="container">
-      <p class="eyebrow text-center">The Founder</p>
-      <h1 class="h1 text-center mt-3">About Milestones by Gloria</h1>
+      <SectionHeading title="A Passion for Meaningful Celebrations" script="Celebrate" scriptPosition="above" class="mb-7" />
+      <FeatureGrid items={values} columns={4} iconCircle />
+    </div>
+  </Section>
 
-      <div class="about-grid mt-8">
-        <aside class="founder-card">
-          <div class="founder-photo img-rounded">
-            <img src="/images/gloria-portrait.jpg" alt="Gloria Niyomahoro, Founder of Milestones by Gloria" loading="eager" decoding="async" />
-          </div>
-          <p class="founder-name">{site.founder.name}</p>
-          <p class="founder-role">{site.founder.role}</p>
-          <a href={site.emailHref} class="btn btn-dark email-btn">Email Me</a>
-          <ul class="founder-socials">
-            {site.socials.instagram && <li><a href={site.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram"><SocialIcon name="instagram" size={22} /></a></li>}
-            {site.socials.facebook && <li><a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook"><SocialIcon name="facebook" size={22} /></a></li>}
-            {site.socials.pinterest && <li><a href={site.socials.pinterest} target="_blank" rel="noopener" aria-label="Pinterest"><SocialIcon name="pinterest" size={22} /></a></li>}
-          </ul>
-        </aside>
-
-        <div class="bio">
-          <p class="lead">Hi, I'm Gloria, the heart behind MBG.</p>
-
-          <p>
-            I created this business because I believe life's most important moments deserve to be
-            experienced, not stressed over. Whether it's a wedding, a birthday celebration, a baby
-            shower, or a memorial service, my goal is to take the pressure off your shoulders so you
-            can focus on what truly matters: your people, your memories, and your moment.
-          </p>
-
-          <p>
-            With a background in caregiving and working with families, I understand how important it
-            is to approach every event with patience, organization, and heart. No two milestones are
-            the same, which is why every event I plan &amp; coordinate is thoughtfully tailored to reflect
-            your story and your vision.
-          </p>
-
-          <p>
-            From joyful celebrations to more delicate gatherings, I'm here to support you with calm
-            guidance, clear communication, and careful attention to detail every step of the way.
-          </p>
-
-          <p>
-            At the end of the day, this isn't just about planning events; it's about creating space for
-            memories that last a lifetime.
-          </p>
-
-          <p class="closing">I would be honoured to be part of your milestone.</p>
-
-          <div class="cta-pair mt-6">
-            <a href="/contact" class="btn btn-dark">Inquire Now</a>
-            <a href="/services" class="btn btn-ghost">Services &amp; Packages</a>
-          </div>
+  <Section bg="default">
+    <div class="container">
+      <div class="promise">
+        <div>
+          <p class="eyebrow">My Promise to You</p>
+          <h2 class="title-caps promise-title">More Than a Planner, Your Partner</h2>
+          <hr class="divider-gold" />
+          <p class="promise-lead">When you choose Milestones by Gloria, you're choosing more than an event planner. You're choosing someone who will:</p>
         </div>
+        <ul class="promise-list">
+          {promises.map((p) => (
+            <li class="promise-item">
+              <span class="promise-check"><Icon name="check-circle" size={26} /></span>
+              <span>{p}</span>
+            </li>
+          ))}
+          <li class="promise-note">
+            So when your day arrives, you can be fully present, laugh a little louder, and cherish moments that last a lifetime.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="warm">
+    <div class="container">
+      <SectionHeading title="A Few Things About Me" class="mb-7" />
+      <ul class="facts-grid">
+        {facts.map((f) => (
+          <li class="fact">
+            <span class="fact-icon"><Icon name="heart" size={26} /></span>
+            <p>{f}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="about-cta text-center mt-8">
+        <a href="/contact" class="btn btn-dark">Inquire Now</a>
+        <a href="/services" class="btn btn-gold">View Services</a>
       </div>
     </div>
   </Section>
 </Base>
 
 <style>
-  .about-grid {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: var(--sp-8);
-    align-items: start;
-  }
-  .founder-card {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    padding: var(--sp-6);
-    box-shadow: var(--shadow-soft);
-    text-align: center;
-    position: sticky;
-    top: calc(var(--nav-height) + var(--sp-5));
-  }
-  .founder-photo {
-    aspect-ratio: 4 / 5;
-    margin-bottom: var(--sp-5);
-  }
-  .founder-name {
-    font-family: var(--font-display);
-    color: var(--color-brown);
-    font-size: 1.5rem;
-    line-height: 1.2;
-  }
-  .founder-role {
-    font-family: var(--font-label);
-    font-style: italic;
-    color: var(--color-ink);
-    margin-top: var(--sp-1);
-    margin-bottom: var(--sp-5);
-  }
-  .email-btn { width: 100%; }
-  .founder-socials {
-    display: flex;
-    gap: var(--sp-5);
-    justify-content: center;
-    margin-top: var(--sp-5);
-  }
-  .founder-socials a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-brown);
-    transition: opacity var(--transition), transform var(--transition);
-  }
-  .founder-socials a:hover { opacity: 0.7; transform: translateY(-1px); }
-
-  .bio p {
-    color: var(--color-ink-soft);
-    margin-bottom: var(--sp-4);
-    font-size: 1.0625rem;
-  }
-  .bio .lead {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.35rem;
-    color: var(--color-brown);
-    margin-bottom: var(--sp-5);
-  }
-  .bio .closing {
-    font-family: var(--font-serif);
-    font-style: italic;
-    color: var(--color-brown);
-    font-size: 1.15rem;
-  }
-
-  @media (max-width: 900px) {
-    .about-grid { grid-template-columns: 1fr; }
-    .founder-card { position: static; max-width: 360px; margin: 0 auto; }
+  .bio { width: 100%; }
+  .bio p { color: var(--color-ink-soft); margin-bottom: var(--sp-3); }
+  .bio-close { font-family: var(--font-serif); font-style: italic; font-size: 1.2rem; color: var(--color-ink); }
+  .promise { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8); align-items: start; }
+  .promise-title { font-size: var(--fs-h2); }
+  .promise-lead { color: var(--color-ink-soft); margin-top: var(--sp-4); }
+  .promise-list { display: flex; flex-direction: column; gap: var(--sp-4); }
+  .promise-item { display: grid; grid-template-columns: 26px 1fr; gap: var(--sp-3); align-items: center; color: var(--color-ink); font-weight: 500; }
+  .promise-check { color: var(--color-accent); }
+  .promise-note { font-family: var(--font-serif); font-style: italic; color: var(--color-ink-soft); font-size: 1.1rem; margin-top: var(--sp-3); padding-top: var(--sp-4); border-top: 1px solid var(--color-hairline); }
+  .facts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
+  .fact { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .fact-icon { color: var(--color-accent); }
+  .fact p { color: var(--color-ink-soft); font-size: var(--fs-body-sm); line-height: 1.6; }
+  .about-cta { display: flex; flex-wrap: wrap; gap: var(--sp-4); justify-content: center; }
+  @media (max-width: 860px) {
+    .promise { grid-template-columns: 1fr; gap: var(--sp-6); }
+    .facts-grid { grid-template-columns: 1fr; }
   }
 </style>

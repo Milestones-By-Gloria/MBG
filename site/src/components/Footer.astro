@@ -1,113 +1,224 @@
 ---
 import { site, nav } from '../data/site';
+import Icon from './Icon.astro';
 import SocialIcon from './SocialIcon.astro';
+// Deep-navy footer from Gloria's mockups: brand block, quick links, and a
+// "let's create your next milestone" contact column, closed by a bronze-gold
+// copyright strip. Gold botanical line art sits in the outer corners.
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="container-wide footer-inner">
+  <div class="footer-botanical left" aria-hidden="true">
+    <svg viewBox="0 0 120 220" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+      <path d="M18 218C30 170 44 120 66 74M66 74c8-16 18-30 30-42" />
+      <path d="M40 146c-14-6-22-18-22-32 14 2 24 12 26 26M44 140c10-10 24-12 36-6-8 12-22 16-34 12" />
+      <path d="M56 106c-13-4-21-15-22-28 13 3 22 13 24 26M60 100c9-11 23-14 35-9-7 12-21 17-33 14" />
+      <path d="M74 66c-12-3-20-13-21-25 12 2 21 11 23 23M78 60c8-10 21-13 32-8-6 11-19 16-30 13" />
+      <circle cx="96" cy="30" r="7" />
+      <path d="M96 23c5 0 9 3 9 7M96 37c-5 0-9-3-9-7" />
+    </svg>
+  </div>
+  <div class="footer-botanical right" aria-hidden="true">
+    <svg viewBox="0 0 120 220" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+      <path d="M102 218C90 170 76 120 54 74M54 74c-8-16-18-30-30-42" />
+      <path d="M80 146c14-6 22-18 22-32-14 2-24 12-26 26M76 140c-10-10-24-12-36-6 8 12 22 16 34 12" />
+      <path d="M64 106c13-4 21-15 22-28-13 3-22 13-24 26M60 100c-9-11-23-14-35-9 7 12 21 17 33 14" />
+      <path d="M46 66c12-3 20-13 21-25-12 2-21 11-23 23M42 60c-8-10-21-13-32-8 6 11 19 16 30 13" />
+      <circle cx="24" cy="30" r="7" />
+      <path d="M24 23c-5 0-9 3-9 7M24 37c5 0 9-3 9-7" />
+    </svg>
+  </div>
+
+  <div class="container-wide footer-grid">
     <div class="footer-brand">
-      <p class="brand-mark">{site.name}</p>
-      <p class="brand-line">{site.tagline}</p>
+      <a href="/" class="brand-mark" aria-label={site.name}>
+        <img src="/img/logo/monogram-square-light.png" alt="" width="200" height="200" class="brand-monogram" />
+        <img src="/img/logo/wordmark-name-light.png" alt={site.name} width="569" height="150" class="brand-word" />
+      </a>
+      <p class="brand-sub">Event Planning &amp; Design</p>
+      <p class="brand-script">
+        {site.footerScript.map((line) => <span>{line}</span>)}
+      </p>
     </div>
 
-    <div class="footer-meta">
-      <a href={site.emailHref} class="footer-email">{site.email}</a>
+    <nav class="footer-col" aria-label="Footer">
+      <h2 class="footer-h">Quick Links</h2>
+      <ul class="footer-links">
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="footer-col footer-invite">
+      <h2 class="footer-h">Let's create your next milestone</h2>
+      <p class="footer-copy">Every celebration is unique.<br />I can't wait to hear about yours.</p>
+      <ul class="footer-contact">
+        <li>
+          <span class="fc-icon"><Icon name="mail" size={16} /></span>
+          <a href={site.emailHref}>{site.email}</a>
+        </li>
+        <li>
+          <span class="fc-icon"><Icon name="phone" size={16} /></span>
+          <a href={site.phoneHref}>{site.phone}</a>
+        </li>
+        <li>
+          <span class="fc-icon"><Icon name="map-pin" size={16} /></span>
+          <span>{site.serviceArea}</span>
+        </li>
+      </ul>
       <ul class="footer-socials">
         {site.socials.instagram && (
-          <li><a href={site.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram"><SocialIcon name="instagram" size={20} /></a></li>
+          <li><a href={site.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram"><SocialIcon name="instagram" size={18} /></a></li>
         )}
         {site.socials.facebook && (
-          <li><a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook"><SocialIcon name="facebook" size={20} /></a></li>
-        )}
-        {site.socials.pinterest && (
-          <li><a href={site.socials.pinterest} target="_blank" rel="noopener" aria-label="Pinterest"><SocialIcon name="pinterest" size={20} /></a></li>
+          <li><a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook"><SocialIcon name="facebook" size={18} /></a></li>
         )}
       </ul>
     </div>
   </div>
 
-  <nav class="container-wide footer-links" aria-label="Footer">
-    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
-    <a href="/contact">Inquire</a>
-  </nav>
-
-  <div class="container-wide footer-bottom">
-    <p>© {year} {site.name}. All rights reserved.</p>
+  <div class="footer-bar">
+    <div class="container-wide">
+      <p>
+        © {year} {site.name} Inc. All rights reserved. ·
+        <a href="/privacy">Privacy Policy</a>
+      </p>
+    </div>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    background: var(--color-cream);
-    border-top: 1px solid var(--color-border);
-    padding: var(--sp-8) 0 var(--sp-5);
-    color: var(--color-brown);
+    position: relative;
+    overflow: hidden;
+    background: var(--color-footer);
+    color: rgba(255, 255, 255, 0.82);
+    /* Gold hairline where the cream page meets the navy footer. */
+    border-top: 1px solid rgba(191, 160, 106, 0.35);
+    padding: var(--sp-8) 0 0;
     font-size: var(--fs-body-sm);
   }
-  .footer-inner {
+  .footer-botanical {
+    position: absolute;
+    bottom: var(--sp-6);
+    width: 120px;
+    color: var(--color-accent);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .footer-botanical.left { left: 0; }
+  .footer-botanical.right { right: 0; }
+
+  .footer-grid {
+    position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 0.7fr 1.2fr;
     gap: var(--sp-7);
-    align-items: center;
-    text-align: center;
+    padding-bottom: var(--sp-8);
   }
-  .footer-brand .brand-mark {
+
+  /* Brand column */
+  .footer-brand { text-align: center; }
+  .brand-mark { display: block; }
+  .brand-monogram { height: 62px; width: auto; margin: 0 auto; }
+  .brand-word { height: 34px; width: auto; margin: var(--sp-3) auto 0; }
+  .brand-sub {
+    margin-top: var(--sp-2);
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .brand-script {
+    margin-top: var(--sp-4);
+    font-family: var(--font-script);
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: var(--color-accent-soft);
+  }
+  .brand-script span { display: block; }
+
+  /* Shared column heading */
+  .footer-h {
     font-family: var(--font-display);
-    font-size: 1.6rem;
-    line-height: 1.1;
-    color: var(--color-brown);
-  }
-  .footer-brand .brand-line {
-    margin-top: var(--sp-3);
-    letter-spacing: 0.18em;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    font-size: 0.7rem;
-    opacity: 0.8;
+    color: var(--color-accent);
+    margin-bottom: var(--sp-4);
   }
-  .footer-links {
-    margin-top: var(--sp-7);
-    padding-top: var(--sp-5);
-    border-top: 1px solid var(--color-border);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--sp-3) var(--sp-6);
-  }
-  .footer-links a {
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    transition: opacity var(--transition);
-  }
-  .footer-links a:hover { opacity: 0.7; }
-  .footer-meta { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); }
-  .footer-email {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1rem;
-  }
-  .footer-socials {
-    display: flex;
-    gap: var(--sp-4);
-    flex-wrap: wrap;
-  }
-  .footer-socials a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-brown);
-    transition: opacity var(--transition), transform var(--transition);
-  }
-  .footer-socials a:hover { opacity: 0.7; transform: translateY(-1px); }
-  .footer-bottom {
-    margin-top: var(--sp-5);
-    padding-top: var(--sp-4);
-    text-align: center;
-    font-size: 0.75rem;
+  /* Hairline under the heading, inset to run from "Create" to the "t" of
+     "Milestone". Sized in em so it tracks the heading text if the type scale
+     changes. */
+  .footer-invite .footer-h { margin-bottom: var(--sp-2); }
+  .footer-invite .footer-h::after {
+    content: '';
+    display: block;
+    width: 16.5em;
+    max-width: 100%;
+    height: 1px;
+    margin: var(--sp-3) 0 var(--sp-4) 3.8em;
+    background: var(--color-accent);
     opacity: 0.7;
   }
-  @media (max-width: 800px) {
-    .footer-inner { grid-template-columns: 1fr; gap: var(--sp-5); }
+
+  .footer-links { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .footer-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color var(--transition);
+  }
+  .footer-links a:hover { color: var(--color-accent); }
+
+  .footer-copy { line-height: 1.7; }
+  .footer-contact {
+    margin-top: var(--sp-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+  .footer-contact li { display: flex; align-items: center; gap: var(--sp-3); }
+  .fc-icon { display: inline-flex; color: var(--color-accent); flex: none; }
+  .footer-contact a { transition: color var(--transition); }
+  .footer-contact a:hover { color: var(--color-accent); }
+
+  .footer-socials { display: flex; gap: var(--sp-4); margin-top: var(--sp-5); }
+  .footer-socials a {
+    display: inline-flex;
+    color: rgba(255, 255, 255, 0.75);
+    transition: color var(--transition), transform var(--transition);
+  }
+  .footer-socials a:hover { color: var(--color-accent); transform: translateY(-1px); }
+
+  /* Bronze-gold copyright strip */
+  .footer-bar {
+    position: relative;
+    background: var(--color-footer-bar);
+    color: var(--color-white);
+    padding: var(--sp-3) 0;
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .footer-bar a { border-bottom: 1px solid transparent; transition: border-color var(--transition); }
+  .footer-bar a:hover { border-bottom-color: currentColor; }
+
+  @media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
+    .footer-brand { grid-column: 1 / -1; }
+    .footer-botanical { display: none; }
+  }
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .footer-links { align-items: center; }
+    .footer-contact li { justify-content: center; }
+    .footer-socials { justify-content: center; }
+    /* Single centred column — the inset would read as a misalignment here. */
+    .footer-invite .footer-h::after { margin-left: auto; margin-right: auto; }
+    .footer-bar { letter-spacing: 0.06em; }
   }
 </style>

@@ -1,45 +1,61 @@
 /* === Self-hosted fonts (via @fontsource) === */
 /* Bundled with the build → served from /_astro/ — no third-party connections. */
-@import '@fontsource/italiana/400.css';
-@import '@fontsource/libre-baskerville/400.css';
-@import '@fontsource/libre-baskerville/400-italic.css';
-@import '@fontsource/libre-baskerville/700.css';
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+@import '@fontsource/cormorant-garamond/500.css';
+@import '@fontsource/cormorant-garamond/600.css';
 @import '@fontsource/montserrat/300.css';
 @import '@fontsource/montserrat/400.css';
 @import '@fontsource/montserrat/500.css';
 @import '@fontsource/montserrat/600.css';
-@import '@fontsource/dm-sans/400-italic.css';
+@import '@fontsource/pinyon-script/400.css';
 
 /* === Milestones by Gloria — Design tokens === */
+/* 2026 redesign: warm-cream / navy / gold palette translated from Gloria's
+   mockups. Tokens are now SEMANTIC (--color-bg, --color-ink, --color-accent…).
+   Legacy names (--color-cream, --color-brown, --color-navy, --color-border…)
+   are kept as ALIASES at the end of :root so existing page/component styles
+   keep working while they are swept over to the semantic names. */
 
 :root {
-  /* Palette (sampled directly from the Canva PDF) */
-  --color-cream: #fbf7f7;          /* warm section bg */
-  --color-periwinkle: #f4f5fb;     /* cool section bg */
-  --color-pink-soft: #efe4e0;      /* deeper pink accent */
-  --color-lavender-soft: #dcdce7;  /* deeper lavender accent */
-
-  --color-brown: #623e2a;          /* primary heading + accent (PDF brand) */
-  --color-brown-deep: #4a2e1f;
-  --color-navy: #1a2c4b;           /* CTA button bg */
-  --color-navy-deep: #25406b;      /* CTA hover */
-  --color-ink: #2e2e2e;            /* primary body text */
-  --color-ink-soft: #343434;
-  --color-black: #000000;
+  /* === Semantic palette (sampled from the mockups) === */
+  --color-bg: #F7F3EC;             /* warm cream — default page background */
+  --color-bg-warm: #F4ECE0;        /* deeper cream — alternating sections */
+  --color-bg-blush: #F3E9E1;       /* soft blush — pricing / quote cards */
+  --color-ink: #2B3547;            /* navy — headings + primary text */
+  --color-ink-soft: #4A5464;       /* muted navy — secondary text */
+  --color-ink-deep: #1F2733;       /* near-black navy — hover */
+  --color-accent: #BFA06A;         /* gold — dividers, icon strokes, prices */
+  --color-accent-soft: #C9AE86;    /* lighter gold — script accent text */
+  --color-hairline: #D9C4A0;       /* thin gold rules / card borders */
   --color-white: #ffffff;
+  --color-black: #000000;
+  --color-border: rgba(43, 53, 71, 0.12);
+  /* Deep navy footer band + its bronze-gold copyright strip. Both sampled from
+     the mockups, where they are noticeably deeper/bluer than --color-ink. */
+  --color-footer: #051A2F;
+  --color-footer-bar: #C39156;
 
-  --color-border: rgba(98, 62, 42, 0.12);
+  /* === Legacy aliases (do not use in new code; being swept out) === */
+  --color-cream: var(--color-bg);
+  --color-periwinkle: var(--color-bg-warm);
+  --color-pink-soft: var(--color-bg-blush);
+  --color-lavender-soft: var(--color-bg-blush);
+  --color-brown: var(--color-ink);
+  --color-brown-deep: var(--color-ink-deep);
+  --color-navy: var(--color-ink);
+  --color-navy-deep: var(--color-ink-deep);
 
   /* Typography
-     Display: CatchyMager (Canva-only) → Italiana (closest free Didone match)
-     Secondary serif: Libre Baskerville (kept as-is, Google Fonts native)
-     Sans (replaces CocoGothic + Noah): Montserrat
-     Italic small label (Founder): DM Sans Italic
+     Display heading: CORMORANT GARAMOND — all-caps, letter-spaced titles
+     Script accent:   PINYON SCRIPT — cursive accent words only
+     Body / UI / buttons: MONTSERRAT — geometric sans
   */
-  --font-display: 'Italiana', 'Cormorant Garamond', Georgia, serif;
-  --font-serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-script: 'Pinyon Script', 'Cormorant Garamond', cursive;
   --font-sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-  --font-label: 'DM Sans', 'Montserrat', sans-serif;
+  --font-label: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 
   /* Type scale */
   --fs-display: clamp(3.25rem, 8vw, 6.5rem);   /* hero title */
@@ -79,8 +95,8 @@
   --radius-lg: 22px;
 
   --nav-height: 76px;
-  --shadow-soft: 0 6px 24px rgba(98, 62, 42, 0.07);
-  --shadow-lift: 0 12px 36px rgba(98, 62, 42, 0.12);
+  --shadow-soft: 0 6px 24px rgba(43, 53, 71, 0.07);
+  --shadow-lift: 0 12px 36px rgba(43, 53, 71, 0.12);
 
   --transition: 200ms ease;
 }
@@ -115,8 +131,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .h1, .h2, .h3 {
   font-family: var(--font-display);
-  color: var(--color-brown);
-  font-weight: 400;
+  color: var(--color-ink);
+  font-weight: 500;
   line-height: var(--lh-snug);
 }
 .h1 { font-size: var(--fs-h1); }
@@ -128,18 +144,46 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .serif-h {
   font-family: var(--font-serif);
-  font-weight: 400;
-  color: var(--color-brown);
+  font-weight: 500;
+  color: var(--color-ink);
 }
+/* Uppercase, letter-spaced Cormorant title — the mockups' primary section head
+   (WHAT'S INCLUDED, TESTIMONIALS, EVENTS WE PLAN, OUR PROCESS). */
+.title-caps {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: var(--lh-snug);
+}
+/* Flowing script accent word (Celebrations, Childcare, Celebrate…). */
+.script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--color-accent-soft);
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1;
+}
+/* Short centered gold rule under a heading. */
+.divider-gold {
+  width: 78px;
+  height: 2px;
+  border: 0;
+  margin: var(--sp-4) 0;
+  background: var(--color-accent);
+}
+.divider-gold.center { margin-left: auto; margin-right: auto; }
 .eyebrow {
   font-family: var(--font-sans);
   font-size: var(--fs-eyebrow);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   font-weight: 500;
-  color: var(--color-brown);
+  color: var(--color-accent);
 }
-.lead { font-size: 1.125rem; color: var(--color-brown); }
+.lead { font-size: 1.125rem; color: var(--color-ink-soft); }
 em, .italic { font-style: italic; }
 
 /* === Layout helpers === */
@@ -149,10 +193,11 @@ em, .italic { font-style: italic; }
 
 .section { padding: var(--sp-9) 0; }
 .section-tight { padding: var(--sp-8) 0; }
-.bg-cream { background: var(--color-cream); }
-.bg-periwinkle { background: var(--color-periwinkle); }
-.bg-pink-soft { background: var(--color-pink-soft); }
-.bg-lavender-soft { background: var(--color-lavender-soft); }
+.bg-cream, .bg-default { background: var(--color-bg); }
+.bg-warm, .bg-periwinkle { background: var(--color-bg-warm); }
+.bg-blush, .bg-pink-soft, .bg-lavender-soft { background: var(--color-bg-blush); }
+.bg-ink { background: var(--color-ink); }
+.bg-ink, .bg-ink * { color: var(--color-white); }
 
 /* === Buttons === */
 .btn {
@@ -160,11 +205,11 @@ em, .italic { font-style: italic; }
   align-items: center;
   justify-content: center;
   gap: var(--sp-2);
-  padding: 0.95rem 1.6rem;
+  padding: 0.95rem 1.7rem;
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: var(--tracking-button);
   text-transform: uppercase;
@@ -172,23 +217,30 @@ em, .italic { font-style: italic; }
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
   white-space: nowrap;
 }
-.btn-primary {
-  background: var(--color-white);
-  color: var(--color-black);
-  box-shadow: var(--shadow-soft);
-}
-.btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-lift); }
-.btn-dark {
-  background: var(--color-brown);
+/* Primary CTA — navy fill, the mockups' main button (BOOK A CONSULTATION…). */
+.btn-dark, .btn-primary {
+  background: var(--color-ink);
   color: var(--color-white);
 }
-.btn-dark:hover { background: var(--color-brown-deep); transform: translateY(-1px); }
+.btn-dark:hover, .btn-primary:hover { background: var(--color-ink-deep); transform: translateY(-1px); }
+/* Gold outline — secondary emphasis. */
+.btn-gold {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-accent);
+}
+.btn-gold:hover { background: var(--color-accent); color: var(--color-white); border-color: var(--color-accent); }
 .btn-ghost {
   background: transparent;
-  color: var(--color-brown);
-  border-color: var(--color-brown);
+  color: var(--color-ink);
+  border-color: var(--color-ink);
 }
-.btn-ghost:hover { background: var(--color-brown); color: var(--color-white); }
+.btn-ghost:hover { background: var(--color-ink); color: var(--color-white); }
+/* On dark/navy sections, invert the ghost button. */
+.bg-ink .btn-ghost { color: var(--color-white); border-color: rgba(255,255,255,0.6); }
+.bg-ink .btn-ghost:hover { background: var(--color-white); color: var(--color-ink); }
+.bg-ink .btn-primary { background: var(--color-white); color: var(--color-ink); }
+.bg-ink .btn-primary:hover { background: var(--color-bg-warm); }
 
 /* === Image helpers === */
 .img-rounded { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-soft); }
@@ -215,7 +267,7 @@ em, .italic { font-style: italic; }
   color: var(--color-brown);
   font-weight: 500;
 }
-.form-group input, .form-group textarea {
+.form-group input, .form-group textarea, .form-group select {
   width: 100%;
   padding: 0.85rem 1rem;
   font-family: var(--font-sans);
@@ -226,13 +278,27 @@ em, .italic { font-style: italic; }
   border-radius: var(--radius-sm);
   transition: border-color var(--transition);
 }
-.form-group input:focus, .form-group textarea:focus {
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
   outline: none;
-  border-color: var(--color-brown);
+  border-color: var(--color-accent);
 }
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--color-ink-soft); opacity: 0.75; }
 .form-group textarea { resize: vertical; min-height: 140px; }
 
 /* === Utilities === */
+/* Visually hidden but still read out — used for labels on the placeholder-only
+   form fields in the mockups. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 .text-center { text-align: center; }
 .text-brown { color: var(--color-brown); }
 .text-ink { color: var(--color-ink); }

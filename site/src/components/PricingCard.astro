@@ -1,0 +1,81 @@
+---
+import Icon from './Icon.astro';
+// Pricing / investment block. Two looks:
+//  - variant="plain"  → centered "Investment" style (label, big gold price, minimum, note, CTA slot)
+//  - variant="blush"  → bordered blush card with an icon (childcare two-up tiles)
+interface Props {
+  label: string;
+  price: string;
+  sub?: string;
+  note?: string;
+  icon?: string;
+  variant?: 'plain' | 'blush';
+  align?: 'center' | 'left';
+  class?: string;
+}
+const {
+  label,
+  price,
+  sub,
+  note,
+  icon,
+  variant = 'plain',
+  align = 'center',
+  class: className = '',
+} = Astro.props;
+const hasCta = Astro.slots.has('default');
+---
+<div class:list={['pricing-card', `variant-${variant}`, `align-${align}`, className]}>
+  {icon && <span class="pricing-icon"><Icon name={icon} size={44} /></span>}
+  <div class="pricing-body">
+    <p class="pricing-label title-caps">{label}</p>
+    <p class="pricing-price">{price}</p>
+    {sub && <p class="pricing-sub eyebrow">{sub}</p>}
+    {note && <p class="pricing-note">{note}</p>}
+    {hasCta && <div class="pricing-cta"><slot /></div>}
+  </div>
+</div>
+
+<style>
+  .pricing-card { display: flex; gap: var(--sp-5); }
+  .variant-plain {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .variant-blush {
+    background: var(--color-bg-blush);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: var(--sp-6);
+    align-items: center;
+  }
+  .align-left { text-align: left; align-items: flex-start; }
+  .pricing-icon { color: var(--color-accent); flex-shrink: 0; display: inline-flex; }
+  .pricing-label {
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--sp-3);
+  }
+  .pricing-price {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--color-accent);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1;
+    margin-bottom: var(--sp-3);
+  }
+  .variant-plain .pricing-sub { margin-bottom: var(--sp-5); }
+  .pricing-note {
+    font-size: var(--fs-body-sm);
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    max-width: 34ch;
+  }
+  .variant-plain .pricing-note { margin: 0 auto; }
+  .pricing-cta { margin-top: var(--sp-5); }
+  .variant-blush .pricing-body { display: flex; flex-direction: column; }
+  @media (max-width: 640px) {
+    .variant-blush { flex-direction: column; text-align: center; align-items: center; }
+  }
+</style>

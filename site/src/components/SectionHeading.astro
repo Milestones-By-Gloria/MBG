@@ -1,0 +1,53 @@
+---
+// Standard section heading: optional eyebrow, an all-caps Cormorant title, a
+// flowing script accent word, and a short gold divider — the recurring heading
+// treatment from the mockups. Supporting copy goes in the default slot.
+interface Props {
+  eyebrow?: string;
+  title: string;
+  script?: string;
+  scriptPosition?: 'above' | 'below';
+  align?: 'center' | 'left';
+  divider?: boolean;
+  id?: string;
+  class?: string;
+}
+const {
+  eyebrow,
+  title,
+  script,
+  scriptPosition = 'below',
+  align = 'center',
+  divider = true,
+  id,
+  class: className = '',
+} = Astro.props;
+const hasSlot = Astro.slots.has('default');
+---
+<div id={id} class:list={['section-heading', `align-${align}`, className]}>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  {script && scriptPosition === 'above' && <p class="script script-accent">{script}</p>}
+  <h2 class="title-caps heading-title">{title}</h2>
+  {script && scriptPosition === 'below' && <p class="script script-accent">{script}</p>}
+  {divider && <hr class:list={['divider-gold', { center: align === 'center' }]} />}
+  {hasSlot && <div class="heading-body lead"><slot /></div>}
+</div>
+
+<style>
+  .section-heading { display: flex; flex-direction: column; }
+  .align-center { align-items: center; text-align: center; }
+  .align-left { align-items: flex-start; text-align: left; }
+  .eyebrow { margin-bottom: var(--sp-3); }
+  .heading-title { font-size: var(--fs-h2); }
+  .script-accent {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-top: -0.15em;
+  }
+  .align-center .script-accent { margin-top: -0.1em; }
+  .heading-body {
+    max-width: 640px;
+    margin-top: var(--sp-4);
+    color: var(--color-ink-soft);
+  }
+  .align-left .heading-body { margin-left: 0; }
+</style>

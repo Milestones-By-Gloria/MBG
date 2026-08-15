@@ -7,6 +7,27 @@
   NODE_VERSION = "20"
 
 # ──────────────────────────────────────────────────────────────────────
+# Serverless functions (Instagram feed backend)
+#   • directory is relative to `base` above → site/netlify/functions
+#   • esbuild bundles each function with its imports (incl. @netlify/blobs)
+# ──────────────────────────────────────────────────────────────────────
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Clean URL for the read endpoint the frontend will consume.
+[[redirects]]
+  from = "/api/instagram"
+  to = "/.netlify/functions/instagram"
+  status = 200
+
+# The Benefits page was folded into About in the 2026 redesign — keep old links alive.
+[[redirects]]
+  from = "/benefits"
+  to = "/about"
+  status = 301
+
+# ──────────────────────────────────────────────────────────────────────
 # Security headers — applied to every page
 # ──────────────────────────────────────────────────────────────────────
 [[headers]]
