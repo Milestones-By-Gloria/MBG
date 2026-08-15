@@ -200,10 +200,7 @@ const faqSchema = {
                 <p class="char-count" data-count-for="message" aria-hidden="true">0/500</p>
               </div>
 
-              <button type="submit" class="btn btn-dark form-submit">
-                Send Message
-                <span class="btn-heart"><Icon name="heart" size={14} /></span>
-              </button>
+              <button type="submit" class="btn btn-dark form-submit">Send Message</button>
             </form>
           )}
         </div>
@@ -374,6 +371,9 @@ const faqSchema = {
     border-bottom: 1px solid var(--color-hairline);
   }
   .connect-list > li:last-child { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
+  /* Flex items default to min-width:auto, which would let the email address
+     push the row wider than the viewport instead of wrapping. */
+  .connect-list > li > div { min-width: 0; }
   .c-badge {
     display: inline-flex;
     align-items: center;
@@ -442,7 +442,6 @@ const faqSchema = {
     color: var(--color-ink-soft);
   }
   .form-submit { width: 100%; }
-  .btn-heart { display: inline-flex; color: var(--color-accent); }
   .hp { position: absolute; left: -9999px; }
 
   .success-card {
@@ -509,7 +508,12 @@ const faqSchema = {
     /* Let the single track shrink below its content's min-content width, and
        allow the email address to break rather than widen the page. */
     .connect-grid > * { min-width: 0; }
-    .c-value, .c-value a { overflow-wrap: anywhere; }
+    /* The address is ~2px wider than the row at 375px; a hair smaller keeps it
+       on one line instead of breaking as "…gmail.co / m". */
+    .c-value { font-size: 0.95rem; }
+    /* break-word, not anywhere: min-width:0 above already lets the track
+       shrink, so the address only breaks when it genuinely cannot fit. */
+    .c-value, .c-value a { overflow-wrap: break-word; }
     .v-divider {
       width: 100%;
       height: 1px;
