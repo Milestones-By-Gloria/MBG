@@ -9,8 +9,23 @@ import Icon from '../../components/Icon.astro';
 import CalcomButton from '../../components/CalcomButton.astro';
 import { childcare as c } from '../../data/services';
 import { site } from '../../data/site';
+import { serviceSchema } from '../../data/schema';
+
+const description =
+  'Professional on-site wedding childcare in Vancouver, BC, so little guests can play safely while you enjoy your day. $95/hr for up to 15 children.';
 ---
-<Base title="Wedding Childcare" current="/services" description={c.intro}>
+<Base
+  title="Wedding Childcare in Vancouver, BC"
+  current="/services"
+  description={description}
+  schema={serviceSchema({
+    name: 'Wedding Childcare',
+    description,
+    path: '/services/childcare',
+    hourlyRate: 95,
+    priceNote: site.pricing.childcareBase,
+  })}
+>
   <Hero
     eyebrow="Services"
     title={c.title}

@@ -11,8 +11,23 @@ import CalcomButton from '../../components/CalcomButton.astro';
 import { corporateEvents as s } from '../../data/services';
 import { corporateEventTypes } from '../../data/events';
 import { site } from '../../data/site';
+import { serviceSchema } from '../../data/schema';
+
+const description =
+  'Corporate event planning in Vancouver, BC: staff celebrations, holiday parties, launches and community functions, calmly coordinated. $90/hr, minimum 4 hours.';
 ---
-<Base title="Corporate Events" current="/services" description={s.intro}>
+<Base
+  title="Corporate Event Planning in Vancouver, BC"
+  current="/services"
+  description={description}
+  schema={serviceSchema({
+    name: 'Corporate Event Planning',
+    description,
+    path: '/services/corporate-events',
+    hourlyRate: 90,
+    priceNote: site.pricing.corporateMin,
+  })}
+>
   <Hero
     eyebrow="Services"
     title={s.title}

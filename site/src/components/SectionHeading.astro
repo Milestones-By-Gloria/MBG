@@ -11,6 +11,10 @@ interface Props {
   divider?: boolean;
   id?: string;
   class?: string;
+  /* Heading level. Pages whose main heading IS this component pass "h1" so the
+     page has exactly one h1; everywhere else it stays an h2. Purely semantic —
+     the styling hangs off .heading-title, not the tag. */
+  as?: 'h1' | 'h2';
 }
 const {
   eyebrow,
@@ -21,13 +25,14 @@ const {
   divider = true,
   id,
   class: className = '',
+  as: Heading = 'h2',
 } = Astro.props;
 const hasSlot = Astro.slots.has('default');
 ---
 <div id={id} class:list={['section-heading', `align-${align}`, className]}>
   {eyebrow && <p class="eyebrow">{eyebrow}</p>}
   {script && scriptPosition === 'above' && <p class="script script-accent">{script}</p>}
-  <h2 class="title-caps heading-title">{title}</h2>
+  <Heading class="title-caps heading-title">{title}</Heading>
   {script && scriptPosition === 'below' && <p class="script script-accent">{script}</p>}
   {divider && <hr class:list={['divider-gold', { center: align === 'center' }]} />}
   {hasSlot && <div class="heading-body lead"><slot /></div>}

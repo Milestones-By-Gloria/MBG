@@ -11,8 +11,23 @@ import CalcomButton from '../../components/CalcomButton.astro';
 import { milestones as m } from '../../data/services';
 import { eventsWePlan } from '../../data/events';
 import { site } from '../../data/site';
+import { serviceSchema } from '../../data/schema';
+
+const description =
+  'Birthday, baby shower, anniversary, engagement and graduation planning in Vancouver, BC. Every detail designed so you can be present. $90/hr, minimum 4 hours.';
 ---
-<Base title="Milestone & Social Events" current="/services" description={m.intro}>
+<Base
+  title="Milestone & Social Event Planning, Vancouver"
+  current="/services"
+  description={description}
+  schema={serviceSchema({
+    name: 'Milestone & Social Event Planning',
+    description,
+    path: '/services/milestones',
+    hourlyRate: 90,
+    priceNote: site.pricing.socialMin,
+  })}
+>
   <Hero
     eyebrow="Services"
     title={m.title}

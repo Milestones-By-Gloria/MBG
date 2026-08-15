@@ -9,8 +9,23 @@ import PricingCard from '../../components/PricingCard.astro';
 import CalcomButton from '../../components/CalcomButton.astro';
 import { weddingPlanning as s } from '../../data/services';
 import { site } from '../../data/site';
+import { serviceSchema } from '../../data/schema';
+
+const description =
+  'Full-service wedding planning in Vancouver, BC. Design, vendors, budget and timeline handled end to end. $90/hr, minimum 10 hours.';
 ---
-<Base title="Wedding Planning" current="/services" description={s.intro}>
+<Base
+  title="Wedding Planning in Vancouver, BC"
+  current="/services"
+  description={description}
+  schema={serviceSchema({
+    name: 'Wedding Planning',
+    description,
+    path: '/services/wedding-planning',
+    hourlyRate: 90,
+    priceNote: site.pricing.weddingMin,
+  })}
+>
   <Hero
     eyebrow="Services"
     title={s.title}

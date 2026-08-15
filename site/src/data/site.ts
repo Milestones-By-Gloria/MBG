@@ -20,6 +20,18 @@ export const site = {
   responseTime: 'I aim to respond within 24–48 hours.',
   serviceArea: 'Vancouver, BC and beyond',
   serviceAreaNote: 'Available for travel',
+  // Cities named in LocalBusiness.areaServed. City-level only by choice — the
+  // business is not publishing a street address.
+  serviceCities: [
+    'Vancouver',
+    'Burnaby',
+    'Richmond',
+    'North Vancouver',
+    'West Vancouver',
+    'Surrey',
+    'Coquitlam',
+    'New Westminster',
+  ],
   instagramHandle: '@milestonesbygloria',
   footerScript: ['Moments beautifully planned.', 'Memories that last a lifetime.'],
 
