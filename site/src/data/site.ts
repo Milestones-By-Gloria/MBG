@@ -25,8 +25,9 @@ export const site = {
 
   socials: {
     instagram: 'https://instagram.com/milestonesbygloria',
-    facebook: 'https://facebook.com/milestonesbygloria',
-    pinterest: 'https://pinterest.com/milestonesbygloria',
+    // Canonical target of the fb.com/share/16ynG18c13 link, with the share
+    // tracking params stripped.
+    facebook: 'https://www.facebook.com/people/Milestones-by-Gloria/61589020823110/',
   },
 
   calcomLink: 'gloria-niyomahoro/free-consultation',
@@ -59,7 +60,7 @@ export const nav = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services' },
-  { href: '/gallery', label: 'Gallery' },
+  // Gallery hidden for now — page lives at src/pages/_gallery.astro (unrouted).
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/contact', label: 'Contact' },
 ] as const;

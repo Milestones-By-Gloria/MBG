@@ -40,7 +40,7 @@ const businessSchema = {
   priceRange: '$$',
   areaServed: { '@type': 'AdministrativeArea', name: 'British Columbia, Canada' },
   founder: { '@type': 'Person', name: site.founder.name },
-  sameAs: [site.socials.instagram, site.socials.facebook, site.socials.pinterest],
+  sameAs: [site.socials.instagram, site.socials.facebook].filter(Boolean),
 };
 ---
 

@@ -114,7 +114,7 @@ const values = [
     </div>
   </Section>
 
-  <Section bg="ink" tight>
+  <Section bg="default" tight>
     <div class="container text-center cta-banner">
       <p class="script cta-script">Let's create</p>
       <h2 class="title-caps cta-title">Something Beautiful Together</h2>
@@ -192,9 +192,11 @@ const values = [
   .about-title { font-size: var(--fs-h2); }
 
   .cta-banner { max-width: 720px; margin: 0 auto; }
-  .cta-script { color: var(--color-accent-soft); font-size: clamp(2rem, 4vw, 2.8rem); }
-  .cta-title { color: var(--color-white); font-size: var(--fs-h2); }
-  .cta-text { color: rgba(255,255,255,0.85); margin-top: var(--sp-4); }
+  /* Cream band — colours come from .script / .title-caps, so the closing CTA
+     matches the hero's navy button and the rest of the light sections. */
+  .cta-script { font-size: clamp(2rem, 4vw, 2.8rem); }
+  .cta-title { font-size: var(--fs-h2); }
+  .cta-text { margin-top: var(--sp-4); }
 
   @media (max-width: 1040px) {
     .home-services { grid-template-columns: repeat(3, 1fr); }

@@ -51,7 +51,6 @@ const year = new Date().getFullYear();
 
     <div class="footer-col footer-invite">
       <h2 class="footer-h">Let's create your next milestone</h2>
-      <span class="footer-heart"><Icon name="heart" size={15} /></span>
       <p class="footer-copy">Every celebration is unique.<br />I can't wait to hear about yours.</p>
       <ul class="footer-contact">
         <li>
@@ -74,9 +73,6 @@ const year = new Date().getFullYear();
         {site.socials.facebook && (
           <li><a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook"><SocialIcon name="facebook" size={18} /></a></li>
         )}
-        {site.socials.pinterest && (
-          <li><a href={site.socials.pinterest} target="_blank" rel="noopener" aria-label="Pinterest"><SocialIcon name="pinterest" size={18} /></a></li>
-        )}
       </ul>
     </div>
   </div>
@@ -97,8 +93,7 @@ const year = new Date().getFullYear();
     overflow: hidden;
     background: var(--color-footer);
     color: rgba(255, 255, 255, 0.82);
-    /* Keeps the seam legible where a page ends on the lighter navy CTA band
-       (home, service pages) — the two navies are close in value. */
+    /* Gold hairline where the cream page meets the navy footer. */
     border-top: 1px solid rgba(191, 160, 106, 0.35);
     padding: var(--sp-8) 0 0;
     font-size: var(--fs-body-sm);
@@ -154,23 +149,19 @@ const year = new Date().getFullYear();
     color: var(--color-accent);
     margin-bottom: var(--sp-4);
   }
-  /* Rule + heart read as one centred ornament under the heading, as in the
-     mockup — left-aligned they look like stray marks. */
+  /* Hairline under the heading, inset to run from "Create" to the "t" of
+     "Milestone". Sized in em so it tracks the heading text if the type scale
+     changes. */
   .footer-invite .footer-h { margin-bottom: var(--sp-2); }
   .footer-invite .footer-h::after {
     content: '';
     display: block;
-    width: 90px;
+    width: 16.5em;
+    max-width: 100%;
     height: 1px;
-    margin: var(--sp-3) auto 0;
+    margin: var(--sp-3) 0 var(--sp-4) 3.8em;
     background: var(--color-accent);
     opacity: 0.7;
-  }
-  .footer-heart {
-    display: flex;
-    justify-content: center;
-    color: var(--color-accent);
-    margin: var(--sp-2) 0 var(--sp-4);
   }
 
   .footer-links { display: flex; flex-direction: column; gap: var(--sp-3); }
@@ -226,6 +217,8 @@ const year = new Date().getFullYear();
     .footer-links { align-items: center; }
     .footer-contact li { justify-content: center; }
     .footer-socials { justify-content: center; }
+    /* Single centred column — the inset would read as a misalignment here. */
+    .footer-invite .footer-h::after { margin-left: auto; margin-right: auto; }
     .footer-bar { letter-spacing: 0.06em; }
   }
 </style>
