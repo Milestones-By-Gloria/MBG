@@ -77,10 +77,13 @@
 # ──────────────────────────────────────────────────────────────────────
 # Caching — long-lived for fingerprinted assets, short-lived for HTML
 # ──────────────────────────────────────────────────────────────────────
+# Photos are content-hashed into /_astro/ by astro:assets, so they are covered
+# by the rule below. /og-image.jpg is NOT hashed (social scrapers cache by URL)
+# and so gets a shorter, revalidating TTL.
 [[headers]]
-  for = "/images/*"
+  for = "/og-image.jpg"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400"
 
 [[headers]]
   for = "/_astro/*"
