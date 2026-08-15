@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
 // Image tile with a title + caption below — "Events We Plan" grid and the
 // Services hub cards. Optional href turns the whole card into a link.
 interface Props {
@@ -14,7 +16,14 @@ const Tag = href ? 'a' : 'div';
 ---
 <Tag class:list={['event-card', { 'is-link': href }, className]} href={href}>
   <div class="event-media">
-    <img src={image} alt={alt ?? title} loading="lazy" decoding="async" />
+    <Image
+      src={img(image)}
+      alt={alt ?? title}
+      widths={[300, 500, 800]}
+      sizes="(max-width: 620px) 50vw, (max-width: 1040px) 33vw, 300px"
+      loading="lazy"
+      decoding="async"
+    />
   </div>
   <div class="event-copy">
     <h3 class="event-title serif-h">{title}</h3>

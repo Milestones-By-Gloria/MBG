@@ -7,6 +7,8 @@ import FeatureGrid from '../../components/FeatureGrid.astro';
 import PricingCard from '../../components/PricingCard.astro';
 import Icon from '../../components/Icon.astro';
 import CalcomButton from '../../components/CalcomButton.astro';
+import { Image } from 'astro:assets';
+import { img } from '../../lib/images';
 import { childcare as c } from '../../data/services';
 import { site } from '../../data/site';
 import { serviceSchema } from '../../data/schema';
@@ -106,7 +108,14 @@ const description =
         <p class="closing-text">{c.closingText}</p>
       </div>
       <div class="closing-photo">
-        <img src="/images/childcare-teddy.jpg" alt="Teddy bear and wooden toys in the children's play area" loading="lazy" decoding="async" />
+        <Image
+          src={img('/images/childcare-teddy.jpg')}
+          alt="Teddy bear and wooden toys in the children's play area"
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 860px) 100vw, 50vw"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   </Section>

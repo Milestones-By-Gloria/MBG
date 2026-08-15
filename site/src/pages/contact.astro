@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import CalcomButton from '../components/CalcomButton.astro';
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
 import Icon from '../components/Icon.astro';
 import SocialIcon from '../components/SocialIcon.astro';
 import { site } from '../data/site';
@@ -58,10 +60,13 @@ const faqSchema = {
         </p>
       </div>
       <div class="hero-media">
-        <img
-          src="/images/contact-place-setting.jpg"
+        <Image
+          src={img('/images/contact-place-setting.jpg')}
           alt="Elegant place setting with a Milestones by Gloria place card"
+          widths={[500, 900, 1400]}
+          sizes="(max-width: 780px) 100vw, 50vw"
           fetchpriority="high"
+          loading="eager"
           decoding="async"
         />
       </div>

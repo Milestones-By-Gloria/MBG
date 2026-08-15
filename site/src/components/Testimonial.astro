@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
 import type { Testimonial } from '../data/testimonials';
 
 interface Props { item: Testimonial }
@@ -8,7 +10,14 @@ const { item } = Astro.props;
 <article class="testimonial">
   {item.image && (
     <div class="testimonial-photo img-rounded">
-      <img src={item.image} alt={item.alt ?? ''} loading="lazy" decoding="async" />
+      <Image
+        src={img(item.image)}
+        alt={item.alt ?? ''}
+        widths={[320, 640, 900]}
+        sizes="(max-width: 800px) 320px, 40vw"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   )}
   <div class="testimonial-body">

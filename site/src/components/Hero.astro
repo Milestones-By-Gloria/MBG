@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
 // Split page hero — copy on one side, image on the other. Used at the top of
 // the service pages, the milestones page, and contact. CTAs go in the slot.
 interface Props {
@@ -40,7 +42,15 @@ const hasCta = Astro.slots.has('default');
     </div>
     {image && (
       <div class="hero-media">
-        <img src={image} alt={imageAlt} fetchpriority="high" decoding="async" />
+        <Image
+          src={img(image)}
+          alt={imageAlt}
+          widths={[400, 700, 1000, 1400]}
+          sizes="(max-width: 860px) 100vw, 50vw"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        />
       </div>
     )}
   </div>

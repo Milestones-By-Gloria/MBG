@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
 import type { Testimonial } from '../data/testimonials';
 import StarRating from './StarRating.astro';
 // Framed testimonial with a photo, quote, star rating, client name and date —
@@ -12,9 +14,11 @@ const { item, reverse = false } = Astro.props;
 <article class:list={['testimonial', { reverse }]}>
   {item.image && (
     <div class="t-photo">
-      <img
-        src={item.image}
+      <Image
+        src={img(item.image)}
         alt={item.alt ?? ''}
+        widths={[340, 680, 1000]}
+        sizes="(max-width: 820px) 340px, 45vw"
         loading="lazy"
         decoding="async"
         style={item.focus ? `object-position: ${item.focus}` : undefined}

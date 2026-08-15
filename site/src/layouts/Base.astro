@@ -28,7 +28,10 @@ const {
 
 const fullTitle = title ? `${title} · ${site.name}` : site.name;
 // Absolute URL so link previews (SMS, Facebook, etc.) resolve the image.
-const ogImage = new URL('/images/hero-milestone-lakeside.jpg', Astro.site).href;
+// Deliberately a hand-cut 1200x630 file in public/, NOT an astro:assets import:
+// social scrapers cache by URL, and a content-hashed filename would change on
+// every re-encode and invalidate every preview already in the wild.
+const ogImage = new URL('/og-image.jpg', Astro.site).href;
 
 // Site-wide structured data for local SEO (name, area served, socials, founder).
 const businessSchema = {
