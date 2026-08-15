@@ -506,6 +506,10 @@ const faqSchema = {
   /* === Responsive === */
   @media (max-width: 920px) {
     .connect-grid { grid-template-columns: 1fr; gap: var(--sp-7); }
+    /* Let the single track shrink below its content's min-content width, and
+       allow the email address to break rather than widen the page. */
+    .connect-grid > * { min-width: 0; }
+    .c-value, .c-value a { overflow-wrap: anywhere; }
     .v-divider {
       width: 100%;
       height: 1px;

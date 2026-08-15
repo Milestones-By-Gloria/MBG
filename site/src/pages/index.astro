@@ -204,7 +204,9 @@ const values = [
   }
   @media (max-width: 820px) {
     .about-teaser { grid-template-columns: 1fr; gap: var(--sp-6); }
-    .about-photo { max-width: 360px; }
+    /* Stacked: centre the capped photo, otherwise it hugs the left edge with
+       a wide gap beside it. */
+    .about-photo { max-width: 360px; margin: 0 auto; }
   }
   @media (max-width: 620px) {
     .home-services { grid-template-columns: repeat(2, 1fr); }

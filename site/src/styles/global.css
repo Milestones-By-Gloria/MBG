@@ -241,6 +241,12 @@ em, .italic { font-style: italic; }
 .bg-ink .btn-ghost:hover { background: var(--color-white); color: var(--color-ink); }
 .bg-ink .btn-primary { background: var(--color-white); color: var(--color-ink); }
 .bg-ink .btn-primary:hover { background: var(--color-bg-warm); }
+/* On a 375px viewport a nowrap "Book a Complimentary Consultation" measures
+   ~386px and drags the whole page into horizontal scroll. Let long labels
+   wrap on phones instead. */
+@media (max-width: 480px) {
+  .btn { white-space: normal; text-align: center; }
+}
 
 /* === Image helpers === */
 .img-rounded { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-soft); }
